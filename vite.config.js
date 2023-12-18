@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [vue(), resolve()],
   build: {
     rollupOptions: {
-      external: ['@fullcalendar/core/index.js', '@fullcalendar/core/internal.js'],
+      external: ['@fullcalendar/core/preact.js','@fullcalendar/core/index.js', '@fullcalendar/core/internal.js'],
     },
   },
 });
