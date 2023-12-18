@@ -51,6 +51,5 @@ const logout = () => {
     <div >
         <FullCalendar :options="calendarOptions" />
     </div>
-    <script src="@fullcalendar/core/index.js"></script>
-  <script src="@fullcalendar/daygrid/index.js"></script>
+    
 </template>
