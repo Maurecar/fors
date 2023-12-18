@@ -3,7 +3,7 @@
   <router-view></router-view>
 </template>
 <script setup>
-import Navbar from './components/Navbar.vue'
+import Navbar from './components/navbar.vue'
 import Login from './views/Login.vue'
 
 const routes = [
