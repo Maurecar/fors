@@ -5,9 +5,10 @@
 [context.production.environment]
   NODE_VERSION = "14"        # la versión de Node.js que deseas utilizar en producción
 
-dependencies = ["@fullcalendar/core"]
+[build.env.dependencies]
+  @fullcalendar/core = "^6.1.10"
 
 [[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
+  from = "/*"
+  to = "/index.html"
+  status = 200
