@@ -1,0 +1,6 @@
+[build]
+  command = "npm run build"  # o el comando que usas para construir tu proyecto
+  publish = "dist"          # la carpeta donde se encuentra la salida construida
+
+[context.production.environment]
+  NODE_VERSION = "14"        # la versión de Node.js que deseas utilizar en producción
