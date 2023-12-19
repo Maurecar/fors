@@ -3,6 +3,7 @@ import { ref, onMounted, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSignOut, useUserId } from '@nhost/vue'
 import FullCalendar from '@fullcalendar/vue3'
+import { FullCalendar } from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import { useQuery } from "@vue/apollo-composable";
