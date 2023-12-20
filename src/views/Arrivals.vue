@@ -13,9 +13,9 @@
                     <tr>
                         <th class="px-4 py-2">Customer</th>
                         <th class="px-4 py-2">Phone</th>
-                        <th class="px-4 py-2">Email</th>
-                        <th class="px-2 py-1">Vehicle</th>
-                        <th class="px-2 py-1">Reservation</th>
+                        <th class="px-4 py-2">Pickup Time</th>
+                        <th class="px-2 py-1">departure time</th>
+                        <th class="px-2 py-1">to</th>
                         <th class="px-4 py-2">Actions</th>
                     </tr>
                 </thead>

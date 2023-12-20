@@ -640,7 +640,8 @@ const handleCreateReservation = async () => {
         console.error(errors);
     } else {
         const contenidoTexto = `
-            Date: ${newReservation.value.date}
+            Pickup Time: ${ dateToString(newReservation.value.pickup_time)}
+            Date: ${newReservation.value.date_reserv}
             Pickup Lotacion: ${newReservation.value.pick_location}
             To: ${newReservation.value.to}
 POLICIES
@@ -796,7 +797,7 @@ function dateToString(date) {
     ':' +
     String(offsetMinutes).padStart(2, '0');
 
-   const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
+   const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${"-07:00"}`;
 
   return formattedDate;
 }
