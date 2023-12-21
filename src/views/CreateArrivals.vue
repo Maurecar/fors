@@ -792,12 +792,13 @@ function dateToString(date) {
   const timezoneOffset = date.getTimezoneOffset();
   const offsetHours = Math.floor(Math.abs(timezoneOffset) / 60);
   const offsetMinutes = Math.abs(timezoneOffset) % 60;
-  const timezone = (timezoneOffset < 0 ? '+' : '-') +
+  const timezone = '+02:00';
+  /* const timezone = (timezoneOffset < 0 ? '+' : '-') +
     String(offsetHours).padStart(2, '0') +
     ':' +
-    String(offsetMinutes).padStart(2, '0');
+    String(offsetMinutes).padStart(2, '0'); */
 
-   const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${"-07:00"}`;
+   const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
 
   return formattedDate;
 }

@@ -21,7 +21,7 @@ const registerOrLogin = async () => {
     } else {      
       await signInEmailPassword(email.value, password.value);
     }
-    router.push('/home');
+    router.push('/');
   } catch (error) {
     alert(error.message);
   }
