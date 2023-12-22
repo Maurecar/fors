@@ -16,7 +16,7 @@
                         <label for="customer">Customer Phone:</label>
                         <input id="Customer phone" v-model="newReservation.phone" placeholder="Customer Phone Number"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
-                        <p>añadir opcion para segundo telefono</p>
+                        
                         <label for="customer">Customer Email:</label>
                         <input id="Customer email" v-model="newReservation.email" placeholder="Customer Email"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
@@ -620,7 +620,7 @@ const handleCreateReservation = async () => {
         landing_time: formatTime(newReservation.value.landing_time),
         flight: newReservation.value.flight,
         tosec: newReservation.value.tosec,
-        re_pickup_time: newReservation.value.re_pickup_time,
+        re_pickup_time:dateToString(newReservation.value.re_pickup_time),
         address: newReservation.value.address,
         date_reserv: formatDate(newReservation.value.date_reserv),
         cost: newReservation.value.cost,
@@ -792,7 +792,7 @@ function dateToString(date) {
   const timezoneOffset = date.getTimezoneOffset();
   const offsetHours = Math.floor(Math.abs(timezoneOffset) / 60);
   const offsetMinutes = Math.abs(timezoneOffset) % 60;
-  const timezone = '+02:00';
+  const timezone = '+00:00';
   /* const timezone = (timezoneOffset < 0 ? '+' : '-') +
     String(offsetHours).padStart(2, '0') +
     ':' +
