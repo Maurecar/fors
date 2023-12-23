@@ -78,6 +78,7 @@ const mapToFullCalendarEvents = (reservation) => {
       customer: n.customer,
       phone: n.phone,
       display: 'list-item',
+      color:'green',
     };
 
     const endEvent = {
@@ -85,6 +86,7 @@ const mapToFullCalendarEvents = (reservation) => {
       start: n.re_pickup_time,
       end: n.re_pickup_time,
       display: 'list-item',
+      color: 'red',
     };
 
     events.push(startEvent);
