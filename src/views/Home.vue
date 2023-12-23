@@ -71,15 +71,24 @@ const mapToFullCalendarEvents = (reservation) => {
   const events = [];
 
   for (const n of reservation) {
-    events.push({
-      
+    const startEvent = {
       title: n.from,
       start: n.pickup_time,
-      end: n.re_pickup_time,
+      end: n.pickup_time,
       customer: n.customer,
       phone: n.phone,
       display: 'list-item',
-    });
+    };
+
+    const endEvent = {
+      title: n.from,
+      start: n.re_pickup_time,
+      end: n.re_pickup_time,
+      display: 'list-item',
+    };
+
+    events.push(startEvent);
+    events.push(endEvent);
   }
   return events;
 };

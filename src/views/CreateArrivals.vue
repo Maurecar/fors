@@ -72,7 +72,7 @@
                         <div class="flex items-center" v-if="newReservation.way === 'One Way'">
                             <div class="oneway-roundtrip">
                                 <div class="flex items-center ">
-                                    <input id="Round Trip" name="from" type="radio" value="Pick-up from the Hayden airport"
+                                    <input id="Round Trip" name="from" type="radio" value="Hayden airport"
                                         v-model="newReservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                     <label for="Pick-up from the Hayden airport"
@@ -81,7 +81,7 @@
                                     </label>
                                 </div>
                                 <div class="flex items-center">
-                                    <input id="Pick-up from Steamboat" name="from" type="radio" value="Pick-up from Steamboat" v-model="newReservation.from"
+                                    <input id="Pick-up from Steamboat" name="from" type="radio" value="Steamboat" v-model="newReservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                     <label for="One Way" class="ml-3 block text-sm font-medium text-white-700">
                                         Pick-up from Steamboat
@@ -96,7 +96,7 @@
                         <div v-else-if="newReservation.way === 'Round Trip'">
                             <div class="oneway-roundtrip">
                                 <div class="flex items-center ">
-                                    <input id="Round Trip" name="from" type="radio" value="Pick-up from the Hayden airport"
+                                    <input id="Round Trip" name="from" type="radio" value="Hayden airport"
                                         v-model="newReservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                     <label for="Pick-up from the Hayden airport"
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="flex items-center">
                                     <input id="Pick-up from Steamboat" name="from" type="radio"
-                                        value="Pick-up from Steamboat" v-model="newReservation.from"
+                                        value="Steamboat" v-model="newReservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                     <label for="One Way" class="ml-3 block text-sm font-medium text-white-700">
                                         Pick-up from Steamboat
@@ -117,7 +117,7 @@
                             </div>
                         </div>
                         <div v-if="newReservation.way === 'One Way'">
-                            <div v-if="newReservation.from === 'Pick-up from Steamboat'">
+                            <div v-if="newReservation.from === 'Steamboat'">
                                 <h5>One way from Steamboat Spring</h5>
                                 <div class="flex flex-wrap -mx-6 mb-6">
                                     <div class="w-full px-3">
@@ -160,7 +160,7 @@
 
                             </div>
 
-                            <div v-else-if="newReservation.from === 'Pick-up from the Hayden airport'">
+                            <div v-else-if="newReservation.from === 'Hayden airport'">
                                 <h5>One Way From Hayden Airport</h5>
                                 <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
@@ -195,7 +195,7 @@
                         </div>
                         <div v-else-if="newReservation.way === 'Round Trip'">
 
-                            <div v-if="newReservation.from === 'Pick-up from Steamboat'">
+                            <div v-if="newReservation.from === 'Steamboat'">
                                 <h5>Round Trip from Steamboat Spring</h5>
                                 <div class="flex flex-wrap -mx-6 mb-6">
                                     <div class="w-full px-3">
@@ -273,7 +273,7 @@
 
                                 </div>
                             </div>
-                            <div v-else-if="newReservation.from === 'Pick-up from the Hayden airport'">
+                            <div v-else-if="newReservation.from === 'Hayden airport'">
                                 <h5>Round Trip from Hayden Airport</h5>
                                 <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
