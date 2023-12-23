@@ -1,5 +1,5 @@
 <template>
-    <div class="light dark">
+    <div class="dark">
       <nav
         class="
           container
@@ -15,9 +15,9 @@
             class="
               text-xl
               font-bold
-              text-gray-100
+              text-gray-700
               md:text-2xl
-              hover:text-indigo-400
+              hover:text-indigo-700
             "
             >Dashboard         -  
           </router-link>
@@ -26,9 +26,9 @@
             <button
               type="button"
               class="
-                text-gray-100
-                hover:text-gray-400
-                focus:outline-none focus:text-gray-400
+                text-gray-700
+                hover:text-gray-700
+                focus:outline-none focus:text-gray-700
               "
             >
               <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
@@ -52,9 +52,9 @@
           "
         >
           
-          <li> <a href="/drivers" class="text-gray-100 hover:text-indigo-400">Drivers</a></li>
-          <li> <a href="/dispatchers" class="text-gray-100 hover:text-indigo-400">Dispatchers</a></li>
-          <li> <a href="/arrivals" class="text-gray-100 hover:text-indigo-400">Reservation</a></li>
+          <li> <a href="/drivers" class="text-gray-700 hover:text-indigo-400">Drivers</a></li>
+          <li> <a href="/dispatchers" class="text-gray-700 hover:text-indigo-400">Dispatchers</a></li>
+          <li> <a href="/arrivals" class="text-gray-700 hover:text-indigo-400">Reservation</a></li>
           
           
         </ul>
