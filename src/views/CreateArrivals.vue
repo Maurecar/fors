@@ -12,7 +12,7 @@
                     <div class="customer-data">
                         <label for="customer">Customer Name:</label>
                         <input id="Customer name" v-model="newReservation.customer" placeholder="Customer name"
-                            class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
+                            class="appearance-none block w-full bg-white-200 text-white border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
                         <label for="customer">Customer Phone:</label>
                         <input id="Customer phone" v-model="newReservation.phone" placeholder="Customer Phone Number"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
@@ -821,6 +821,7 @@ function formatDate(date) {
     margin: 10px;
     background-color: #050a69;
     position: relative;
+    color: white;
 }
 
 .customer-data::before {
@@ -847,6 +848,7 @@ function formatDate(date) {
     margin: 10px;
     background-color: #701010;
     position: relative;
+    color: white;
 }
 
 .passengers-data::before {
@@ -873,6 +875,7 @@ function formatDate(date) {
     margin: 10px;
     background-color: #696202;
     position: relative;
+    color: white;
 }
 
 .others {
@@ -881,6 +884,7 @@ function formatDate(date) {
     margin: 10px;
     background-color: #646cff;
     position: relative;
+    color: white;
 }
 
 .reservation-data {
@@ -889,6 +893,7 @@ function formatDate(date) {
     margin: 10px;
     background-color: #213547;
     position: relative;
+    color: white;
 }
 
 .cost {
@@ -897,6 +902,7 @@ function formatDate(date) {
     margin: 10px;
     background-color: #2d4721;
     position: relative;
+    color: white;
 }
 
 .returning {
