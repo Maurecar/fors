@@ -12,7 +12,7 @@
                     <div class="customer-data">
                         <label for="customer">Customer Name:</label>
                         <input id="Customer name" v-model="newReservation.customer" placeholder="Customer name"
-                            class="appearance-none block w-full bg-white-200 text-white border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
+                            class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
                         <label for="customer">Customer Phone:</label>
                         <input id="Customer phone" v-model="newReservation.phone" placeholder="Customer Phone Number"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
