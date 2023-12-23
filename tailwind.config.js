@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
@@ -7,12 +8,20 @@ export default {
   ],
   theme: {
     screens:{
-      'mobil':'480px',
-      'tablet': '640px',
-      'laptop': '1024px',
-      'desktop': '1280px',
+      sm: '480px',
+      md: '768px',
+      lg: '976px',
+      xl: '1440px',
     },
-    extend: {},
+    extend: {
+      spacing: {
+        '128': '32rem',
+        '144': '36rem',
+      },
+      borderRadius: {
+        '4xl': '2rem',
+      }
+    },
   },
   plugins: [],
 }
