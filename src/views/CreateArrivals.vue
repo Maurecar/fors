@@ -640,10 +640,37 @@ const handleCreateReservation = async () => {
         console.error(errors);
     } else {
         const contenidoTexto = `
-            Pickup Time: ${ dateToString(newReservation.value.pickup_time)}
-            Date: ${newReservation.value.date_reserv}
-            Pickup Lotacion: ${newReservation.value.pick_location}
-            To: ${newReservation.value.to}
+        customer: ${newReservation.value.customer},
+        phone: ${newReservation.value.phone},
+        phone2: ${newReservation.value.phone2},
+        email: ${newReservation.value.email},
+        adult: ${newReservation.value.adult},
+        kid: ${newReservation.value.kid},
+        carseat: ${newReservation.value.carseat},
+        boosterseat: ${newReservation.value.boosterseat},
+        way: ${newReservation.value.way},
+        from: ${newReservation.value.from},
+        pick_location: ${newReservation.value.pick_location},
+        pickup_time: ${dateToString(newReservation.value.pickup_time)},
+        departure_time: ${formatTime(newReservation.value.departure_time)},
+        to: ${newReservation.value.to},
+        landing_time: ${formatTime(newReservation.value.landing_time)},
+        flight: ${newReservation.value.flight},
+        tosec: ${newReservation.value.tosec},
+        re_pickup_time:${dateToString(newReservation.value.re_pickup_time)},
+        address: ${newReservation.value.address},
+        date_reserv: ${formatDate(newReservation.value.date_reserv)},
+        cost: ${newReservation.value.cost},
+        tip: ${newReservation.value.tip},
+        costreturn: ${newReservation.value.costreturn},
+        tipreturn: ${newReservation.value.tipreturn},
+        payment_met: ${newReservation.value.payment_met},
+        heard: ${newReservation.value.heard},
+        note: ${newReservation.value.note},
+        status: ${newReservation.value.status},
+        vehicle: ${newReservation.value.vehicle},
+        driver: ${newReservation.value.driver},
+        dispatcher: ${newReservation.value.dispatcher},
 POLICIES
 
 Cancellations

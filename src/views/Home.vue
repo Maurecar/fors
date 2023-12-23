@@ -72,9 +72,12 @@ const mapToFullCalendarEvents = (reservation) => {
 
   for (const n of reservation) {
     events.push({
-      title: n.customer,
+      
+      title: n.from,
       start: n.pickup_time,
       end: n.re_pickup_time,
+      customer: n.customer,
+      phone: n.phone,
       display: 'list-item',
     });
   }
@@ -85,12 +88,19 @@ const calendarOptions = reactive({
   plugins: [dayGridPlugin, timeGridPlugin],
   initialView: 'dayGridMonth',
   timeZone: 'America/Denver',
+  dayMaxEvents: true,
   headerToolbar: {
     left: 'prev,next today',
     center: 'title',
     right: 'dayGridMonth,timeGridWeek,timeGridDay',
   },
   events: [],
+  eventClick: function(info) {
+    alert('From: ' + info.event.title +
+    ' \ncustomer: ' + info.event._def.extendedProps.customer +
+    ' \nphone: ' + info.event._def.extendedProps.phone );
+
+  },
 
   eventTimeFormat: {
     hour: '2-digit',
