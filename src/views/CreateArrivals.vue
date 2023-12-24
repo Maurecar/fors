@@ -963,6 +963,7 @@ function formatDate(date) {
     margin: 10px;
     background-color: #0a8df8;
     position: relative;
+    color: white;
 
 }
 
