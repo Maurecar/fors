@@ -79,6 +79,8 @@ const mapToFullCalendarEvents = (reservation) => {
       end: n.pickup_time,
       customer: n.customer,
       phone: n.phone,
+      to: n.to,
+      loc: n.pick_location,
       display: 'list-item',
       color: 'green',
     };
@@ -90,6 +92,7 @@ const mapToFullCalendarEvents = (reservation) => {
       customer: n.customer,
       phone: n.phone,
       trip: n.way,
+      
       display: 'list-item',
       color: 'red',
     };
@@ -114,7 +117,11 @@ const calendarOptions = reactive({
   eventClick: function (info) {
     if (info.event.title.includes("Steamboat")) {
   alert('DEPARTURE:' +
+    ' \nDate: ' + formatDate(info.event.start) +
     ' \nFrom: ' + info.event.title +
+    ' - ' + info.event.extendedProps['loc'] +
+    ' \nto: ' + info.event.extendedProps['to'] +
+    ' \nTime: ' + formatTime(info.event.start) +
     ' \ncustomer: ' + info.event.extendedProps['customer'] +
     ' \nphone: ' + info.event.extendedProps['phone'] +
     ' \nType of trip: ' + info.event.extendedProps['trip']);
@@ -143,6 +150,21 @@ const redirectToCreateArrival = () => {
   router.push('/createarrivals')
 }
 
+function formatDate(date) {
+    if (!(date instanceof Date)) {
+        console.error('Input is not a valid Date object');
+        return null;
+    }
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    console.log(date.toLocaleDateString('en-US', options))
+    return date.toLocaleDateString('en-US', options);
+}
+
+function formatTime(timeObject) {
+
+const time = new Date(0, 0, 0, timeObject.hours, timeObject.minutes, timeObject.seconds);
+return time.toLocaleTimeString('en-Us', { hour: 'numeric', minute: 'numeric', hour12: true });
+}
 
 </script>
 
