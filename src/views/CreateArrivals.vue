@@ -137,7 +137,7 @@
                                     <VueDatePicker v-model="newReservation.pickup_time" :is-24="false" :formatter="formatter" :timezone="'America/Denver'"
                                         class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                     </VueDatePicker>
-                                    <p>{{ newReservation.pickup_time }}</p>
+                                    
                                     <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                         for="reservation-pickup-time">
                                         Departure Time:
@@ -146,7 +146,7 @@
                                         :is-24="false"
                                         class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                     </VueDatePicker>
-                                    {{ formatTime(newReservation.departure_time) }}
+                                    
                                     <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                         for="reservation-to">
                                         Droping Location:
@@ -339,7 +339,7 @@
                             :format="formatter.date"
                             class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                         </VueDatePicker>
-                        <p>{{ new Date(newReservation.date_reserv).toLocaleDateString() }}</p>
+                        
 
                     </div>
                 </div>
@@ -399,6 +399,7 @@
                                     <option>Google search</option>
                                     <option>Front desk hotel</option>
                                     <option>A friend</option>
+                                    <option>Returning customer</option>
                                     <option>Facebook / Instagram</option>
                                     <option>Yelp / Trip advisor</option>
                                     <option>Tik - Tok</option>
@@ -472,7 +473,28 @@
                             <option>Other</option>
                         </select>
                     </div>
-
+                    <label for="vehicle">Company of Reservation</label>
+                    <div class="flex items-center ">
+                    <input id="Moving Mountains" name="Moving Mountains" type="radio" value="MM"
+                                    v-model="newReservation.company"
+                                    class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
+                                <label for="Moving Mountains" class="ml-3 block text-sm font-medium text-white-700">
+                                    Moving Mountains
+                                </label>
+                                <input id="Central of Reservations" name="Central of Reservations" type="radio" value="CRS"
+                                    v-model="newReservation.company"
+                                    class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
+                                <label for="Central of Reservations" class="ml-3 block text-sm font-medium text-white-700">
+                                    Central of Reservations
+                                </label>
+                                <input id="First Option Ride Service" name="First Option Ride Service" type="radio" value=""
+                                    v-model="newReservation.company"
+                                    class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
+                                <label for="First Option Ride Service" class="ml-3 block text-sm font-medium text-white-700">
+                                    First Option Ride Service
+                                </label>
+                            </div>
+                                
                 </div>
                 <div class="w-full px-3">
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -544,13 +566,14 @@ const newReservation = ref({
     dispatcher: "",
     driver: "",
     vehicle: "",
+    company:"",
 
 })
 const reserdatestr = new Date(newReservation.date_reserv).toLocaleDateString();
 
 const { mutate: createReservation } = useMutation(gql`
-        mutation InsertReservation($customer: String, $phone: String, $phone2: String, $email: String, $adult: Int, $kid: Int, $carseat: Int, $boosterseat: Int, $way: String, $from: String, $pick_location: String, $to: String, $flight: String, $tosec: String, $address: String, $date_reserv: date, $payment_met: String, $heard: String, $note: String, $status: String, $dispatcher: String, $driver: String, $vehicle: String, $cost: float8, $costreturn: float8, $departure_time: String, $landing_time: String, $re_pickup_time: timestamptz, $pickup_time: timestamptz, $tip: float8, $tipreturn: float8 ) {
-  insert_reservation(objects: {customer: $customer, phone: $phone, phone2: $phone2, email: $email, adult: $adult, kid: $kid, carseat: $carseat, boosterseat: $boosterseat, way: $way, from: $from, pick_location: $pick_location, to: $to, flight: $flight, tosec: $tosec, address: $address, date_reserv: $date_reserv, payment_met: $payment_met, heard: $heard, note: $note, status: $status, dispatcher: $dispatcher, driver: $driver, vehicle: $vehicle, cost: $cost, costreturn: $costreturn, departure_time: $departure_time, landing_time: $landing_time, re_pickup_time: $re_pickup_time, pickup_time: $pickup_time, tip: $tip, tipreturn: $tipreturn}) {
+        mutation InsertReservation($customer: String, $phone: String, $phone2: String, $email: String, $adult: Int, $kid: Int, $carseat: Int, $boosterseat: Int, $way: String, $from: String, $pick_location: String, $to: String, $flight: String, $tosec: String, $address: String, $date_reserv: date, $payment_met: String, $heard: String, $note: String, $status: String, $dispatcher: String, $driver: String, $vehicle: String, $cost: float8, $costreturn: float8, $departure_time: String, $landing_time: String, $re_pickup_time: timestamptz, $pickup_time: timestamptz, $tip: float8, $tipreturn: float8, $company: String ) {
+  insert_reservation(objects: {customer: $customer, phone: $phone, phone2: $phone2, email: $email, adult: $adult, kid: $kid, carseat: $carseat, boosterseat: $boosterseat, way: $way, from: $from, pick_location: $pick_location, to: $to, flight: $flight, tosec: $tosec, address: $address, date_reserv: $date_reserv, payment_met: $payment_met, heard: $heard, note: $note, status: $status, dispatcher: $dispatcher, driver: $driver, vehicle: $vehicle, cost: $cost, costreturn: $costreturn, departure_time: $departure_time, landing_time: $landing_time, re_pickup_time: $re_pickup_time, pickup_time: $pickup_time, tip: $tip, tipreturn: $tipreturn, company: $company}) {
     affected_rows
     returning {
       id
@@ -585,6 +608,7 @@ const { mutate: createReservation } = useMutation(gql`
       dispatcher
       driver
       vehicle
+      company
     }
   }
 } 
@@ -634,12 +658,14 @@ const handleCreateReservation = async () => {
         vehicle: newReservation.value.vehicle,
         driver: newReservation.value.driver,
         dispatcher: newReservation.value.dispatcher,
+        company: newReservation.value.company,
 
     })
     if (errors) {
         console.error(errors);
     } else {
         const contenidoTexto = `
+        Date: ${dateToString(newReservation.value.pickup_time)},
         customer: ${newReservation.value.customer},
         phone: ${newReservation.value.phone},
         phone2: ${newReservation.value.phone2},
@@ -651,7 +677,6 @@ const handleCreateReservation = async () => {
         way: ${newReservation.value.way},
         from: ${newReservation.value.from},
         pick_location: ${newReservation.value.pick_location},
-        pickup_time: ${dateToString(newReservation.value.pickup_time)},
         departure_time: ${formatTime(newReservation.value.departure_time)},
         to: ${newReservation.value.to},
         landing_time: ${formatTime(newReservation.value.landing_time)},

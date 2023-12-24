@@ -52,6 +52,7 @@ const {
 		landing_time
 		pickup_time
 		re_pickup_time
+    company
   }
 }
 `);
@@ -72,7 +73,8 @@ const mapToFullCalendarEvents = (reservation) => {
 
   for (const n of reservation) {
     const startEvent = {
-      title: n.from,
+      title: n.company + " " + n.from,
+      trip: n.way,
       start: n.pickup_time,
       end: n.pickup_time,
       customer: n.customer,
@@ -82,9 +84,12 @@ const mapToFullCalendarEvents = (reservation) => {
     };
 
     const endEvent = {
-      title: n.from,
+      title: n.company + " " + n.from,
       start: n.re_pickup_time,
       end: n.re_pickup_time,
+      customer: n.customer,
+      phone: n.phone,
+      trip: n.way,
       display: 'list-item',
       color: 'red',
     };
@@ -107,9 +112,19 @@ const calendarOptions = reactive({
   },
   events: [],
   eventClick: function(info) {
-    alert('From: ' + info.event.title +
+    if( info.event.title ==='Hayden airport'){
+    alert( 'ARRIVAL:' +
+    ' \nFrom: ' + info.event.title +
     ' \ncustomer: ' + info.event._def.extendedProps.customer +
-    ' \nphone: ' + info.event._def.extendedProps.phone );
+    ' \nphone: ' + info.event._def.extendedProps.phone  +
+    ' \nType of trip: ' + info.event._def.extendedProps.trip );
+  } else {
+      alert('DEPARTURE:' +
+      ' \nFrom: ' + info.event.title +
+      ' \ncustomer: ' + info.event._def.extendedProps.customer +
+      ' \nphone: ' + info.event._def.extendedProps.phone  +
+      ' \nType of trip: ' + info.event._def.extendedProps.trip );
+    }
 
   },
 
