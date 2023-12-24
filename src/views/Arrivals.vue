@@ -62,8 +62,8 @@ const logout = () => {
     result: reservationResult,
     refetch: reservationRefetch
   } = useQuery(gql`
-    query GetReservation {
-  reservation {
+    query GetReservation  {
+  reservation (order_by: {id: desc}){
     date_reserv
 		cost
 		costreturn

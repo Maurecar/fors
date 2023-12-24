@@ -139,6 +139,9 @@ const logout = () => {
   signOut()
   router.push('/login')
 }
+const redirectToCreateArrival = () => {
+    router.push('/createarrivals')
+}
 
 
 </script>
@@ -151,6 +154,8 @@ const logout = () => {
     </div>
   </main>
   <h1>Welcome to app </h1>
+  <button @click="redirectToCreateArrival" class="text-green-500 hover:underline cursor-pointer">Create
+                Reservation</button>
   <div>
     <FullCalendar :options="calendarOptions" />
   </div>

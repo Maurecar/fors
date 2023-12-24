@@ -16,7 +16,7 @@
                         <label for="customer">Customer Phone:</label>
                         <input id="Customer phone" v-model="newReservation.phone" placeholder="Customer Phone Number"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
-                        
+
                         <label for="customer">Customer Email:</label>
                         <input id="Customer email" v-model="newReservation.email" placeholder="Customer Email"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
@@ -81,7 +81,8 @@
                                     </label>
                                 </div>
                                 <div class="flex items-center">
-                                    <input id="Pick-up from Steamboat" name="from" type="radio" value="Steamboat" v-model="newReservation.from"
+                                    <input id="Pick-up from Steamboat" name="from" type="radio" value="Steamboat"
+                                        v-model="newReservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                     <label for="One Way" class="ml-3 block text-sm font-medium text-white-700">
                                         Pick-up from Steamboat
@@ -105,8 +106,8 @@
                                     </label>
                                 </div>
                                 <div class="flex items-center">
-                                    <input id="Pick-up from Steamboat" name="from" type="radio"
-                                        value="Steamboat" v-model="newReservation.from"
+                                    <input id="Pick-up from Steamboat" name="from" type="radio" value="Steamboat"
+                                        v-model="newReservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                     <label for="One Way" class="ml-3 block text-sm font-medium text-white-700">
                                         Pick-up from Steamboat
@@ -134,10 +135,11 @@
                                         for="reservation-pickup-time">
                                         Date and pick-up Time:
                                     </label>
-                                    <VueDatePicker v-model="newReservation.pickup_time" :is-24="false" :formatter="formatter" 
+                                    <VueDatePicker v-model="newReservation.pickup_time" :is-24="false"
+                                        :formatter="formatter"
                                         class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                     </VueDatePicker>
-                                    
+
                                     <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                         for="reservation-pickup-time">
                                         Departure Time:
@@ -146,7 +148,7 @@
                                         :is-24="false"
                                         class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                     </VueDatePicker>
-                                    
+
                                     <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                         for="reservation-to">
                                         Droping Location:
@@ -339,7 +341,7 @@
                             :format="formatter.date"
                             class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                         </VueDatePicker>
-                        
+
 
                     </div>
                 </div>
@@ -442,8 +444,7 @@
                                 <option v-for="dispatcher in dispatcherResult.Dispatcher" :key="dispatcher.id"
                                     :value="dispatcher.name">
                                     {{ dispatcher.name }}</option>
-                            </select>
-                            <label>Dispathcer: {{ newReservation.dispatcher }}</label>
+                            </select>                        
                         </div>
                     </div>
                     <div>
@@ -458,7 +459,6 @@
                                 }}
                                 </option>
                             </select>
-                            <label> Driver: {{ newReservation.driver }}</label>
                         </div>
                     </div>
                     <div>
@@ -466,6 +466,7 @@
                         <select
                             class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
                             id="vehicle" v-model="newReservation.vehicle">
+                            <option value="">--Choose a vehicle</option>
                             <option>Van #1</option>
                             <option>Van #2</option>
                             <option>Suburban</option>
@@ -473,28 +474,58 @@
                             <option>Other</option>
                         </select>
                     </div>
+                    <div v-if="newReservation.way === 'Round Trip'" class="mt-4">
+                        <div>
+                            <div v-if="driverResult">
+                                <label for="driver2">Select a Driver for returning:</label>
+                                <select id="driver2" v-model="newReservation.driver2"
+                                    class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
+                                    @change="onSelectUser">
+                                    <option value="">-- Select a driver for returning --</option>
+                                    <option v-for="driver in driverResult.Driver" :key="driver.id" :value="driver.name">{{
+                                        driver.name
+                                    }}
+                                    </option>
+                                </select>                                
+                            </div>
+                        </div>
+                        <div>
+                            <label for="vehicle">Vehicle for returning:</label>
+                            <select
+                                class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
+                                id="vehicle" v-model="newReservation.vehicle2">
+                                <option value="">--Choose a vehicle for returning</option>
+                                <option>Van #1</option>
+                                <option>Van #2</option>
+                                <option>Suburban</option>
+                                <option>Yukon</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                    </div>
                     <label for="vehicle">Company of Reservation</label>
                     <div class="flex items-center ">
-                    <input id="Moving Mountains" name="Moving Mountains" type="radio" value="MM"
-                                    v-model="newReservation.company"
-                                    class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
-                                <label for="Moving Mountains" class="ml-3 block text-sm font-medium text-white-700">
-                                    Moving Mountains
-                                </label>
-                                <input id="Central of Reservations" name="Central of Reservations" type="radio" value="CRS"
-                                    v-model="newReservation.company"
-                                    class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
-                                <label for="Central of Reservations" class="ml-3 block text-sm font-medium text-white-700">
-                                    Central of Reservations
-                                </label>
-                                <input id="First Option Ride Service" name="First Option Ride Service" type="radio" value=""
-                                    v-model="newReservation.company"
-                                    class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
-                                <label for="First Option Ride Service" class="ml-3 block text-sm font-medium text-white-700">
-                                    First Option Ride Service
-                                </label>
-                            </div>
-                                
+                        <input id="Moving Mountains" name="Moving Mountains" type="radio" value="MM"
+                            v-model="newReservation.company"
+                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
+                        <label for="Moving Mountains" class="ml-3 block text-sm font-medium text-white-700">
+                            Moving Mountains
+                        </label>
+                        <input id="Central of Reservations" name="Central of Reservations" type="radio" value="CRS"
+                            v-model="newReservation.company"
+                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
+                        <label for="Central of Reservations" class="ml-3 block text-sm font-medium text-white-700">
+                            Central of Reservations
+                        </label>
+                        <input id="First Option Ride Service" name="First Option Ride Service" type="radio" value=""
+                            v-model="newReservation.company"
+                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
+                        <label for="First Option Ride Service" class="ml-3 block text-sm font-medium text-white-700">
+                            First Option Ride Service
+                        </label>
+                    </div>
+
                 </div>
                 <div class="w-full px-3">
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -566,14 +597,16 @@ const newReservation = ref({
     dispatcher: "",
     driver: "",
     vehicle: "",
-    company:"",
+    driver2: "",
+    vehicle2: "",
+    company: "",
 
 })
 const reserdatestr = new Date(newReservation.date_reserv).toLocaleDateString();
 
 const { mutate: createReservation } = useMutation(gql`
-        mutation InsertReservation($customer: String, $phone: String, $phone2: String, $email: String, $adult: Int, $kid: Int, $carseat: Int, $boosterseat: Int, $way: String, $from: String, $pick_location: String, $to: String, $flight: String, $tosec: String, $address: String, $date_reserv: date, $payment_met: String, $heard: String, $note: String, $status: String, $dispatcher: String, $driver: String, $vehicle: String, $cost: float8, $costreturn: float8, $departure_time: String, $landing_time: String, $re_pickup_time: timestamptz, $pickup_time: timestamptz, $tip: float8, $tipreturn: float8, $company: String ) {
-  insert_reservation(objects: {customer: $customer, phone: $phone, phone2: $phone2, email: $email, adult: $adult, kid: $kid, carseat: $carseat, boosterseat: $boosterseat, way: $way, from: $from, pick_location: $pick_location, to: $to, flight: $flight, tosec: $tosec, address: $address, date_reserv: $date_reserv, payment_met: $payment_met, heard: $heard, note: $note, status: $status, dispatcher: $dispatcher, driver: $driver, vehicle: $vehicle, cost: $cost, costreturn: $costreturn, departure_time: $departure_time, landing_time: $landing_time, re_pickup_time: $re_pickup_time, pickup_time: $pickup_time, tip: $tip, tipreturn: $tipreturn, company: $company}) {
+        mutation InsertReservation($customer: String, $phone: String, $phone2: String, $email: String, $adult: Int, $kid: Int, $carseat: Int, $boosterseat: Int, $way: String, $from: String, $pick_location: String, $to: String, $flight: String, $tosec: String, $address: String, $date_reserv: date, $payment_met: String, $heard: String, $note: String, $status: String, $dispatcher: String, $driver: String, $driver2: String, $vehicle: String, $vehicle2: String, $cost: float8, $costreturn: float8, $departure_time: String, $landing_time: String, $re_pickup_time: timestamptz, $pickup_time: timestamptz, $tip: float8, $tipreturn: float8, $company: String ) {
+  insert_reservation(objects: {customer: $customer, phone: $phone, phone2: $phone2, email: $email, adult: $adult, kid: $kid, carseat: $carseat, boosterseat: $boosterseat, way: $way, from: $from, pick_location: $pick_location, to: $to, flight: $flight, tosec: $tosec, address: $address, date_reserv: $date_reserv, payment_met: $payment_met, heard: $heard, note: $note, status: $status, dispatcher: $dispatcher, driver: $driver, driver2: $driver2, vehicle: $vehicle, vehicle2: $vehicle2, cost: $cost, costreturn: $costreturn, departure_time: $departure_time, landing_time: $landing_time, re_pickup_time: $re_pickup_time, pickup_time: $pickup_time, tip: $tip, tipreturn: $tipreturn, company: $company}) {
     affected_rows
     returning {
       id
@@ -608,6 +641,8 @@ const { mutate: createReservation } = useMutation(gql`
       dispatcher
       driver
       vehicle
+      driver2
+      vehicle2
       company
     }
   }
@@ -624,7 +659,7 @@ const handleCreateReservation = async () => {
         return alert("Please fill all fields")
 
     }
-    
+
     const { data, errors } = await createReservation({
 
         customer: newReservation.value.customer,
@@ -644,7 +679,7 @@ const handleCreateReservation = async () => {
         landing_time: formatTime(newReservation.value.landing_time),
         flight: newReservation.value.flight,
         tosec: newReservation.value.tosec,
-        re_pickup_time:dateToString(newReservation.value.re_pickup_time),
+        re_pickup_time: dateToString(newReservation.value.re_pickup_time),
         address: newReservation.value.address,
         date_reserv: formatDate(newReservation.value.date_reserv),
         cost: newReservation.value.cost,
@@ -657,6 +692,8 @@ const handleCreateReservation = async () => {
         status: newReservation.value.status,
         vehicle: newReservation.value.vehicle,
         driver: newReservation.value.driver,
+        vehicle2: newReservation.value.vehicle2,
+        driver2: newReservation.value.driver2,
         dispatcher: newReservation.value.dispatcher,
         company: newReservation.value.company,
 
@@ -695,6 +732,8 @@ const handleCreateReservation = async () => {
         status: ${newReservation.value.status},
         vehicle: ${newReservation.value.vehicle},
         driver: ${newReservation.value.driver},
+        vehicle returning: ${newReservation.value.vehicle2},
+        driver returning: ${newReservation.value.driver2},
         dispatcher: ${newReservation.value.dispatcher},
 POLICIES
 
@@ -824,44 +863,39 @@ const {
     }
   `)
 function formatTime(timeObject) {
-   
+
     const time = new Date(0, 0, 0, timeObject.hours, timeObject.minutes, timeObject.seconds);
     return time.toLocaleTimeString('en-Us', { hour: 'numeric', minute: 'numeric', hour12: true });
 }
 function dateToString(date) {
-  if (!(date instanceof Date)) {
-    console.error('Input is not a valid Date object');
-    return null;
-  }
+    if (!(date instanceof Date)) {
+        console.error('Input is not a valid Date object');
+        return null;
+    }
 
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-  const seconds = String(date.getSeconds()).padStart(2, '0');
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
 
-  const timezoneOffset = date.getTimezoneOffset();
-  const offsetHours = Math.floor(Math.abs(timezoneOffset) / 60);
-  const offsetMinutes = Math.abs(timezoneOffset) % 60;
-  const timezone = '+00:00';
-  /* const timezone = (timezoneOffset < 0 ? '+' : '-') +
-    String(offsetHours).padStart(2, '0') +
-    ':' +
-    String(offsetMinutes).padStart(2, '0'); */
+    const timezoneOffset = date.getTimezoneOffset();
+    const offsetHours = Math.floor(Math.abs(timezoneOffset) / 60);
+    const offsetMinutes = Math.abs(timezoneOffset) % 60;
+    const timezone = '+00:00';
+    const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
 
-   const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
-
-  return formattedDate;
+    return formattedDate;
 }
 function formatDate(date) {
-  if (!(date instanceof Date)) {
-    console.error('Input is not a valid Date object');
-    return null;
-  }
-  const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-  console.log(date.toLocaleDateString('en-US', options))
-  return date.toLocaleDateString('en-US', options);
+    if (!(date instanceof Date)) {
+        console.error('Input is not a valid Date object');
+        return null;
+    }
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    console.log(date.toLocaleDateString('en-US', options))
+    return date.toLocaleDateString('en-US', options);
 }
 
 
@@ -880,18 +914,13 @@ function formatDate(date) {
     content: "Customer Data";
     position: absolute;
     top: -20px;
-    /* Ajusta la posición vertical del título según sea necesario */
     left: 10px;
-    /* Ajusta la posición horizontal del título según sea necesario */
     background-color: #050a69;
-    /* Mantén el mismo color de fondo */
     padding: 0 5px;
-    /* Ajusta el espaciado del título según sea necesario */
     font-weight: bold;
     border: 1px solid #000;
-    /* Bordes alrededor del título */
     border-bottom: none;
-    /* Elimina el borde inferior para que no se duplique */
+
 }
 
 .passengers-data {
@@ -914,7 +943,7 @@ function formatDate(date) {
     border: 1px solid #000;
     border-bottom: none;
     color: white;
-    }
+}
 
 .fors {
     border: 1px solid #000000;
