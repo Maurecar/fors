@@ -907,19 +907,14 @@ function formatDate(date) {
     content: "passengers-data";
     position: absolute;
     top: -20px;
-    /* Ajusta la posición vertical del título según sea necesario */
     left: 10px;
-    /* Ajusta la posición horizontal del título según sea necesario */
     background-color: #701010;
-    /* Mantén el mismo color de fondo */
     padding: 0 5px;
-    /* Ajusta el espaciado del título según sea necesario */
     font-weight: bold;
     border: 1px solid #000;
-    /* Bordes alrededor del título */
     border-bottom: none;
-    /* Elimina el borde inferior para que no se duplique */
-}
+    color: white;
+    }
 
 .fors {
     border: 1px solid #000000;
