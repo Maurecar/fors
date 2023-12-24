@@ -80,7 +80,7 @@ const mapToFullCalendarEvents = (reservation) => {
       customer: n.customer,
       phone: n.phone,
       display: 'list-item',
-      color:'green',
+      color: 'green',
     };
 
     const endEvent = {
@@ -111,20 +111,20 @@ const calendarOptions = reactive({
     right: 'dayGridMonth,timeGridWeek,timeGridDay',
   },
   events: [],
-  eventClick: function(info) {
-    if( info.event.title ==='Hayden airport'){
-    alert( 'ARRIVAL:' +
+  eventClick: function (info) {
+    if (info.event.title.includes("Steamboat")) {
+  alert('DEPARTURE:' +
     ' \nFrom: ' + info.event.title +
-    ' \ncustomer: ' + info.event._def.extendedProps.customer +
-    ' \nphone: ' + info.event._def.extendedProps.phone  +
-    ' \nType of trip: ' + info.event._def.extendedProps.trip );
-  } else {
-      alert('DEPARTURE:' +
-      ' \nFrom: ' + info.event.title +
-      ' \ncustomer: ' + info.event._def.extendedProps.customer +
-      ' \nphone: ' + info.event._def.extendedProps.phone  +
-      ' \nType of trip: ' + info.event._def.extendedProps.trip );
-    }
+    ' \ncustomer: ' + info.event.extendedProps['customer'] +
+    ' \nphone: ' + info.event.extendedProps['phone'] +
+    ' \nType of trip: ' + info.event.extendedProps['trip']);
+} else {
+  alert('ARRIVAL:' +
+    ' \nFrom: ' + info.event.title +
+    ' \ncustomer: ' + info.event.extendedProps['customer'] +
+    ' \nphone: ' + info.event.extendedProps['phone'] +
+    ' \nType of trip: ' + info.event.extendedProps['trip']);
+}
 
   },
 
@@ -140,7 +140,7 @@ const logout = () => {
   router.push('/login')
 }
 const redirectToCreateArrival = () => {
-    router.push('/createarrivals')
+  router.push('/createarrivals')
 }
 
 
@@ -155,9 +155,8 @@ const redirectToCreateArrival = () => {
   </main>
   <h1>Welcome to app </h1>
   <button @click="redirectToCreateArrival" class="text-green-500 hover:underline cursor-pointer">Create
-                Reservation</button>
+    Reservation</button>
   <div>
     <FullCalendar :options="calendarOptions" />
   </div>
-  
 </template>
