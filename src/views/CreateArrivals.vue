@@ -134,7 +134,7 @@
                                         for="reservation-pickup-time">
                                         Date and pick-up Time:
                                     </label>
-                                    <VueDatePicker v-model="newReservation.pickup_time" :is-24="false" :formatter="formatter" :timezone="'America/Denver'"
+                                    <VueDatePicker v-model="newReservation.pickup_time" :is-24="false" :formatter="formatter" 
                                         class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                     </VueDatePicker>
                                     
