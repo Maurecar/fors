@@ -444,7 +444,7 @@
                                 <option v-for="dispatcher in dispatcherResult.Dispatcher" :key="dispatcher.id"
                                     :value="dispatcher.name">
                                     {{ dispatcher.name }}</option>
-                            </select>                        
+                            </select>
                         </div>
                     </div>
                     <div>
@@ -486,7 +486,7 @@
                                         driver.name
                                     }}
                                     </option>
-                                </select>                                
+                                </select>
                             </div>
                         </div>
                         <div>
@@ -701,7 +701,9 @@ const handleCreateReservation = async () => {
     if (errors) {
         console.error(errors);
     } else {
-        const contenidoTexto = `
+        if (newReservation.value.way === "Round Trip") {
+            if (newReservation.value.from === "Steamboat") {
+                const contenidoTexto = ` DEPARTURE
         Date: ${dateToString(newReservation.value.pickup_time)},
         customer: ${newReservation.value.customer},
         phone: ${newReservation.value.phone},
@@ -735,24 +737,122 @@ const handleCreateReservation = async () => {
         vehicle returning: ${newReservation.value.vehicle2},
         driver returning: ${newReservation.value.driver2},
         dispatcher: ${newReservation.value.dispatcher},
-POLICIES
 
-Cancellations
+        `
+            } else { const contenidoTexto = ` ARRIVAL
+        Date: ${dateToString(newReservation.value.pickup_time)},
+        customer: ${newReservation.value.customer},
+        phone: ${newReservation.value.phone},
+        phone2: ${newReservation.value.phone2},
+        email: ${newReservation.value.email},
+        adult: ${newReservation.value.adult},
+        kid: ${newReservation.value.kid},
+        carseat: ${newReservation.value.carseat},
+        boosterseat: ${newReservation.value.boosterseat},
+        way: ${newReservation.value.way},
+        from: ${newReservation.value.from},
+        pick_location: ${newReservation.value.pick_location},
+        departure_time: ${formatTime(newReservation.value.departure_time)},
+        to: ${newReservation.value.to},
+        landing_time: ${formatTime(newReservation.value.landing_time)},
+        flight: ${newReservation.value.flight},
+        tosec: ${newReservation.value.tosec},
+        re_pickup_time:${dateToString(newReservation.value.re_pickup_time)},
+        address: ${newReservation.value.address},
+        date_reserv: ${formatDate(newReservation.value.date_reserv)},
+        cost: ${newReservation.value.cost},
+        tip: ${newReservation.value.tip},
+        costreturn: ${newReservation.value.costreturn},
+        tipreturn: ${newReservation.value.tipreturn},
+        payment_met: ${newReservation.value.payment_met},
+        heard: ${newReservation.value.heard},
+        note: ${newReservation.value.note},
+        status: ${newReservation.value.status},
+        vehicle: ${newReservation.value.vehicle},
+        driver: ${newReservation.value.driver},
+        vehicle returning: ${newReservation.value.vehicle2},
+        driver returning: ${newReservation.value.driver2},
+        dispatcher: ${newReservation.value.dispatcher},
 
-Cancellations made 48 hours prior to the trip will receive a full refund minus a 5% service charge fee.
+        `}
+        } else {
+            if (newReservation.value.from === "Steamboat") {
+                const contenidoTexto = ` DEPARTURE
+        Date: ${dateToString(newReservation.value.pickup_time)},
+        customer: ${newReservation.value.customer},
+        phone: ${newReservation.value.phone},
+        phone2: ${newReservation.value.phone2},
+        email: ${newReservation.value.email},
+        adult: ${newReservation.value.adult},
+        kid: ${newReservation.value.kid},
+        carseat: ${newReservation.value.carseat},
+        boosterseat: ${newReservation.value.boosterseat},
+        way: ${newReservation.value.way},
+        from: ${newReservation.value.from},
+        pick_location: ${newReservation.value.pick_location},
+        departure_time: ${formatTime(newReservation.value.departure_time)},
+        to: ${newReservation.value.to},
+        landing_time: ${formatTime(newReservation.value.landing_time)},
+        flight: ${newReservation.value.flight},
+        tosec: ${newReservation.value.tosec},
+        re_pickup_time:${dateToString(newReservation.value.re_pickup_time)},
+        address: ${newReservation.value.address},
+        date_reserv: ${formatDate(newReservation.value.date_reserv)},
+        cost: ${newReservation.value.cost},
+        tip: ${newReservation.value.tip},
+        costreturn: ${newReservation.value.costreturn},
+        tipreturn: ${newReservation.value.tipreturn},
+        payment_met: ${newReservation.value.payment_met},
+        heard: ${newReservation.value.heard},
+        note: ${newReservation.value.note},
+        status: ${newReservation.value.status},
+        vehicle: ${newReservation.value.vehicle},
+        driver: ${newReservation.value.driver},
+        vehicle returning: ${newReservation.value.vehicle2},
+        driver returning: ${newReservation.value.driver2},
+        dispatcher: ${newReservation.value.dispatcher},
 
-Cancellations on the day of the trip, or any no-shows will incur in:
+        `
+            } else {
+                const contenidoTexto = ` ARRIVAL
+        Date: ${dateToString(newReservation.value.pickup_time)},
+        customer: ${newReservation.value.customer},
+        phone: ${newReservation.value.phone},
+        phone2: ${newReservation.value.phone2},
+        email: ${newReservation.value.email},
+        adult: ${newReservation.value.adult},
+        kid: ${newReservation.value.kid},
+        carseat: ${newReservation.value.carseat},
+        boosterseat: ${newReservation.value.boosterseat},
+        way: ${newReservation.value.way},
+        from: ${newReservation.value.from},
+        pick_location: ${newReservation.value.pick_location},
+        departure_time: ${formatTime(newReservation.value.departure_time)},
+        to: ${newReservation.value.to},
+        landing_time: ${formatTime(newReservation.value.landing_time)},
+        flight: ${newReservation.value.flight},
+        tosec: ${newReservation.value.tosec},
+        re_pickup_time:${dateToString(newReservation.value.re_pickup_time)},
+        address: ${newReservation.value.address},
+        date_reserv: ${formatDate(newReservation.value.date_reserv)},
+        cost: ${newReservation.value.cost},
+        tip: ${newReservation.value.tip},
+        costreturn: ${newReservation.value.costreturn},
+        tipreturn: ${newReservation.value.tipreturn},
+        payment_met: ${newReservation.value.payment_met},
+        heard: ${newReservation.value.heard},
+        note: ${newReservation.value.note},
+        status: ${newReservation.value.status},
+        vehicle: ${newReservation.value.vehicle},
+        driver: ${newReservation.value.driver},
+        vehicle returning: ${newReservation.value.vehicle2},
+        driver returning: ${newReservation.value.driver2},
+        dispatcher: ${newReservation.value.dispatcher},
 
-– 50% fee in a roundtrip.
-– 100% fee in one way rides.
-
-Liability
-
-First Option Ride Service LLC We will not be responsible for canceled flights, 
-bad traffic conditions, or delays caused by weather or any other conditions beyond our control. 
-However, in the event of a flight delay, we are willing to reschedule your pick-up time
-based on our availability
-        `;
+        `
+            }
+        }
+        ;
 
         const blob = new Blob([contenidoTexto], { type: 'text/plain' });
         const contenidoURL = URL.createObjectURL(blob);
