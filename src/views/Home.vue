@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive, initCustomFormatter } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSignOut, useUserId } from '@nhost/vue'
 
@@ -64,7 +64,7 @@ onMounted(async () => {
 
   if (!reservationLoading.value && reservationResult.value) {
     reservation.value = reservationResult.value.reservation || [];
-    calendarOptions.events = mapToFullCalendarEvents(reservation.value); // Pass the 'reservation' array directly to the function
+    calendarOptions.events = mapToFullCalendarEvents(reservation.value); 
   }
 });
 
@@ -94,13 +94,17 @@ const mapToFullCalendarEvents = (reservation) => {
       driver: n.driver,
       reservation: n.date_reserv,
       note: n.note,
- 
+      cost: n.cost,
+      costr: n.costreturn,
+      tip: n.tip,
+      tipr: n.tipreturn,
+
       display: 'list-item',
       color: 'green',
     };
 
     const endEvent = {
-      title: n.company + " " + n.from,
+      title: n.company + " " + n.to,
       start: n.re_pickup_time,
       end: n.re_pickup_time,
       customer: n.customer,
@@ -120,7 +124,12 @@ const mapToFullCalendarEvents = (reservation) => {
       driver: n.driver,
       reservation: n.date_reserv,
       note: n.note,
-      
+      cost: n.cost,
+      costr: n.costreturn,
+      tip: n.tip,
+      tipr: n.tipreturn,
+      from: n.from,
+
       display: 'list-item',
       color: 'red',
     };
@@ -143,50 +152,67 @@ const calendarOptions = reactive({
   },
   events: [],
   eventClick: function (info) {
-    if (info.event.title.includes("Steamboat")) {
-  alert('DEPARTURE:' +
-    ' \nDate: ' + formatDate(info.event.start) +
-    ' \nFrom: ' + info.event.title +
-    ' - ' + info.event.extendedProps['loc'] +
-    ' \nto: ' + info.event.extendedProps['to'] +
-    ' \nTime: ' + formatTime(info.event.start) +
-    ' \nDeparture time: ' + info.event.extendedProps['dep'] +
-    ' \nName: ' + info.event.extendedProps['customer'] +
-    ' \nPhone: ' + info.event.extendedProps['phone'] +
-    ' \nAdult: ' + info.event.extendedProps['adu'] +
-    ' \nKid: ' + info.event.extendedProps['kid'] +
-    ' \nVehicle: ' + info.event.extendedProps['veh'] +
-    ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
-    ' \nPayment method: ' + info.event.extendedProps['met'] +
-    ' \nEmail: ' + info.event.extendedProps['email'] +
-    ' \nFlight: ' + info.event.extendedProps['flight'] +
-    ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
-    ' \nDriverS name: ' + info.event.extendedProps['driver'] +
-    ' \nNote: ' + info.event.extendedProps['note']);
-} else {
-  alert('ARRIVAL:' +
-  ' \nDate: ' + formatDate(info.event.start) +
-    ' \nFrom: ' + info.event.title +
-    ' - ' + info.event.extendedProps['loc'] +
-    ' \nto: ' + info.event.extendedProps['to'] +
-    ' \nTime: ' + formatTime(info.event.start) +
-    ' \nLanding time: ' + info.event.extendedProps['lan'] +
-    ' \nName: ' + info.event.extendedProps['customer'] +
-    ' \nPhone: ' + info.event.extendedProps['phone'] +
-    ' \nAdult: ' + info.event.extendedProps['adu'] +
-    ' \nKid: ' + info.event.extendedProps['kid'] +
-    ' \nPayment Status: Alredy paid ' + info.event.extendedProps['trip'] +
-    ' \nPayment method ' + info.event.extendedProps['met'] +
-    ' \nEmail ' + info.event.extendedProps['email'] +
-    ' \nVehicle: ' + info.event.extendedProps['veh'] +
-    ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
-    ' \nPayment method: ' + info.event.extendedProps['met'] +
-    ' \nEmail: ' + info.event.extendedProps['email'] +
-    ' \nFlight: ' + info.event.extendedProps['flight'] +
-    ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
-    ' \nDriverS name: ' + info.event.extendedProps['driver'] +
-    ' \nNote: ' + info.event.extendedProps['note']);
-}
+    if (!"endevent" in info.event) {
+      if (info.event.title.includes("Steamboat")) {
+        alert('END EVENT - ARRIVAL:'
+          
+        );
+      } else if (eventType === 'departure') {
+        alert('END EVENT - DEPARTURE:'
+          
+        );
+      }
+    } else {
+      if (info.event.title.includes("Steamboat")) {
+        alert('DEPARTURE:' +
+          ' \nDate: ' + formatDate(info.event.start) +
+          ' \nFrom: ' + info.event.title +
+          ' - ' + info.event.extendedProps['loc'] +
+          ' \nto: ' + info.event.extendedProps['from'] +
+          ' \nTime: ' + formatTime(info.event.start) +
+          ' \nDeparture time: ' + info.event.extendedProps['dep'] +
+          ' \nName: ' + info.event.extendedProps['customer'] +
+          ' \nPhone: ' + info.event.extendedProps['phone'] +
+          ' \nAdult: ' + info.event.extendedProps['adu'] +
+          ' \nKid: ' + info.event.extendedProps['kid'] +
+          ' \nVehicle: ' + info.event.extendedProps['veh'] +
+          ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+          ' cost: $' + info.event.extendedProps['cost'] + ' tip: $' + info.event.extendedProps['tip'] +
+          ' cost return: $' + info.event.extendedProps['costr'] + ' tip return: $ ' + info.event.extendedProps['tipr'] +
+          ' \nPayment method: ' + info.event.extendedProps['met'] +
+          ' \nEmail: ' + info.event.extendedProps['email'] +
+          ' \nFlight: ' + info.event.extendedProps['flight'] +
+          ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
+          ' \nDriverS name: ' + info.event.extendedProps['driver'] +
+          ' \nNote: ' + info.event.extendedProps['note']);
+      } else {
+        alert('ARRIVAL:' +
+          ' \nDate: ' + formatDate(info.event.start) +
+          ' \nFrom: ' + info.event.title +
+          ' - ' + info.event.extendedProps['loc'] +
+          ' \nto: ' + info.event.extendedProps['to'] +
+          ' \nTime: ' + formatTime(info.event.start) +
+          ' \nLanding time: ' + info.event.extendedProps['lan'] +
+          ' \nName: ' + info.event.extendedProps['customer'] +
+          ' \nPhone: ' + info.event.extendedProps['phone'] +
+          ' \nAdult: ' + info.event.extendedProps['adu'] +
+          ' \nKid: ' + info.event.extendedProps['kid'] +
+          ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+          ' cost: $' + info.event.extendedProps['cost'] + ' tip: $' + info.event.extendedProps['tip'] +
+          ' cost return: $' + info.event.extendedProps['costr'] + ' tip return: $ ' + info.event.extendedProps['tipr'] +
+          ' \nPayment method ' + info.event.extendedProps['met'] +
+          ' \nEmail ' + info.event.extendedProps['email'] +
+          ' \nVehicle: ' + info.event.extendedProps['veh'] +
+          ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+          ' \nPayment method: ' + info.event.extendedProps['met'] +
+          ' \nEmail: ' + info.event.extendedProps['email'] +
+          ' \nFlight: ' + info.event.extendedProps['flight'] +
+          ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
+          ' \nDriverS name: ' + info.event.extendedProps['driver'] +
+          ' \nNote: ' + info.event.extendedProps['note']);
+      }
+    }
+
 
   },
 
@@ -206,13 +232,13 @@ const redirectToCreateArrival = () => {
 }
 
 function formatDate(date) {
-    if (!(date instanceof Date)) {
-        console.error('Input is not a valid Date object');
-        return null;
-    }
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-    console.log(date.toLocaleDateString('en-US', options))
-    return date.toLocaleDateString('en-US', options);
+  if (!(date instanceof Date)) {
+    console.error('Input is not a valid Date object');
+    return null;
+  }
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  console.log(date.toLocaleDateString('en-US', options))
+  return date.toLocaleDateString('en-US', options);
 }
 const formatTime = (isoDate) => {
   const date = new Date(isoDate);
