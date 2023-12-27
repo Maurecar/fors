@@ -21,7 +21,7 @@ const {
   refetch: reservationRefetch
 } = useQuery(gql`
   query GetReservation {
-  reservation(where: {vehicle: {_eq: "Van #1"}}) {
+  reservation(where: {vehicle2: {_eq: "Van #1"}, vehicle: {_eq: "Van #1"}}) {
     date_reserv
 		cost
 		costreturn

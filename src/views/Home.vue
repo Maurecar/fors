@@ -81,6 +81,20 @@ const mapToFullCalendarEvents = (reservation) => {
       phone: n.phone,
       to: n.to,
       loc: n.pick_location,
+      land: n.landing_time,
+      dep: n.departure_time,
+      kid: n.kid,
+      adu: n.adult,
+      veh: n.vehicle,
+      lan: n.landing_time,
+      met: n.payment_met,
+      email: n.email,
+      flight: n.flight,
+      dispat: n.dispatcher,
+      driver: n.driver,
+      reservation: n.date_reserv,
+      note: n.note,
+ 
       display: 'list-item',
       color: 'green',
     };
@@ -91,7 +105,21 @@ const mapToFullCalendarEvents = (reservation) => {
       end: n.re_pickup_time,
       customer: n.customer,
       phone: n.phone,
-      trip: n.way,
+      to: n.to,
+      loc: n.pick_location,
+      land: n.landing_time,
+      dep: n.departure_time,
+      kid: n.kid,
+      adu: n.adult,
+      veh: n.vehicle,
+      lan: n.landing_time,
+      met: n.payment_met,
+      email: n.email,
+      flight: n.flight,
+      dispat: n.dispatcher,
+      driver: n.driver,
+      reservation: n.date_reserv,
+      note: n.note,
       
       display: 'list-item',
       color: 'red',
@@ -122,15 +150,42 @@ const calendarOptions = reactive({
     ' - ' + info.event.extendedProps['loc'] +
     ' \nto: ' + info.event.extendedProps['to'] +
     ' \nTime: ' + formatTime(info.event.start) +
-    ' \ncustomer: ' + info.event.extendedProps['customer'] +
-    ' \nphone: ' + info.event.extendedProps['phone'] +
-    ' \nType of trip: ' + info.event.extendedProps['trip']);
+    ' \nDeparture time: ' + info.event.extendedProps['dep'] +
+    ' \nName: ' + info.event.extendedProps['customer'] +
+    ' \nPhone: ' + info.event.extendedProps['phone'] +
+    ' \nAdult: ' + info.event.extendedProps['adu'] +
+    ' \nKid: ' + info.event.extendedProps['kid'] +
+    ' \nVehicle: ' + info.event.extendedProps['veh'] +
+    ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+    ' \nPayment method: ' + info.event.extendedProps['met'] +
+    ' \nEmail: ' + info.event.extendedProps['email'] +
+    ' \nFlight: ' + info.event.extendedProps['flight'] +
+    ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
+    ' \nDriverS name: ' + info.event.extendedProps['driver'] +
+    ' \nNote: ' + info.event.extendedProps['note']);
 } else {
   alert('ARRIVAL:' +
+  ' \nDate: ' + formatDate(info.event.start) +
     ' \nFrom: ' + info.event.title +
-    ' \ncustomer: ' + info.event.extendedProps['customer'] +
-    ' \nphone: ' + info.event.extendedProps['phone'] +
-    ' \nType of trip: ' + info.event.extendedProps['trip']);
+    ' - ' + info.event.extendedProps['loc'] +
+    ' \nto: ' + info.event.extendedProps['to'] +
+    ' \nTime: ' + formatTime(info.event.start) +
+    ' \nLanding time: ' + info.event.extendedProps['lan'] +
+    ' \nName: ' + info.event.extendedProps['customer'] +
+    ' \nPhone: ' + info.event.extendedProps['phone'] +
+    ' \nAdult: ' + info.event.extendedProps['adu'] +
+    ' \nKid: ' + info.event.extendedProps['kid'] +
+    ' \nPayment Status: Alredy paid ' + info.event.extendedProps['trip'] +
+    ' \nPayment method ' + info.event.extendedProps['met'] +
+    ' \nEmail ' + info.event.extendedProps['email'] +
+    ' \nVehicle: ' + info.event.extendedProps['veh'] +
+    ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+    ' \nPayment method: ' + info.event.extendedProps['met'] +
+    ' \nEmail: ' + info.event.extendedProps['email'] +
+    ' \nFlight: ' + info.event.extendedProps['flight'] +
+    ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
+    ' \nDriverS name: ' + info.event.extendedProps['driver'] +
+    ' \nNote: ' + info.event.extendedProps['note']);
 }
 
   },
@@ -159,12 +214,14 @@ function formatDate(date) {
     console.log(date.toLocaleDateString('en-US', options))
     return date.toLocaleDateString('en-US', options);
 }
-
-function formatTime(timeObject) {
-
-const time = new Date(0, 0, 0, timeObject.hours, timeObject.minutes, timeObject.seconds);
-return time.toLocaleTimeString('en-Us', { hour: 'numeric', minute: 'numeric', hour12: true });
-}
+const formatTime = (isoDate) => {
+  const date = new Date(isoDate);
+  const hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
+  return formattedTime;
+};
 
 </script>
 
