@@ -557,6 +557,8 @@ const router = useRouter()
 const { signOut } = useSignOut()
 const { userId } = useUserId()
 const totalAmount = ref(0);
+const Totalarrive = ref(0);
+const Totaldeparture = ref(0);
 
 
 const logout = () => {
@@ -651,6 +653,7 @@ const { mutate: createReservation } = useMutation(gql`
 
 
 const handleCreateReservation = async () => {
+    let contenidoTexto = '';
     if (
 
         !newReservation.value.pickup_time
@@ -701,155 +704,152 @@ const handleCreateReservation = async () => {
     if (errors) {
         console.error(errors);
     } else {
-        if (newReservation.value.way === "Round Trip") {
+       
+        if (newReservation.value.way === "One Way") {
             if (newReservation.value.from === "Steamboat") {
-                const contenidoTexto = ` DEPARTURE
-        Date: ${dateToString(newReservation.value.pickup_time)},
-        customer: ${newReservation.value.customer},
-        phone: ${newReservation.value.phone},
-        phone2: ${newReservation.value.phone2},
-        email: ${newReservation.value.email},
-        adult: ${newReservation.value.adult},
-        kid: ${newReservation.value.kid},
-        carseat: ${newReservation.value.carseat},
-        boosterseat: ${newReservation.value.boosterseat},
-        way: ${newReservation.value.way},
-        from: ${newReservation.value.from},
-        pick_location: ${newReservation.value.pick_location},
-        departure_time: ${formatTime(newReservation.value.departure_time)},
-        to: ${newReservation.value.to},
-        landing_time: ${formatTime(newReservation.value.landing_time)},
-        flight: ${newReservation.value.flight},
-        tosec: ${newReservation.value.tosec},
-        re_pickup_time:${dateToString(newReservation.value.re_pickup_time)},
-        address: ${newReservation.value.address},
-        date_reserv: ${formatDate(newReservation.value.date_reserv)},
-        cost: ${newReservation.value.cost},
-        tip: ${newReservation.value.tip},
-        costreturn: ${newReservation.value.costreturn},
-        tipreturn: ${newReservation.value.tipreturn},
-        payment_met: ${newReservation.value.payment_met},
-        heard: ${newReservation.value.heard},
-        note: ${newReservation.value.note},
-        status: ${newReservation.value.status},
-        vehicle: ${newReservation.value.vehicle},
-        driver: ${newReservation.value.driver},
-        vehicle returning: ${newReservation.value.vehicle2},
-        driver returning: ${newReservation.value.driver2},
-        dispatcher: ${newReservation.value.dispatcher},
-
-        `
-            } else { const contenidoTexto = ` ARRIVAL
-        Date: ${dateToString(newReservation.value.pickup_time)},
-        customer: ${newReservation.value.customer},
-        phone: ${newReservation.value.phone},
-        phone2: ${newReservation.value.phone2},
-        email: ${newReservation.value.email},
-        adult: ${newReservation.value.adult},
-        kid: ${newReservation.value.kid},
-        carseat: ${newReservation.value.carseat},
-        boosterseat: ${newReservation.value.boosterseat},
-        way: ${newReservation.value.way},
-        from: ${newReservation.value.from},
-        pick_location: ${newReservation.value.pick_location},
-        departure_time: ${formatTime(newReservation.value.departure_time)},
-        to: ${newReservation.value.to},
-        landing_time: ${formatTime(newReservation.value.landing_time)},
-        flight: ${newReservation.value.flight},
-        tosec: ${newReservation.value.tosec},
-        re_pickup_time:${dateToString(newReservation.value.re_pickup_time)},
-        address: ${newReservation.value.address},
-        date_reserv: ${formatDate(newReservation.value.date_reserv)},
-        cost: ${newReservation.value.cost},
-        tip: ${newReservation.value.tip},
-        costreturn: ${newReservation.value.costreturn},
-        tipreturn: ${newReservation.value.tipreturn},
-        payment_met: ${newReservation.value.payment_met},
-        heard: ${newReservation.value.heard},
-        note: ${newReservation.value.note},
-        status: ${newReservation.value.status},
-        vehicle: ${newReservation.value.vehicle},
-        driver: ${newReservation.value.driver},
-        vehicle returning: ${newReservation.value.vehicle2},
-        driver returning: ${newReservation.value.driver2},
-        dispatcher: ${newReservation.value.dispatcher},
-
-        `}
+                contenidoTexto = ` DEPARTURE
+Date: ${formatDate(newReservation.value.pickup_time)},
+from: ${newReservation.value.from}, ${newReservation.value.address},
+to: ${newReservation.value.to},
+Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
+Flight departure time: ${formatTime(newReservation.value.departure_time)},
+Name: ${newReservation.value.customer},
+Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
+Adults: ${newReservation.value.adult},
+kids: ${newReservation.value.kid},
+Car seat: ${newReservation.value.carseat},
+Booster seat: ${newReservation.value.boosterseat},
+Vehicle: ${newReservation.value.vehicle},
+Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
+Payment methode: ${newReservation.value.payment_met},
+Email: ${newReservation.value.email},
+Flight: ${newReservation.value.flight},
+Dispatcher's name: ${newReservation.value.dispatcher},
+Driver's name: ${newReservation.value.driver},
+Date of reservation: ${formatDate(newReservation.value.date_reserv)},
+How do you hear about us?: ${newReservation.value.heard},
+NOTES: ${newReservation.value.note},
+                `
+            } else { contenidoTexto = ` ARRIVAL
+Date: ${formatDate(newReservation.value.pickup_time)},
+from: ${newReservation.value.from}, ${newReservation.value.address},
+to: ${newReservation.value.to},
+Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
+Landing time: ${formatTime(newReservation.value.landing_time)},
+Name: ${newReservation.value.customer},
+Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
+Adults: ${newReservation.value.adult},
+kids: ${newReservation.value.kid},
+Car seat: ${newReservation.value.carseat},
+Booster seat: ${newReservation.value.boosterseat},
+Vehicle: ${newReservation.value.vehicle},
+Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
+Payment methode: ${newReservation.value.payment_met},
+Email: ${newReservation.value.email},
+Flight: ${newReservation.value.flight},
+Dispatcher's name: ${newReservation.value.dispatcher},
+Driver's name: ${newReservation.value.driver},
+Date of reservation: ${formatDate(newReservation.value.date_reserv)},
+How do you hear about us?: ${newReservation.value.heard},
+NOTES: ${newReservation.value.note},
+     `
+            }
         } else {
             if (newReservation.value.from === "Steamboat") {
-                const contenidoTexto = ` DEPARTURE
-        Date: ${dateToString(newReservation.value.pickup_time)},
-        customer: ${newReservation.value.customer},
-        phone: ${newReservation.value.phone},
-        phone2: ${newReservation.value.phone2},
-        email: ${newReservation.value.email},
-        adult: ${newReservation.value.adult},
-        kid: ${newReservation.value.kid},
-        carseat: ${newReservation.value.carseat},
-        boosterseat: ${newReservation.value.boosterseat},
-        way: ${newReservation.value.way},
-        from: ${newReservation.value.from},
-        pick_location: ${newReservation.value.pick_location},
-        departure_time: ${formatTime(newReservation.value.departure_time)},
-        to: ${newReservation.value.to},
-        landing_time: ${formatTime(newReservation.value.landing_time)},
-        flight: ${newReservation.value.flight},
-        tosec: ${newReservation.value.tosec},
-        re_pickup_time:${dateToString(newReservation.value.re_pickup_time)},
-        address: ${newReservation.value.address},
-        date_reserv: ${formatDate(newReservation.value.date_reserv)},
-        cost: ${newReservation.value.cost},
-        tip: ${newReservation.value.tip},
-        costreturn: ${newReservation.value.costreturn},
-        tipreturn: ${newReservation.value.tipreturn},
-        payment_met: ${newReservation.value.payment_met},
-        heard: ${newReservation.value.heard},
-        note: ${newReservation.value.note},
-        status: ${newReservation.value.status},
-        vehicle: ${newReservation.value.vehicle},
-        driver: ${newReservation.value.driver},
-        vehicle returning: ${newReservation.value.vehicle2},
-        driver returning: ${newReservation.value.driver2},
-        dispatcher: ${newReservation.value.dispatcher},
+                contenidoTexto = ` DEPARTURE
+                Date: ${formatDate(newReservation.value.pickup_time)},
+from: ${newReservation.value.from}, ${newReservation.value.address},
+to: ${newReservation.value.to},
+Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
+Flight departure time: ${formatTime(newReservation.value.departure_time)},
+Name: ${newReservation.value.customer},
+Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
+Adults: ${newReservation.value.adult},
+kids: ${newReservation.value.kid},
+Car seat: ${newReservation.value.carseat},
+Booster seat: ${newReservation.value.boosterseat},
+Vehicle: ${newReservation.value.vehicle},
+Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
+Payment methode: ${newReservation.value.payment_met},
+Email: ${newReservation.value.email},
+Flight: ${newReservation.value.flight},
+Dispatcher's name: ${newReservation.value.dispatcher},
+Driver's name: ${newReservation.value.driver},
+Date of reservation: ${formatDate(newReservation.value.date_reserv)},
+How do you hear about us?: ${newReservation.value.heard},
+NOTES: ${newReservation.value.note},
 
-        `
+                ARRIVAL
+Date: ${formatDate(newReservation.value.pickup_time)},
+from: ${newReservation.value.from}, ${newReservation.value.address},
+to: ${newReservation.value.to},
+Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
+Landing time: ${formatTime(newReservation.value.landing_time)},
+Name: ${newReservation.value.customer},
+Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
+Adults: ${newReservation.value.adult},
+kids: ${newReservation.value.kid},
+Car seat: ${newReservation.value.carseat},
+Booster seat: ${newReservation.value.boosterseat},
+Vehicle for returning: ${newReservation.value.vehicle2},
+Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.costreturn} + tip: $ ${newReservation.value.tipreturn} = Total : $ ${Totaldeparture.value}
+Payment methode: ${newReservation.value.payment_met},
+Email: ${newReservation.value.email},
+Flight: ${newReservation.value.flight},
+Dispatcher's name: ${newReservation.value.dispatcher},
+Driver's name for returning: ${newReservation.value.driver2},
+Date of reservation: ${formatDate(newReservation.value.date_reserv)},
+How do you hear about us?: ${newReservation.value.heard},
+NOTES: ${newReservation.value.note},
+                `
             } else {
-                const contenidoTexto = ` ARRIVAL
-        Date: ${dateToString(newReservation.value.pickup_time)},
-        customer: ${newReservation.value.customer},
-        phone: ${newReservation.value.phone},
-        phone2: ${newReservation.value.phone2},
-        email: ${newReservation.value.email},
-        adult: ${newReservation.value.adult},
-        kid: ${newReservation.value.kid},
-        carseat: ${newReservation.value.carseat},
-        boosterseat: ${newReservation.value.boosterseat},
-        way: ${newReservation.value.way},
-        from: ${newReservation.value.from},
-        pick_location: ${newReservation.value.pick_location},
-        departure_time: ${formatTime(newReservation.value.departure_time)},
-        to: ${newReservation.value.to},
-        landing_time: ${formatTime(newReservation.value.landing_time)},
-        flight: ${newReservation.value.flight},
-        tosec: ${newReservation.value.tosec},
-        re_pickup_time:${dateToString(newReservation.value.re_pickup_time)},
-        address: ${newReservation.value.address},
-        date_reserv: ${formatDate(newReservation.value.date_reserv)},
-        cost: ${newReservation.value.cost},
-        tip: ${newReservation.value.tip},
-        costreturn: ${newReservation.value.costreturn},
-        tipreturn: ${newReservation.value.tipreturn},
-        payment_met: ${newReservation.value.payment_met},
-        heard: ${newReservation.value.heard},
-        note: ${newReservation.value.note},
-        status: ${newReservation.value.status},
-        vehicle: ${newReservation.value.vehicle},
-        driver: ${newReservation.value.driver},
-        vehicle returning: ${newReservation.value.vehicle2},
-        driver returning: ${newReservation.value.driver2},
-        dispatcher: ${newReservation.value.dispatcher},
+                contenidoTexto = ` ARRIVAL
+                Date: ${formatDate(newReservation.value.pickup_time)},
+from: ${newReservation.value.from}, ${newReservation.value.address},
+to: ${newReservation.value.to},
+Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
+Landing time: ${formatTime(newReservation.value.landing_time)},
+Name: ${newReservation.value.customer},
+Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
+Adults: ${newReservation.value.adult},
+kids: ${newReservation.value.kid},
+Car seat: ${newReservation.value.carseat},
+Booster seat: ${newReservation.value.boosterseat},
+Vehicle: ${newReservation.value.vehicle},
+Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
+Payment methode: ${newReservation.value.payment_met},
+Email: ${newReservation.value.email},
+Flight: ${newReservation.value.flight},
+Dispatcher's name: ${newReservation.value.dispatcher},
+Driver's name: ${newReservation.value.driver},
+Date of reservation: ${formatDate(newReservation.value.date_reserv)},
+How do you hear about us?: ${newReservation.value.heard},
+NOTES: ${newReservation.value.note},
 
-        `
+                DEPARTURE
+                Date: ${formatDate(newReservation.value.pickup_time)},
+from: ${newReservation.value.from}, ${newReservation.value.address},
+to: ${newReservation.value.to},
+Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
+Flight departure time: ${formatTime(newReservation.value.departure_time)},
+Name: ${newReservation.value.customer},
+Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
+Adults: ${newReservation.value.adult},
+kids: ${newReservation.value.kid},
+Car seat: ${newReservation.value.carseat},
+Booster seat: ${newReservation.value.boosterseat},
+Vehicle for returning: ${newReservation.value.vehicle2},
+Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.costreturn} + tip: $ ${newReservation.value.tipreturn} = Total : $ ${Totaldeparture.value}
+Payment methode: ${newReservation.value.payment_met},
+Email: ${newReservation.value.email},
+Flight: ${newReservation.value.flight},
+Dispatcher's name: ${newReservation.value.dispatcher},
+Driver's name for returning: ${newReservation.value.driver2},
+Date of reservation: ${formatDate(newReservation.value.date_reserv)},
+How do you hear about us?: ${newReservation.value.heard},
+NOTES: ${newReservation.value.note},
+
+                `
             }
         }
         ;
@@ -932,6 +932,9 @@ watchEffect(() => {
     const tipreturn = parseFloat(newReservation.value.tipreturn) || 0;
     const costreturn = parseFloat(newReservation.value.costreturn) || 0;
     totalAmount.value = cost + tip + tipreturn + costreturn;
+    Totalarrive.value = cost + tip;
+    Totaldeparture.value = costreturn + tipreturn;
+
 });
 
 const {
@@ -997,6 +1000,14 @@ function formatDate(date) {
     console.log(date.toLocaleDateString('en-US', options))
     return date.toLocaleDateString('en-US', options);
 }
+const formatTimetwo = (isoDate) => {
+  const date = new Date(isoDate);
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
+  return formattedTime;
+};
 
 
 </script>

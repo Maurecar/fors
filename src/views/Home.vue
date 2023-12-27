@@ -265,3 +265,10 @@ const formatTime = (isoDate) => {
     <FullCalendar :options="calendarOptions" />
   </div>
 </template>
+<style scoped>
+/* @media screen and (max-width: 640px) {
+    .custom-mobile-calendar {
+      height: 640px; 
+    }
+  } */
+</style>
