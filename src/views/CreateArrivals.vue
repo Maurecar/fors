@@ -842,7 +842,6 @@ Vehicle for returning: ${newReservation.value.vehicle2},
 Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.costreturn} + tip: $ ${newReservation.value.tipreturn} = Total : $ ${Totaldeparture.value}
 Payment methode: ${newReservation.value.payment_met},
 Email: ${newReservation.value.email},
-Flight: ${newReservation.value.flight},
 Dispatcher's name: ${newReservation.value.dispatcher},
 Driver's name for returning: ${newReservation.value.driver2},
 Date of reservation: ${formatDate(newReservation.value.date_reserv)},

@@ -51,7 +51,20 @@
             md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0
           "
         >
+        <li>
           
+          <div class="relative" @click="toggleVehiclesMenu">
+            <a class="text-gray-700 hover:text-indigo-400">Vehicles</a>
+            <ul v-show="showVehiclesMenu" class="absolute mt-2 space-y-2 bg-white shadow-md">
+              <li><a href="/van1" class="block px-4 py-2 text-gray-800">Van 1</a></li>
+              <li><a href="/van2" class="block px-4 py-2 text-gray-800">Van 2</a></li>
+              <li><a href="/suburban" class="block px-4 py-2 text-gray-800">Suburban</a></li>
+              <li><a href="/yukon" class="block px-4 py-2 text-gray-800">Yukon</a></li>
+              <li><a href="/" class="block px-4 py-2 text-gray-800">all</a></li>
+              
+            </ul>
+          </div>
+        </li>
           <li> <a href="/drivers" class="text-gray-700 hover:text-indigo-400">Drivers</a></li>
           <li> <a href="/dispatchers" class="text-gray-700 hover:text-indigo-400">Dispatchers</a></li>
           <li> <a href="/arrivals" class="text-gray-700 hover:text-indigo-400">Reservation</a></li>
@@ -66,8 +79,10 @@
   export default {
     setup() {
       let showMenu = ref(false);
+      let showVehiclesMenu = ref(false);
       const toggleNav = () => (showMenu.value = !showMenu.value);
-      return { showMenu, toggleNav };
+      const toggleVehiclesMenu = () => (showVehiclesMenu.value = !showVehiclesMenu.value);
+      return { showMenu, showVehiclesMenu, toggleNav, toggleVehiclesMenu  };
     },
   };
   </script>

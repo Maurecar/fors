@@ -39,9 +39,26 @@ const routes = [
         }
     },
     {
-        path: '/customers',
-        name: 'customers',
-        component: () => import('./views/Customers.vue'),
+        path: '/van2',
+        name: 'van2',
+        component: () => import('./views/Van2.vue'),
+        meta: {
+            protected: true
+        }
+    },
+        {
+        path: '/suburban',
+        name: 'suburban',
+        component: () => import('./views/Suburban.vue'),
+        meta: {
+            protected: true
+        }
+    },
+    
+    {
+        path: '/yukon',
+        name: 'yukon',
+        component: () => import('./views/Yukon.vue'),
         meta: {
             protected: true
         }
