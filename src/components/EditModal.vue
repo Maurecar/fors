@@ -1,14 +1,11 @@
+<!-- Este es el componente modal que se importa en el componente principal -->
 <template>
-    <div class="flex items-center justify-between mb-8">
-        <h1 class="text-4xl font-bold mb-4">Reservations Create</h1>
-        <button @click="redirectToListArrival" class="text-green-500 hover:underline cursor-pointer">List
-            Reservation</button>
-        <button @click="logout" class="text-red-500 hover:underline cursor-pointer">Logout</button>
-    </div>
-    <div class="form-container mx-auto">
-        <div class="flex flex-wrap justify-between mb-8">
-            <form @submit.prevent="handleCreateReservation" class="w-full max-w-lg">
-                <div>
+    <div class="modal">
+      <div class="modal-content">
+        <span class="close" @click="$emit('close')">close and return to list</span>
+        <h2>Edit Reservation</h2>
+        <form @submit.prevent="updateReservation">
+            <div>
                     <div class="customer-data">
                         <label for="customer">Customer Name:</label>
                         <input id="Customer name" v-model="newReservation.customer" placeholder="Customer name"
@@ -529,22 +526,15 @@
                     </div>
 
                 </div>
-                <div class="w-full px-3">
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full px-3">
-                            <input type="submit" value="Create reservation"
-                                class="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded" />
-                        </div>
-                    </div>
-
-                </div>
-            </form>
-        </div>
+                
+                <button type="cancel" class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Close</button>
+          <button type="submit" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save Changes</button>
+        </form>
+      </div>
     </div>
-</template>
-
-<script setup>
-
+  </template>
+  
+  <script setup>
 import { ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSignOut, useUserId } from '@nhost/vue';
@@ -554,371 +544,90 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import Swal from 'sweetalert2';
 
-
-const router = useRouter()
-const { signOut } = useSignOut()
-const { userId } = useUserId()
 const totalAmount = ref(0);
 const Totalarrive = ref(0);
 const Totaldeparture = ref(0);
-
-
-const logout = () => {
-    signOut()
-    router.push('/login')
-}
-
 const newReservation = ref({
 
-    customer: "",
-    phone: "",
-    phone2: "",
-    email: "",
-    adult: 0,
-    kid: 0,
-    carseat: 0,
-    boosterseat: 0,
-    way: "",
-    from: "",
-    pick_location: "",
-    pickup_time: new Date(),
-    departure_time: new Date(),
-    to: "",
-    landing_time: new Date(),
-    flight: "",
-    tosec: "",
-    re_pickup_time: null,
-    address: "",
-    date_reserv: "",
-    cost: 0,
-    tip: 0,
-    costreturn: 0,
-    tipreturn: 0,
-    payment_met: "",
-    heard: "",
-    note: "",
-    status: "",
-    dispatcher: "",
-    driver: "",
-    vehicle: "",
-    driver2: "",
-    vehicle2: "",
-    company: "",
+customer: "",
+phone: "",
+phone2: "",
+email: "",
+adult: 0,
+kid: 0,
+carseat: 0,
+boosterseat: 0,
+way: "",
+from: "",
+pick_location: "",
+pickup_time: new Date(),
+departure_time: new Date(),
+to: "",
+landing_time: new Date(),
+flight: "",
+tosec: "",
+re_pickup_time: null,
+address: "",
+date_reserv: "",
+cost: 0,
+tip: 0,
+costreturn: 0,
+tipreturn: 0,
+payment_met: "",
+heard: "",
+note: "",
+status: "",
+dispatcher: "",
+driver: "",
+vehicle: "",
+driver2: "",
+vehicle2: "",
+company: "",
 
 })
 const reserdatestr = new Date(newReservation.date_reserv).toLocaleDateString();
 
-const { mutate: createReservation } = useMutation(gql`
-        mutation InsertReservation($customer: String, $phone: String, $phone2: String, $email: String, $adult: Int, $kid: Int, $carseat: Int, $boosterseat: Int, $way: String, $from: String, $pick_location: String, $to: String, $flight: String, $tosec: String, $address: String, $date_reserv: date, $payment_met: String, $heard: String, $note: String, $status: String, $dispatcher: String, $driver: String, $driver2: String, $vehicle: String, $vehicle2: String, $cost: float8, $costreturn: float8, $departure_time: String, $landing_time: String, $re_pickup_time: timestamptz, $pickup_time: timestamptz, $tip: float8, $tipreturn: float8, $company: String ) {
-  insert_reservation(objects: {customer: $customer, phone: $phone, phone2: $phone2, email: $email, adult: $adult, kid: $kid, carseat: $carseat, boosterseat: $boosterseat, way: $way, from: $from, pick_location: $pick_location, to: $to, flight: $flight, tosec: $tosec, address: $address, date_reserv: $date_reserv, payment_met: $payment_met, heard: $heard, note: $note, status: $status, dispatcher: $dispatcher, driver: $driver, driver2: $driver2, vehicle: $vehicle, vehicle2: $vehicle2, cost: $cost, costreturn: $costreturn, departure_time: $departure_time, landing_time: $landing_time, re_pickup_time: $re_pickup_time, pickup_time: $pickup_time, tip: $tip, tipreturn: $tipreturn, company: $company}) {
-    affected_rows
-    returning {
-      id
-      customer
-      phone
-      phone2
-      email
-      adult
-      kid
-      carseat
-      boosterseat
-      way
-      from
-      pick_location
-      pickup_time
-      departure_time
-      to
-      landing_time
-      flight
-      tosec
-      re_pickup_time
-      address
-      date_reserv
-      cost
-      tip
-      costreturn
-      tipreturn
-      payment_met
-      heard
-      note
-      status
-      dispatcher
-      driver
-      vehicle
-      driver2
-      vehicle2
-      company
-    }
-  }
-} 
-`)
-
-
-const handleCreateReservation = async () => {
-    let contenidoTexto = '';
-    if (
-
-        !newReservation.value.pickup_time
-
-    ) {
-        return alert("Please fill all fields")
-
-    }
-
-    const { data, errors } = await createReservation({
-
-        customer: newReservation.value.customer,
-        phone: newReservation.value.phone,
-        phone2: newReservation.value.phone2,
-        email: newReservation.value.email,
-        adult: newReservation.value.adult,
-        kid: newReservation.value.kid,
-        carseat: newReservation.value.carseat,
-        boosterseat: newReservation.value.boosterseat,
-        way: newReservation.value.way,
-        from: newReservation.value.from,
-        pick_location: newReservation.value.pick_location,
-        pickup_time: dateToString(newReservation.value.pickup_time),
-        departure_time: formatTime(newReservation.value.departure_time),
-        to: newReservation.value.to,
-        landing_time: formatTime(newReservation.value.landing_time),
-        flight: newReservation.value.flight,
-        tosec: newReservation.value.tosec,
-        re_pickup_time: dateToString(newReservation.value.re_pickup_time),
-        address: newReservation.value.address,
-        date_reserv: formatDate(newReservation.value.date_reserv),
-        cost: newReservation.value.cost,
-        tip: newReservation.value.tip,
-        costreturn: newReservation.value.costreturn,
-        tipreturn: newReservation.value.tipreturn,
-        payment_met: newReservation.value.payment_met,
-        heard: newReservation.value.heard,
-        note: newReservation.value.note,
-        status: newReservation.value.status,
-        vehicle: newReservation.value.vehicle,
-        driver: newReservation.value.driver,
-        vehicle2: newReservation.value.vehicle2,
-        driver2: newReservation.value.driver2,
-        dispatcher: newReservation.value.dispatcher,
-        company: newReservation.value.company,
-
-    })
-    if (errors) {
-        console.error(errors);
-    } else {
-       
-        if (newReservation.value.way === "One Way") {
-            if (newReservation.value.from === "Steamboat") {
-                contenidoTexto = ` DEPARTURE
-Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.address},
-to: ${newReservation.value.to},
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
-Flight departure time: ${formatTime(newReservation.value.departure_time)},
-Name: ${newReservation.value.customer},
-Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
-Adults: ${newReservation.value.adult},
-kids: ${newReservation.value.kid},
-Car seat: ${newReservation.value.carseat},
-Booster seat: ${newReservation.value.boosterseat},
-Vehicle: ${newReservation.value.vehicle},
-Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
-Payment methode: ${newReservation.value.payment_met},
-Email: ${newReservation.value.email},
-Flight: ${newReservation.value.flight},
-Dispatcher's name: ${newReservation.value.dispatcher},
-Driver's name: ${newReservation.value.driver},
-Date of reservation: ${formatDate(newReservation.value.date_reserv)},
-How do you hear about us?: ${newReservation.value.heard},
-NOTES: ${newReservation.value.note},
-                `
-            } else { contenidoTexto = ` ARRIVAL
-Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.address},
-to: ${newReservation.value.to},
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
-Landing time: ${formatTime(newReservation.value.landing_time)},
-Name: ${newReservation.value.customer},
-Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
-Adults: ${newReservation.value.adult},
-kids: ${newReservation.value.kid},
-Car seat: ${newReservation.value.carseat},
-Booster seat: ${newReservation.value.boosterseat},
-Vehicle: ${newReservation.value.vehicle},
-Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
-Payment methode: ${newReservation.value.payment_met},
-Email: ${newReservation.value.email},
-Flight: ${newReservation.value.flight},
-Dispatcher's name: ${newReservation.value.dispatcher},
-Driver's name: ${newReservation.value.driver},
-Date of reservation: ${formatDate(newReservation.value.date_reserv)},
-How do you hear about us?: ${newReservation.value.heard},
-NOTES: ${newReservation.value.note},
-     `
-            }
-        } else {
-            if (newReservation.value.from === "Steamboat") {
-                contenidoTexto = ` DEPARTURE
-                Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.address},
-to: ${newReservation.value.to},
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
-Flight departure time: ${formatTime(newReservation.value.departure_time)},
-Name: ${newReservation.value.customer},
-Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
-Adults: ${newReservation.value.adult},
-kids: ${newReservation.value.kid},
-Car seat: ${newReservation.value.carseat},
-Booster seat: ${newReservation.value.boosterseat},
-Vehicle: ${newReservation.value.vehicle},
-Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
-Payment methode: ${newReservation.value.payment_met},
-Email: ${newReservation.value.email},
-Flight: ${newReservation.value.flight},
-Dispatcher's name: ${newReservation.value.dispatcher},
-Driver's name: ${newReservation.value.driver},
-Date of reservation: ${formatDate(newReservation.value.date_reserv)},
-How do you hear about us?: ${newReservation.value.heard},
-NOTES: ${newReservation.value.note},
-
-                ARRIVAL
-Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.address},
-to: ${newReservation.value.to},
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
-Landing time: ${formatTime(newReservation.value.landing_time)},
-Name: ${newReservation.value.customer},
-Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
-Adults: ${newReservation.value.adult},
-kids: ${newReservation.value.kid},
-Car seat: ${newReservation.value.carseat},
-Booster seat: ${newReservation.value.boosterseat},
-Vehicle for returning: ${newReservation.value.vehicle2},
-Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.costreturn} + tip: $ ${newReservation.value.tipreturn} = Total : $ ${Totaldeparture.value}
-Payment methode: ${newReservation.value.payment_met},
-Email: ${newReservation.value.email},
-Flight: ${newReservation.value.flight},
-Dispatcher's name: ${newReservation.value.dispatcher},
-Driver's name for returning: ${newReservation.value.driver2},
-Date of reservation: ${formatDate(newReservation.value.date_reserv)},
-How do you hear about us?: ${newReservation.value.heard},
-NOTES: ${newReservation.value.note},
-                `
-            } else {
-                contenidoTexto = ` ARRIVAL
-                Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.address},
-to: ${newReservation.value.to},
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
-Landing time: ${formatTime(newReservation.value.landing_time)},
-Name: ${newReservation.value.customer},
-Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
-Adults: ${newReservation.value.adult},
-kids: ${newReservation.value.kid},
-Car seat: ${newReservation.value.carseat},
-Booster seat: ${newReservation.value.boosterseat},
-Vehicle: ${newReservation.value.vehicle},
-Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
-Payment methode: ${newReservation.value.payment_met},
-Email: ${newReservation.value.email},
-Flight: ${newReservation.value.flight},
-Dispatcher's name: ${newReservation.value.dispatcher},
-Driver's name: ${newReservation.value.driver},
-Date of reservation: ${formatDate(newReservation.value.date_reserv)},
-How do you hear about us?: ${newReservation.value.heard},
-NOTES: ${newReservation.value.note},
-
-                DEPARTURE
-                Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.address},
-to: ${newReservation.value.to},
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
-Flight departure time: ${formatTime(newReservation.value.departure_time)},
-Name: ${newReservation.value.customer},
-Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
-Adults: ${newReservation.value.adult},
-kids: ${newReservation.value.kid},
-Car seat: ${newReservation.value.carseat},
-Booster seat: ${newReservation.value.boosterseat},
-Vehicle for returning: ${newReservation.value.vehicle2},
-Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.costreturn} + tip: $ ${newReservation.value.tipreturn} = Total : $ ${Totaldeparture.value}
-Payment methode: ${newReservation.value.payment_met},
-Email: ${newReservation.value.email},
-Dispatcher's name: ${newReservation.value.dispatcher},
-Driver's name for returning: ${newReservation.value.driver2},
-Date of reservation: ${formatDate(newReservation.value.date_reserv)},
-How do you hear about us?: ${newReservation.value.heard},
-NOTES: ${newReservation.value.note},
-
-                `
-            }
+  
+  // Recibir la reserva como prop
+  const props = defineProps({
+    reservation: {
+      type: Object,
+      required: true,
+    },
+  });
+  
+  // Usar una mutación para actualizar la reserva
+  const { mutate: updateReservation2, onDone: updateDone } = useMutation(
+    gql`
+      mutation ($id: Int!, $customer: String!, $phone: String!, $pickup_time: String!, $departure_time: String!, $to: String!) {
+        update_reservation(
+          where: { id: { _eq: $id } }
+          _set: { customer: $customer, phone: $phone, pickup_time: $pickup_time, departure_time: $departure_time, to: $to }
+        ) {
+          affected_rows
         }
-        ;
-
-        const blob = new Blob([contenidoTexto], { type: 'text/plain' });
-        const contenidoURL = URL.createObjectURL(blob);
-
-        await Swal.fire({
-            icon: 'success',
-            title: 'Successfully',
-            html: `
-                <p>Reservation created successfully</p>
-                <a href="${contenidoURL}" download="Reservation ${newReservation.value.customer}.txt">
-                    <button class="swal2-confirm swal2-styled" type="button">
-                        Descargar Datos
-                    </button>
-                </a>
-            `,
-            showCancelButton: false,
-            showCloseButton: false,
-            allowOutsideClick: false,
-        });
-
-        newReservation.value = {
-
-            pick_location: '',
-            to: '',
-            landing_time: '',
-            pickup_time: '',
-            customer: '',
-            flight: '',
-            adult: 0,
-            kid: 0,
-            carseat: 0,
-            boosterseat: 0,
-            way: '',
-            cost: 0,
-            tip: 0,
-            costreturn: 0,
-            tipreturn: 0,
-            total_amount: 0,
-            payment_met: '',
-            status: '',
-            driver: '',
-            dispatcher: '',
-            vehicle: '',
-            date_reserv: '',
-
-            heard: '',
-            note: '',
-            customer: '',
-            phone: '',
-            email: '',
-        };
-
-        redirectToListArrival();
-    }
-}
-
-
-
-const redirectToListArrival = () => {
-    router.push('/arrivals')
-    router.afterEach(() => {
-        window.location.reload();
+      }
+    `
+  );
+  
+  // Ejecutar la mutación al enviar el formulario
+  const updateReservation = () => {
+    updateReservation({
+      id: props.reservation.id,
+      customer: props.reservation.customer,
+      phone: props.reservation.phone,
+      pickup_time: props.reservation.pickup_time,
+      departure_time: props.reservation.departure_time,
+      to: props.reservation.to,
     });
-}
-const formatter = ref({
+  };
+  
+  // Emitir un evento de cierre al terminar la mutación
+  updateDone(() => {
+    $emit("close");
+  });
+
+  const formatter = ref({
     date: "MMM dd yyyy ",
     month: "MMM",
     time: "HH:mm tt"
@@ -1009,11 +718,26 @@ const formatTimetwo = (isoDate) => {
   const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
   return formattedTime;
 };
-
-
-</script>
-<style scoped>
-.customer-data {
+  </script>
+  
+  <style scoped>
+  /* Estilos del modal */
+  .modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+  }
+  .customer-data {
     border: 1px solid #000;
     padding: 10px;
     margin: 10px;
@@ -1108,4 +832,4 @@ const formatTimetwo = (isoDate) => {
     padding: 0;
 
 }
-</style>
+  </style>
