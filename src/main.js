@@ -112,6 +112,14 @@ const routes = [
         }
     },
     {
+        path: '/trip',
+        name: 'trip',
+        component: () => import('./views/Trip.vue'),
+        meta: {
+            protected: false
+        }
+    },
+    {
         path: '/createarrivals',
         name: 'createarrivals',
         component: () => import('./views/CreateArrivals.vue'),

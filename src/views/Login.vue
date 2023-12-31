@@ -5,6 +5,7 @@ import {
   useSignInEmailPassword,
   useSignUpEmailPassword
 } from '@nhost/vue'
+
 const router = useRouter()
 const isRegister = ref(false)
 const email = ref('')
@@ -24,9 +25,9 @@ const registerOrLogin = async () => {
     router.push('/');
   } catch (error) {
     alert(error.message);
-  }
+}
 
-  router.push('/')
+router.push('/')
 }
 </script>
 <template>
