@@ -19,7 +19,7 @@ const {
   refetch: reservationRefetch
 } = useQuery(gql`
   query GetReservation {
-  reservation(where: { _or:[ {vehicle2: {_eq: "Van #1"}, vehicle: {_eq: "Van #1"}}]})  {
+  reservation {
     date_reserv
 		cost
 		costreturn
@@ -73,7 +73,7 @@ const mapToFullCalendarEvents = (reservation) => {
 
   for (const n of reservation) {
     const startEvent = {
-      title: n.company + " " + n.from,
+      title: n.vehicle + "-" + n.driver,
       trip: n.way,
       start: n.pickup_time,
       end: n.pickup_time,
@@ -104,7 +104,7 @@ const mapToFullCalendarEvents = (reservation) => {
     };
 
     const endEvent = {
-      title: n.company + " " + n.to,
+      title: n.vehicle + "-" + n.driver,
       start: n.re_pickup_time,
       end: n.re_pickup_time,
       customer: n.customer,
@@ -266,5 +266,9 @@ const formatTime = (isoDate) => {
   </div>
 </template>
 <style scoped>
-
+/* @media screen and (max-width: 640px) {
+    .custom-mobile-calendar {
+      height: 640px; 
+    }
+  } */
 </style>

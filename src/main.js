@@ -144,6 +144,14 @@ const routes = [
         }
     },
     {
+        path: '/check',
+        name: 'check',
+        component: () => import('./views/Check.vue'),
+        meta: {
+            protected: true
+        }
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('./views/Login.vue'),

@@ -31,6 +31,10 @@
               <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 @click="() => openEditModal(n)">Update</button>
             </td>
+            <td class="border px-4 py-2">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      @click="() => loadDataForUpdate(n)">Update</button>
+  </td>
           </tr>
         </table>
       </div>
@@ -56,7 +60,12 @@
     signOut();
     router.push("/login");
   };
-  
+  let updateId = ref('');
+let updateCustomer = ref('');
+let updatePhone = ref('');
+let updatePickupTime = ref('');
+let updateDepartureTime = ref('');
+let updateTo = ref('');
   const {
     loading: reservationLoading,
     result: reservationResult,
@@ -145,5 +154,21 @@
     // Refresca la lista de reservas
     reservationRefetch();
   };
+
+  const loadDataForUpdate = (reservation) => {
+  // Asigna la reserva al estado
+  selectedReservation.value = reservation;
+  // Abre el modal
+  showModal.value = true;
+
+  // Carga los datos en el formulario de actualización
+  //updateId.value = reservation.id;
+  updateCustomer.value = reservation.customer;
+  updatePhone.value = reservation.phone;
+  updatePickupTime.value = reservation.pickup_time;
+  updateDepartureTime.value = reservation.departure_time;
+  updateTo.value = reservation.to;
+  // ... otros campos del formulario
+};
   </script>
   

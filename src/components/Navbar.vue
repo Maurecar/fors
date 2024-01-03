@@ -51,6 +51,7 @@
             md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0
           "
         >
+        <li> <a href="/check" class="text-gray-700 hover:text-indigo-400">Available</a></li>
         <li>
           
           <div class="relative" @click="toggleVehiclesMenu">

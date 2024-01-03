@@ -8,35 +8,35 @@
             <div>
                     <div class="customer-data">
                         <label for="customer">Customer Name:</label>
-                        <input id="Customer name" v-model="newReservation.customer" placeholder="Customer name"
+                        <input id="updateCustomer" v-model="reservation.customer"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
                         <label for="customer">Customer Phone:</label>
-                        <input id="Customer phone" v-model="newReservation.phone" placeholder="Customer Phone Number"
+                        <input id="Customer phone" v-model="reservation.phone" placeholder="Customer Phone Number"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
                         <label for="customer">Customer Email:</label>
-                        <input id="Customer email" v-model="newReservation.email" placeholder="Customer Email"
+                        <input id="Customer email" v-model="reservation.email" placeholder="Customer Email"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
                     </div>
                     <div class="passengers-data">
                         <div>
                             <label for="adults">Adults:</label>
-                            <input id="adults" type="number" min="0" max="30" v-model="newReservation.adult"
+                            <input id="adults" type="number" min="0" max="30" v-model="reservation.adult"
                                 class="appearance-none block w-full bg-white-200 text-gray-700 border border-black-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray focus:border-black-500">
                         </div>
                         <div>
                             <label for="kid">Kids:</label>
-                            <input id="kid" type="number" min="0" max="30" v-model="newReservation.kid"
+                            <input id="kid" type="number" min="0" max="30" v-model="reservation.kid"
                                 class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500">
                         </div>
                         <div>
                             <label for="carseat">Car Seat:</label>
-                            <input id="carseat" type="number" min="0" max="30" v-model="newReservation.carseat"
+                            <input id="carseat" type="number" min="0" max="30" v-model="reservation.carseat"
                                 class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500">
                         </div>
                         <div>
                             <label for="boosterseat">Booster Seat:</label>
-                            <input id="boosterseat" type="number" min="0" max="30" v-model="newReservation.boosterseat"
+                            <input id="boosterseat" type="number" min="0" max="30" v-model="reservation.boosterseat"
                                 class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500">
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                     <div class="reservation-data">
                         <div class="oneway-roundtrip">
                             <div class="flex items-center">
-                                <input id="One Way" name="way" type="radio" value="One Way" v-model="newReservation.way"
+                                <input id="One Way" name="way" type="radio" value="One Way" v-model="reservation.way"
                                     class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                 <label for="One Way" class="ml-3 block text-sm font-medium text-white-700">
                                     One Way
@@ -53,24 +53,24 @@
                             </div>
                             <div class="flex items-center ">
                                 <input id="Round Trip" name="way" type="radio" value="Round Trip"
-                                    v-model="newReservation.way"
+                                    v-model="reservation.way"
                                     class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                 <label for="Round Trip" class="ml-3 block text-sm font-medium text-white-700">
                                     Round Trip
                                 </label>
                             </div>
-                            <label>You choose: {{ newReservation.way }}</label>
+                            <label>You choose: {{ reservation.way }}</label>
                         </div>
 
                         <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                             for="reservation-from">
                             <p>From:</p>
                         </label>
-                        <div class="flex items-center" v-if="newReservation.way === 'One Way'">
+                        <div class="flex items-center" v-if="reservation.way === 'One Way'">
                             <div class="oneway-roundtrip">
                                 <div class="flex items-center ">
                                     <input id="Round Trip" name="from" type="radio" value="Hayden airport"
-                                        v-model="newReservation.from"
+                                        v-model="reservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                     <label for="Pick-up from the Hayden airport"
                                         class="ml-3 block text-sm font-medium text-white-700">
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="flex items-center">
                                     <input id="Pick-up from Steamboat" name="from" type="radio" value="Steamboat"
-                                        v-model="newReservation.from"
+                                        v-model="reservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                     <label for="One Way" class="ml-3 block text-sm font-medium text-white-700">
                                         Pick-up from Steamboat
@@ -91,11 +91,11 @@
                         </div>
 
 
-                        <div v-else-if="newReservation.way === 'Round Trip'">
+                        <div v-else-if="reservation.way === 'Round Trip'">
                             <div class="oneway-roundtrip">
                                 <div class="flex items-center ">
                                     <input id="Round Trip" name="from" type="radio" value="Hayden airport"
-                                        v-model="newReservation.from"
+                                        v-model="reservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                     <label for="Pick-up from the Hayden airport"
                                         class="ml-3 block text-sm font-medium text-white-700">
@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="flex items-center">
                                     <input id="Pick-up from Steamboat" name="from" type="radio" value="Steamboat"
-                                        v-model="newReservation.from"
+                                        v-model="reservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                     <label for="One Way" class="ml-3 block text-sm font-medium text-white-700">
                                         Pick-up from Steamboat
@@ -114,8 +114,8 @@
 
                             </div>
                         </div>
-                        <div v-if="newReservation.way === 'One Way'">
-                            <div v-if="newReservation.from === 'Steamboat'">
+                        <div v-if="reservation.way === 'One Way'">
+                            <div v-if="reservation.from === 'Steamboat'">
                                 <h5>One way from Steamboat Spring</h5>
                                 <div class="flex flex-wrap -mx-6 mb-6">
                                     <div class="w-full px-3">
@@ -123,7 +123,7 @@
                                             for="reservation-pick-time">
                                             Pick-up location in Steamboat Springs:
                                         </label>
-                                        <input id="Pick-up" v-model="newReservation.pick_location"
+                                        <input id="Pick-up" v-model="reservation.pick_location"
                                             placeholder="Pick-up location"
                                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
                                     </div>
@@ -132,7 +132,7 @@
                                         for="reservation-pickup-time">
                                         Date and pick-up Time:
                                     </label>
-                                    <VueDatePicker v-model="newReservation.pickup_time" :is-24="false"
+                                    <VueDatePicker v-model="reservation.pickup_time" :is-24="false"
                                         :formatter="formatter"
                                         class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                     </VueDatePicker>
@@ -141,7 +141,7 @@
                                         for="reservation-pickup-time">
                                         Departure Time:
                                     </label>
-                                    <VueDatePicker v-model="newReservation.departure_time" type="time" time-picker
+                                    <VueDatePicker v-model="reservation.departure_time" type="time" time-picker
                                         :is-24="false"
                                         class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                     </VueDatePicker>
@@ -150,7 +150,7 @@
                                         for="reservation-to">
                                         Droping Location:
                                     </label>
-                                    <input id="to" v-model="newReservation.to" placeholder="Drop-off location "
+                                    <input id="to" v-model="reservation.to" placeholder="Drop-off location "
                                         class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
 
@@ -159,42 +159,42 @@
 
                             </div>
 
-                            <div v-else-if="newReservation.from === 'Hayden airport'">
+                            <div v-else-if="reservation.from === 'Hayden airport'">
                                 <h5>One Way From Hayden Airport</h5>
                                 <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Date and pick-up Time:
                                 </label>
-                                <VueDatePicker v-model="newReservation.pickup_time" :is-24="false"
+                                <VueDatePicker v-model="reservation.pickup_time" :is-24="false"
                                     class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                 </VueDatePicker>
                                 <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Landing Time:
                                 </label>
-                                <VueDatePicker v-model="newReservation.landing_time" time-picker type="time" :is-24="false"
+                                <VueDatePicker v-model="reservation.landing_time" time-picker type="time" :is-24="false"
                                     class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                 </VueDatePicker>
                                 <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                     for="reservation-to">
                                     Airline and flight number:
                                 </label>
-                                <input id="airline" v-model="newReservation.flight" placeholder="Airline and flight number "
+                                <input id="airline" v-model="reservation.flight" placeholder="Airline and flight number "
                                     class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
                                 <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                     for="reservation-to">
                                     Droping Location in Steamboat:
                                 </label>
-                                <input id="to" v-model="newReservation.to" placeholder="Drop-off location "
+                                <input id="to" v-model="reservation.to" placeholder="Drop-off location "
                                     class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
                             </div>
 
                         </div>
-                        <div v-else-if="newReservation.way === 'Round Trip'">
+                        <div v-else-if="reservation.way === 'Round Trip'">
 
-                            <div v-if="newReservation.from === 'Steamboat'">
+                            <div v-if="reservation.from === 'Steamboat'">
                                 <h5>Round Trip from Steamboat Spring</h5>
                                 <div class="flex flex-wrap -mx-6 mb-6">
                                     <div class="w-full px-3">
@@ -202,7 +202,7 @@
                                             for="reservation-pick-time">
                                             Pick-up location in Steamboat Springs:
                                         </label>
-                                        <input id="Pick-up" v-model="newReservation.pick_location"
+                                        <input id="Pick-up" v-model="reservation.pick_location"
                                             placeholder="Pick-up location"
                                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
                                     </div>
@@ -211,7 +211,7 @@
                                         for="reservation-pickup-time">
                                         Date and pick-up Time:
                                     </label>
-                                    <VueDatePicker v-model="newReservation.pickup_time" :is-24="false"
+                                    <VueDatePicker v-model="reservation.pickup_time" :is-24="false"
                                         class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                     </VueDatePicker>
 
@@ -219,14 +219,14 @@
                                         for="reservation-pickup-time">
                                         Departure Time:
                                     </label>
-                                    <VueDatePicker v-model="newReservation.departure_time" time-picker :is-24="false"
+                                    <VueDatePicker v-model="reservation.departure_time" time-picker :is-24="false"
                                         class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                     </VueDatePicker>
                                     <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                         for="reservation-to">
                                         Droping Location :
                                     </label>
-                                    <input id="to" v-model="newReservation.tosec" placeholder="Drop-off location "
+                                    <input id="to" v-model="reservation.tosec" placeholder="Drop-off location "
                                         class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
 
@@ -241,7 +241,7 @@
                                         for="reservation-pickup-time">
                                         Date and Time:
                                     </label>
-                                    <VueDatePicker v-model="newReservation.re_pickup_time" :is-24="false"
+                                    <VueDatePicker v-model="reservation.re_pickup_time" :is-24="false"
                                         class="returning w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                     </VueDatePicker>
                                     <label
@@ -249,14 +249,14 @@
                                         for="reservation-pickup-time">
                                         Landing Time:
                                     </label>
-                                    <VueDatePicker v-model="newReservation.landing_time" time-picker :is-24="false"
+                                    <VueDatePicker v-model="reservation.landing_time" time-picker :is-24="false"
                                         class="returning appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                     </VueDatePicker>
                                     <label class="returning  uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                         for="reservation-to">
                                         Airline and flight number:
                                     </label>
-                                    <input id="airline" v-model="newReservation.flight"
+                                    <input id="airline" v-model="reservation.flight"
                                         placeholder="Airline and flight number "
                                         class="returning appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
@@ -267,39 +267,39 @@
                                         for="reservation-to">
                                         Droping Location in Steamboat:
                                     </label>
-                                    <input id="to" v-model="newReservation.to" placeholder="Drop-off location "
+                                    <input id="to" v-model="reservation.to" placeholder="Drop-off location "
                                         class="returning appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
                                 </div>
                             </div>
-                            <div v-else-if="newReservation.from === 'Hayden airport'">
+                            <div v-else-if="reservation.from === 'Hayden airport'">
                                 <h5>Round Trip from Hayden Airport</h5>
                                 <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Date and pick-up Time:
                                 </label>
-                                <VueDatePicker v-model="newReservation.pickup_time" :is-24="false"
+                                <VueDatePicker v-model="reservation.pickup_time" :is-24="false"
                                     class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                 </VueDatePicker>
                                 <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Landing Time:
                                 </label>
-                                <VueDatePicker v-model="newReservation.landing_time" time-picker :is-24="false"
+                                <VueDatePicker v-model="reservation.landing_time" time-picker :is-24="false"
                                     class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                 </VueDatePicker>
                                 <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                     for="reservation-to">
                                     Airline and flight number:
                                 </label>
-                                <input id="airline" v-model="newReservation.flight" placeholder="Airline and flight number "
+                                <input id="airline" v-model="reservation.flight" placeholder="Airline and flight number "
                                     class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
                                 <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                     for="reservation-to">
                                     Droping Location in Steamboat:
                                 </label>
-                                <input id="to" v-model="newReservation.to" placeholder="Drop-off location "
+                                <input id="to" v-model="reservation.to" placeholder="Drop-off location "
                                     class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
                                 <label class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
@@ -310,21 +310,21 @@
                                     for="reservation-to">
                                     Pick-up Location Address:
                                 </label>
-                                <input id="airline" v-model="newReservation.address" placeholder="Pick-up Location Address"
+                                <input id="airline" v-model="reservation.address" placeholder="Pick-up Location Address"
                                     class="returning appearance-none block w-full bg-white-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
                                 <label class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Date and Pick-up Time:
                                 </label>
-                                <VueDatePicker v-model="newReservation.re_pickup_time" :is-24="false"
+                                <VueDatePicker v-model="reservation.re_pickup_time" :is-24="false"
                                     class="returning w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                 </VueDatePicker>
                                 <label class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Departure Time:
                                 </label>
-                                <VueDatePicker v-model="newReservation.departure_time" time-picker :is-24="false"
+                                <VueDatePicker v-model="reservation.departure_time" time-picker :is-24="false"
                                     class="returning appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                 </VueDatePicker>
 
@@ -334,7 +334,7 @@
                             for="reservation-pickup-time">
                             Reservation Date:
                         </label>
-                        <VueDatePicker v-model="newReservation.date_reserv" :enable-time-picker="false"
+                        <VueDatePicker v-model="reservation.date_reserv" :enable-time-picker="false"
                             :format="formatter.date"
                             class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                         </VueDatePicker>
@@ -350,24 +350,24 @@
                                 <label for="Amount" class="block text-sm font-medium text-white-700">
                                     Amount
                                 </label>
-                                <input id="Amount" name="text1" type="text" v-model="newReservation.cost"
+                                <input id="Amount" name="text1" type="text" v-model="reservation.cost"
                                     class="mt-1 block w-full border border-gray-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 <label for="Gratuity" class="block mt-4 text-sm font-medium text-white-700">
                                     Gratuity
                                 </label>
-                                <input id="Gratuity" name="Gratuity" type="text" v-model="newReservation.tip"
+                                <input id="Gratuity" name="Gratuity" type="text" v-model="reservation.tip"
                                     class="mt-1 block w-full border border-gray-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                             </div>
-                            <div v-if="newReservation.way === 'Round Trip'" class="mt-4">
+                            <div v-if="reservation.way === 'Round Trip'" class="mt-4">
                                 <label for="text5" class="block mt-4 text-sm font-medium text-white-700">
                                     Second trip amount (return)
                                 </label>
-                                <input id="text5" name="text5" type="text" v-model="newReservation.costreturn"
+                                <input id="text5" name="text5" type="text" v-model="reservation.costreturn"
                                     class="mt-1 block w-full border border-white-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 <label for="text6" class="block mt-4 text-sm font-medium text-white-700">
                                     Second trip Gratuity (return)
                                 </label>
-                                <input id="text6" name="text6" type="text" v-model="newReservation.tipreturn"
+                                <input id="text6" name="text6" type="text" v-model="reservation.tipreturn"
                                     class="mt-1 block w-full border border-white-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                             </div>
                             <div>
@@ -377,7 +377,7 @@
                                 <label for="Status payment">Method Payment:</label>
                                 <select
                                     class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
-                                    id="payment methode" v-model="newReservation.payment_met">
+                                    id="payment methode" v-model="reservation.payment_met">
                                     <option value="">--Choose Payment Method--</option>
                                     <option>Payment Link</option>
                                     <option>Credit Card</option>
@@ -393,7 +393,7 @@
                                 <label for="How do you heard about us?">How do you heard about us?</label>
                                 <select
                                     class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
-                                    id="How do you heard about us?" v-model="newReservation.heard">
+                                    id="How do you heard about us?" v-model="reservation.heard">
                                     <option value="">--Choose Option--</option>
                                     <option>Google search</option>
                                     <option>Front desk hotel</option>
@@ -411,7 +411,7 @@
                                         for="reservation-date">
                                         Notes:
                                     </label>
-                                    <textarea v-model="newReservation.note" placeholder="add notes"
+                                    <textarea v-model="reservation.note" placeholder="add notes"
                                         class="appearance-none text-gray-700 block w-full bg-white-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500"></textarea>
                                 </div>
                             </div>
@@ -424,7 +424,7 @@
                         <label for="Status payment">Payment Status:</label>
                         <select
                             class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
-                            id="Status payment" v-model="newReservation.status">
+                            id="Status payment" v-model="reservation.status">
                             <option value="">--Choose Status--</option>
                             <option>Pending</option>
                             <option>Paid</option>
@@ -434,7 +434,7 @@
                     <div>
                         <div v-if="dispatcherResult">
                             <label for="dispatcher">Select a Dispatcher:</label>
-                            <select id="dispatcher" v-model="newReservation.dispatcher"
+                            <select id="dispatcher" v-model="reservation.dispatcher"
                                 class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
                                 @change="onSelectUser">
                                 <option value="">-- Select a dispatcher --</option>
@@ -447,7 +447,7 @@
                     <div>
                         <div v-if="driverResult">
                             <label for="driver">Select a Driver:</label>
-                            <select id="driver" v-model="newReservation.driver"
+                            <select id="driver" v-model="reservation.driver"
                                 class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
                                 @change="onSelectUser">
                                 <option value="">-- Select a driver --</option>
@@ -462,7 +462,7 @@
                         <label for="vehicle">Vehicle:</label>
                         <select
                             class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
-                            id="vehicle" v-model="newReservation.vehicle">
+                            id="vehicle" v-model="reservation.vehicle">
                             <option value="">--Choose a vehicle</option>
                             <option>Van #1</option>
                             <option>Van #2</option>
@@ -472,11 +472,11 @@
                             <option>Other</option>
                         </select>
                     </div>
-                    <div v-if="newReservation.way === 'Round Trip'" class="mt-4">
+                    <div v-if="reservation.way === 'Round Trip'" class="mt-4">
                         <div>
                             <div v-if="driverResult">
                                 <label for="driver2">Select a Driver for returning:</label>
-                                <select id="driver2" v-model="newReservation.driver2"
+                                <select id="driver2" v-model="reservation.driver2"
                                     class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
                                     @change="onSelectUser">
                                     <option value="">-- Select a driver for returning --</option>
@@ -491,7 +491,7 @@
                             <label for="vehicle">Vehicle for returning:</label>
                             <select
                                 class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
-                                id="vehicle" v-model="newReservation.vehicle2">
+                                id="vehicle" v-model="reservation.vehicle2">
                                 <option value="">--Choose a vehicle for returning</option>
                                 <option>Van #1</option>
                                 <option>Van #2</option>
@@ -506,19 +506,19 @@
                     <label for="vehicle">Company of Reservation</label>
                     <div class="flex items-center ">
                         <input id="Moving Mountains" name="Moving Mountains" type="radio" value="MM"
-                            v-model="newReservation.company"
+                            v-model="reservation.company"
                             class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                         <label for="Moving Mountains" class="ml-3 block text-sm font-medium text-white-700">
                             Moving Mountains
                         </label>
                         <input id="Central of Reservations" name="Central of Reservations" type="radio" value="CRS"
-                            v-model="newReservation.company"
+                            v-model="reservation.company"
                             class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                         <label for="Central of Reservations" class="ml-3 block text-sm font-medium text-white-700">
                             Central of Reservations
                         </label>
                         <input id="First Option Ride Service" name="First Option Ride Service" type="radio" value=""
-                            v-model="newReservation.company"
+                            v-model="reservation.company"
                             class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                         <label for="First Option Ride Service" class="ml-3 block text-sm font-medium text-white-700">
                             First Option Ride Service
@@ -535,7 +535,7 @@
   </template>
   
   <script setup>
-import { ref, watchEffect } from 'vue';
+import { ref, watchEffect, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSignOut, useUserId } from '@nhost/vue';
 import { useQuery, useMutation } from "@vue/apollo-composable";
@@ -544,9 +544,21 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import Swal from 'sweetalert2';
 
+let updateId = ref('');
+let updateCustomer = ref('');
+let updatePhone = ref('');
+let updatePickupTime = ref('');
+let updateDepartureTime = ref('');
+let updateTo = ref('');
 const totalAmount = ref(0);
 const Totalarrive = ref(0);
 const Totaldeparture = ref(0);
+const reservation2 = ref({
+  cost2: 0,
+  tip2: 0,
+  tipreturn2: 0,
+  costreturn2: 0,
+});
 const newReservation = ref({
 
 customer: "",
@@ -585,7 +597,7 @@ vehicle2: "",
 company: "",
 
 })
-const reserdatestr = new Date(newReservation.date_reserv).toLocaleDateString();
+//const reserdatestr = new Date(newReservation.date_reserv).toLocaleDateString();
 
   
   // Recibir la reserva como prop
@@ -636,16 +648,16 @@ const selectedDate = ref(null);
 const datePickerFormat = 'yyyy-MM-dd hh:mm tt';
 
 
-watchEffect(() => {
-    const cost = parseFloat(newReservation.value.cost) || 0;
-    const tip = parseFloat(newReservation.value.tip) || 0;
-    const tipreturn = parseFloat(newReservation.value.tipreturn) || 0;
-    const costreturn = parseFloat(newReservation.value.costreturn) || 0;
+ watchEffect(() => {
+    cost2 = parseFloat(reservation.cost) || 0;
+    tip2 = parseFloat(reservation.tip) || 0;
+    tipreturn2 = parseFloat(reservation.tipreturn) || 0;
+    costreturn2 = parseFloat(reservation.costreturn) || 0;
     totalAmount.value = cost + tip + tipreturn + costreturn;
     Totalarrive.value = cost + tip;
     Totaldeparture.value = costreturn + tipreturn;
 
-});
+}); 
 
 const {
     loading: driverLoading,
