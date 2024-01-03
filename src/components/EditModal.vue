@@ -527,10 +527,11 @@
 
                 </div>
                 
-                <button type="cancel" class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Close</button>
-          <button type="submit" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save Changes</button>
-        </form>
-      </div>
+                <button type="cancel" class="close bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="$emit('close')">Close</button>
+                <button type="submit" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save Changes</button>
+            </form>
+            
+        </div>
     </div>
   </template>
   
@@ -544,12 +545,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import Swal from 'sweetalert2';
 
-let updateId = ref('');
-let updateCustomer = ref('');
-let updatePhone = ref('');
-let updatePickupTime = ref('');
-let updateDepartureTime = ref('');
-let updateTo = ref('');
+
 const totalAmount = ref(0);
 const Totalarrive = ref(0);
 const Totaldeparture = ref(0);
@@ -625,7 +621,7 @@ company: "",
   // Ejecutar la mutación al enviar el formulario
   const updateReservation = () => {
     updateReservation({
-      id: props.reservation.id,
+      //id: props.reservation.id,
       customer: props.reservation.customer,
       phone: props.reservation.phone,
       pickup_time: props.reservation.pickup_time,
@@ -648,7 +644,7 @@ const selectedDate = ref(null);
 const datePickerFormat = 'yyyy-MM-dd hh:mm tt';
 
 
- watchEffect(() => {
+/*  watchEffect(() => {
     cost2 = parseFloat(reservation.cost) || 0;
     tip2 = parseFloat(reservation.tip) || 0;
     tipreturn2 = parseFloat(reservation.tipreturn) || 0;
@@ -657,7 +653,7 @@ const datePickerFormat = 'yyyy-MM-dd hh:mm tt';
     Totalarrive.value = cost + tip;
     Totaldeparture.value = costreturn + tipreturn;
 
-}); 
+});  */
 
 const {
     loading: driverLoading,
@@ -730,6 +726,7 @@ const formatTimetwo = (isoDate) => {
   const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
   return formattedTime;
 };
+
   </script>
   
   <style scoped>
