@@ -1,11 +1,11 @@
 <!-- Este es el componente modal que se importa en el componente principal -->
 <template>
     <div class="modal">
-      <div class="modal-content">
-        <span class="close" @click="$emit('close')">close and return to list</span>
-        <h2>Edit Reservation</h2>
-        <form @submit.prevent="updateReservation">
-            <div>
+        <div class="modal-content">
+            <span class="close" @click="$emit('close')">close and return to list</span>
+            <h2>Edit Reservation</h2>
+            <form @submit.prevent="handleUpdateReservation">
+                <div>
                     <div class="customer-data">
                         <label for="customer">Customer Name:</label>
                         <input id="updateCustomer" v-model="reservation.customer"
@@ -52,8 +52,7 @@
                                 </label>
                             </div>
                             <div class="flex items-center ">
-                                <input id="Round Trip" name="way" type="radio" value="Round Trip"
-                                    v-model="reservation.way"
+                                <input id="Round Trip" name="way" type="radio" value="Round Trip" v-model="reservation.way"
                                     class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                 <label for="Round Trip" class="ml-3 block text-sm font-medium text-white-700">
                                     Round Trip
@@ -132,8 +131,7 @@
                                         for="reservation-pickup-time">
                                         Date and pick-up Time:
                                     </label>
-                                    <VueDatePicker v-model="reservation.pickup_time" :is-24="false"
-                                        :formatter="formatter"
+                                    <VueDatePicker v-model="reservation.pickup_time" :is-24="false" :formatter="formatter"
                                         class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                     </VueDatePicker>
 
@@ -526,17 +524,19 @@
                     </div>
 
                 </div>
-                
-                <button type="cancel" class="close bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="$emit('close')">Close</button>
-                <button type="submit" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save Changes</button>
+
+                <button type="cancel" class="close bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    @click="$emit('close')">Close</button>
+                <button type="submit" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save
+                    Changes</button>
             </form>
-            
+
         </div>
     </div>
-  </template>
+</template>
   
-  <script setup>
-import { ref, watchEffect, onMounted } from 'vue';
+<script setup>
+import { ref, watchEffect, onMounted, defineProps, reactive, defineEmits } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSignOut, useUserId } from '@nhost/vue';
 import { useQuery, useMutation } from "@vue/apollo-composable";
@@ -545,97 +545,186 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import Swal from 'sweetalert2';
 
-
+const emits = defineEmits();
 const totalAmount = ref(0);
 const Totalarrive = ref(0);
 const Totaldeparture = ref(0);
-const reservation2 = ref({
-  cost2: 0,
-  tip2: 0,
-  tipreturn2: 0,
-  costreturn2: 0,
-});
-const newReservation = ref({
+// const reservation2 = ref({
+//     cost2: 0,
+//     tip2: 0,
+//     tipreturn2: 0,
+//     costreturn2: 0,
+// });
+const reservation = reactive({
 
-customer: "",
-phone: "",
-phone2: "",
-email: "",
-adult: 0,
-kid: 0,
-carseat: 0,
-boosterseat: 0,
-way: "",
-from: "",
-pick_location: "",
-pickup_time: new Date(),
-departure_time: new Date(),
-to: "",
-landing_time: new Date(),
-flight: "",
-tosec: "",
-re_pickup_time: null,
-address: "",
-date_reserv: "",
-cost: 0,
-tip: 0,
-costreturn: 0,
-tipreturn: 0,
-payment_met: "",
-heard: "",
-note: "",
-status: "",
-dispatcher: "",
-driver: "",
-vehicle: "",
-driver2: "",
-vehicle2: "",
-company: "",
+    customer: "",
+    phone: "",
+    phone2: "",
+    email: "",
+    adult: 0,
+    kid: 0,
+    carseat: 0,
+    boosterseat: 0,
+    way: "",
+    from: "",
+    pick_location: "",
+    pickup_time: new Date(),
+    departure_time: new Date(),
+    to: "",
+    landing_time: new Date(),
+    flight: "",
+    tosec: "",
+    re_pickup_time: null,
+    address: "",
+    date_reserv: "",
+    cost: 0,
+    tip: 0,
+    costreturn: 0,
+    tipreturn: 0,
+    payment_met: "",
+    heard: "",
+    note: "",
+    status: "",
+    dispatcher: "",
+    driver: "",
+    vehicle: "",
+    driver2: "",
+    vehicle2: "",
+    company: "",
 
-})
+}) 
 //const reserdatestr = new Date(newReservation.date_reserv).toLocaleDateString();
 
-  
-  // Recibir la reserva como prop
-  const props = defineProps({
-    reservation: {
-      type: Object,
-      required: true,
-    },
-  });
-  
-  // Usar una mutación para actualizar la reserva
-  const { mutate: updateReservation2, onDone: updateDone } = useMutation(
-    gql`
-      mutation ($id: Int!, $customer: String!, $phone: String!, $pickup_time: String!, $departure_time: String!, $to: String!) {
-        update_reservation(
-          where: { id: { _eq: $id } }
-          _set: { customer: $customer, phone: $phone, pickup_time: $pickup_time, departure_time: $departure_time, to: $to }
-        ) {
-          affected_rows
-        }
-      }
-    `
-  );
-  
-  // Ejecutar la mutación al enviar el formulario
-  const updateReservation = () => {
-    updateReservation({
-      //id: props.reservation.id,
-      customer: props.reservation.customer,
-      phone: props.reservation.phone,
-      pickup_time: props.reservation.pickup_time,
-      departure_time: props.reservation.departure_time,
-      to: props.reservation.to,
-    });
-  };
-  
-  // Emitir un evento de cierre al terminar la mutación
-  updateDone(() => {
-    $emit("close");
-  });
 
-  const formatter = ref({
+// Recibir la reserva como prop
+const props = defineProps({
+    reservation: {
+        type: Object,
+        required: true,
+    },
+});
+onMounted(() => {
+    // Usar Object.assign para copiar propiedades de props.reservation a reservation
+    Object.assign(reservation, props.reservation);
+});
+
+// Usar una mutación para actualizar la reserva
+const { mutate: updateReservation, onDone: updateDone } = useMutation(
+    gql`
+      mutation MyMutation($id: Int!, $data: reservation_set_input!) {
+  update_reservation_by_pk(pk_columns: {id: $id}, _set: $data) {
+    address
+    adult
+    boosterseat
+    carseat
+    company
+    cost
+    costreturn
+    customer
+    date_reserv
+    departure_time
+    dispatcher
+    driver
+    driver2
+    email
+    flight
+    from
+    heard
+    id
+    kid
+    landing_time
+    note
+    payment_met
+    phone
+    phone2
+    pick_location
+    pickup_time
+    re_pickup_time
+    status
+    tip
+    tipreturn
+    to
+    tosec
+    vehicle
+    vehicle2
+    way
+  }
+}
+    `
+);
+
+// Ejecutar la mutación al enviar el formulario
+const handleUpdateReservation = async() => {
+    if (
+
+        !reservation.pickup_time
+
+    ) {
+        return alert("Please fill all fields")
+
+    }
+    const { data, errors } = await updateReservation({
+        id: props.reservation.id,
+        data: {
+
+        customer: reservation.customer,
+        phone: reservation.phone,
+        phone2: reservation.phone2,
+        email: reservation.email,
+        adult: reservation.adult,
+        kid: reservation.kid,
+        carseat: reservation.carseat,
+        boosterseat: reservation.boosterseat,
+        way: reservation.way,
+        from: reservation.from,
+        pick_location: reservation.pick_location,
+        pickup_time: dateToString(reservation.pickup_time),
+        departure_time: formatTime(reservation.departure_time),
+        to: reservation.to,
+        landing_time: formatTime(reservation.landing_time),
+        flight: reservation.flight,
+        tosec: reservation.tosec,
+        re_pickup_time: dateToString(reservation.re_pickup_time),
+        address: reservation.address,
+        date_reserv: formatDate(reservation.date_reserv),
+        cost: reservation.cost,
+        tip: reservation.tip,
+        costreturn: reservation.costreturn,
+        tipreturn: reservation.tipreturn,
+        payment_met: reservation.payment_met,
+        heard: reservation.heard,
+        note: reservation.note,
+        status: reservation.status,
+        vehicle: reservation.vehicle,
+        driver: reservation.driver,
+        vehicle2: reservation.vehicle2,
+        driver2: reservation.driver2,
+        dispatcher: reservation.dispatcher,
+        company: reservation.company,
+        }
+
+    })
+    if (errors) {
+        console.error(errors);
+    }
+    await Swal.fire({
+            icon: 'success',
+            title: 'Successfully',
+            html: `
+              UPDATE SUCCESFULLY
+            `,
+            showCancelButton: false,
+            showCloseButton: false,
+            allowOutsideClick: false,
+        });
+};
+
+// Emitir un evento de cierre al terminar la mutación
+updateDone(() => {
+    emits('close');
+});
+
+const formatter = ref({
     date: "MMM dd yyyy ",
     month: "MMM",
     time: "HH:mm tt"
@@ -719,19 +808,19 @@ function formatDate(date) {
     return date.toLocaleDateString('en-US', options);
 }
 const formatTimetwo = (isoDate) => {
-  const date = new Date(isoDate);
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
-  return formattedTime;
+    const date = new Date(isoDate);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
+    return formattedTime;
 };
 
-  </script>
+</script>
   
-  <style scoped>
-  /* Estilos del modal */
-  .modal {
+<style scoped>
+/* Estilos del modal */
+.modal {
     display: block;
     position: fixed;
     z-index: 1;
@@ -741,12 +830,13 @@ const formatTimetwo = (isoDate) => {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
-  }
-  
-  .modal-content {
+}
+
+.modal-content {
     background-color: #fefefe;
-  }
-  .customer-data {
+}
+
+.customer-data {
     border: 1px solid #000;
     padding: 10px;
     margin: 10px;
@@ -841,4 +931,4 @@ const formatTimetwo = (isoDate) => {
     padding: 0;
 
 }
-  </style>
+</style>
