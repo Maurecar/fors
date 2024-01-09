@@ -54,6 +54,8 @@ router.push('/')
       </label>
       <input type="submit" value="Login or SignUp" class="text-green-500 hover:underline cursor-pointer" />
     </form>
+    <h6>Are you a driver and do you want to know about your rides? </h6>
+    <h6>click <a href="/trip" >here</a></h6>
   </main>
 </template>
 <style scoped>
