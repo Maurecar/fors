@@ -719,7 +719,7 @@ const handleUpdateReservation = async() => {
         });
 };
 
-// Emitir un evento de cierre al terminar la mutación
+
 updateDone(() => {
     emits('close');
 });

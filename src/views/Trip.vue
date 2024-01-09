@@ -15,22 +15,31 @@
       </div>
     </form>
   </div>
-  <div v-if="ridesResult && ridesResult.reservation">
+  <div v-if="ridesResultDriver1 && ridesResultDriver1.reservation">
+    <h2>Driver {{ driver }}</h2>
     <table class="table-auto">
+      There are your rides.
       <thead>
         <tr>
-          <th class="px-4 py-2">Name</th>
-          <th class="px-4 py-2">Phone</th>
-          <th class="px-4 py-2">Email</th>
-          <th class="px-4 py-2">Actions</th>
+          <th class="px-4 py-2">Pick-up time</th>
+          <th class="px-4 py-2">From</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="ride in ridesResult.reservation" :key="ride.id">
+        <tr v-for="ride in ridesResultDriver1.reservation" :key="ride.id">
           <td class="border px-4 py-2">{{ ride.pickup_time }}</td>
-          <td class="border px-4 py-2">{{ ride.re_pickup_time }}</td>
           <td class="border px-4 py-2">{{ ride.from }}</td>
         </tr>
+        
+      </tbody>
+    </table>
+    <table class="table-auto">
+      <tbody>
+        <tr v-for="ride in ridesResultDriver1.reservation" :key="ride.id">
+          <td class="border px-4 py-2">{{ ride.re_pickup_time }}</td>
+          <td class="border px-4 py-2">{{ ride.address }}</td>
+        </tr>
+        
       </tbody>
     </table>
   </div>
@@ -43,49 +52,72 @@ import { gql } from "@apollo/client/core";
 
 const code = ref('');
 const driver = ref('');
+const dirver2 = ref('');
 
-const currentDate = new Date();
-const tomorrowDate = new Date();
-tomorrowDate.setDate(currentDate.getDate() + 1);
+const currentDate = ref(new Date());
+const tomorrowDate = ref(new Date());
+tomorrowDate.value.setDate(currentDate.value.getDate() + 1);
 
-const { loading: ridesLoading, result: ridesResult, refetch: refetchRides } = useQuery(
+
+const { loading: ridesLoadingDriver1, result: ridesResultDriver1, refetch: refetchRidesDriver1 } = useQuery(
   gql`
-    query GetReservation(
-  $driver: String, 
-  $driver2: String, 
-  $startDate: timestamptz, 
-  $endDate: timestamptz
-) { 
-  reservation (where: { 
-      _or: [
-        { _and: [
-            { driver: { _eq: $driver }},
-            { pickup_time: { _gte: $startDate, _lt: $endDate }},
-          ]
-        }, 
-        { _and: [
-            { driver2: { _eq: $driver2 }},
-            { re_pickup_time: { _gte: $startDate, _lt: $endDate }},
-          ]
-        },
-      ] 
+    query GetReservationDriver1(
+      $driver: String, 
+      $startDate: timestamptz, 
+      $endDate: timestamptz
+    ) { 
+      reservation (where: { 
+        _and: [
+          { driver: { _eq: $driver }},
+          { pickup_time: { _gte: $startDate, _lt: $endDate }},
+        ]
+      }) {
+        pickup_time
+        re_pickup_time
+        from
+        address
+        driver
+        driver2
+        vehicle
+        vehicle2
+      }
     }
-  ) {
-    pickup_time
-    re_pickup_time
-    from
-    driver
-    driver2
-    vehicle
-    vehicle2
-  }
-}
-
   `,
   {
     driver: driver.value,
-    startDate: dateToString(currentDate.value),
-    endDate: dateToString(tomorrowDate.value)
+    startDate: ref(dateToString(currentDate.value)),
+    endDate: ref(dateToString(tomorrowDate.value))
+  }
+);
+
+const { loading: ridesLoadingDriver2, result: ridesResultDriver2, refetch: refetchRidesDriver2 } = useQuery(
+  gql`
+    query GetReservationDriver2(
+      $driver2: String, 
+      $startDate: timestamptz, 
+      $endDate: timestamptz
+    ) { 
+      reservation (where: { 
+        _and: [
+          { driver2: { _eq: $driver2 }},
+          { re_pickup_time: { _gte: $startDate, _lt: $endDate }},
+        ]
+      }) {
+        pickup_time
+        re_pickup_time
+        address
+        from
+        driver
+        driver2
+        vehicle
+        vehicle2
+      }
+    }
+  `,
+  {
+    driver2: driver.value,
+    startDate: ref(dateToString(currentDate.value)),
+    endDate: ref(dateToString(tomorrowDate.value))
   }
 );
 
@@ -99,21 +131,38 @@ const handleCheckRides = async () => {
       driver.value = 'Jarvi Colchado';
     } else if (code.value === 'MKS20') {
       driver.value = 'Mi';
-    }else if (code.value === 'TY125') {
+    } else if (code.value === 'TY125') {
       driver.value = 'Tatiana Frolova';
-    }else if (code.value === 'IY230') {
+    } else if (code.value === 'IY230') {
       driver.value = 'Ivan Aguilar	';
-    }else if (code.value === 'LFE35') {
+    } else if (code.value === 'LFE35') {
       driver.value = 'Librado';
     } else {
       alert('Your code is wrong');
     }
+    const startDate = dateToString(currentDate.value);
+const endDate = dateToString(tomorrowDate.value);
+
+
+    await refetchRidesDriver1({
+      driver: driver.value,
+      startDate,
+      endDate
+    });
+
+    await refetchRidesDriver2({
+      driver2: driver.value,
+      startDate,
+      endDate
+    });
   }
 };
 
 function dateToString(date) {
-  if (!(date instanceof Date)) {
-    console.error('Input is not a valid Date object');
+  if (!date || !(date instanceof Date)) {
+    console.log(currentDate instanceof Date, currentDate);
+    console.log(tomorrowDate instanceof Date, tomorrowDate);
+    console.error('Input is not a valid Date object', date);
     return null;
   }
 
@@ -128,7 +177,10 @@ function dateToString(date) {
   const offsetHours = Math.floor(Math.abs(timezoneOffset) / 60);
   const offsetMinutes = Math.abs(timezoneOffset) % 60;
   const timezone = '+00:00';
-  const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
+  //const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
+  const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
+
+
 
   return formattedDate;
 }
