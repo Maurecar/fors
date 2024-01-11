@@ -553,15 +553,12 @@ import { gql } from "@apollo/client/core";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import Swal from 'sweetalert2';
-
-
 const router = useRouter()
 const { signOut } = useSignOut()
 const { userId } = useUserId()
 const totalAmount = ref(0);
 const Totalarrive = ref(0);
 const Totaldeparture = ref(0);
-
 
 const logout = () => {
     signOut()
@@ -604,10 +601,8 @@ const newReservation = ref({
     driver2: "",
     vehicle2: "",
     company: "",
-
 })
 const reserdatestr = new Date(newReservation.date_reserv).toLocaleDateString();
-
 const { mutate: createReservation } = useMutation(gql`
         mutation InsertReservation($customer: String, $phone: String, $phone2: String, $email: String, $adult: Int, $kid: Int, $carseat: Int, $boosterseat: Int, $way: String, $from: String, $pick_location: String, $to: String, $flight: String, $tosec: String, $address: String, $date_reserv: date, $payment_met: String, $heard: String, $note: String, $status: String, $dispatcher: String, $driver: String, $driver2: String, $vehicle: String, $vehicle2: String, $cost: float8, $costreturn: float8, $departure_time: String, $landing_time: String, $re_pickup_time: timestamptz, $pickup_time: timestamptz, $tip: float8, $tipreturn: float8, $company: String ) {
   insert_reservation(objects: {customer: $customer, phone: $phone, phone2: $phone2, email: $email, adult: $adult, kid: $kid, carseat: $carseat, boosterseat: $boosterseat, way: $way, from: $from, pick_location: $pick_location, to: $to, flight: $flight, tosec: $tosec, address: $address, date_reserv: $date_reserv, payment_met: $payment_met, heard: $heard, note: $note, status: $status, dispatcher: $dispatcher, driver: $driver, driver2: $driver2, vehicle: $vehicle, vehicle2: $vehicle2, cost: $cost, costreturn: $costreturn, departure_time: $departure_time, landing_time: $landing_time, re_pickup_time: $re_pickup_time, pickup_time: $pickup_time, tip: $tip, tipreturn: $tipreturn, company: $company}) {
@@ -652,19 +647,13 @@ const { mutate: createReservation } = useMutation(gql`
   }
 } 
 `)
-
-
 const handleCreateReservation = async () => {
     let contenidoTexto = '';
     if (
-
         !newReservation.value.pickup_time
-
     ) {
         return alert("Please fill all fields")
-
     }
-
     const { data, errors } = await createReservation({
 
         customer: newReservation.value.customer,
@@ -849,12 +838,9 @@ Driver's name for returning: ${newReservation.value.driver2},
 Date of reservation: ${formatDate(newReservation.value.date_reserv)},
 How do you hear about us?: ${newReservation.value.heard},
 NOTES: ${newReservation.value.note},
-
                 `
             }
-        }
-        ;
-
+        };
         const blob = new Blob([contenidoTexto], { type: 'text/plain' });
         const contenidoURL = URL.createObjectURL(blob);
 
@@ -898,7 +884,6 @@ NOTES: ${newReservation.value.note},
             dispatcher: '',
             vehicle: '',
             date_reserv: '',
-
             heard: '',
             note: '',
             customer: '',
@@ -971,6 +956,7 @@ function formatTime(timeObject) {
     const time = new Date(0, 0, 0, timeObject.hours, timeObject.minutes, timeObject.seconds);
     return time.toLocaleTimeString('en-Us', { hour: 'numeric', minute: 'numeric', hour12: true });
 }
+
 function dateToString(date) {
     if (!(date instanceof Date)) {
         console.error('Input is not a valid Date object');

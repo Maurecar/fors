@@ -6,8 +6,7 @@
           Reservation</button>
         <button @click="logout" class="text-red-500 hover:underline cursor-pointer">Logout</button>
       </div>
-  
-      <div v-if="!reservationLoading ">
+        <div v-if="!reservationLoading ">
         <table class="table-auto">
           <thead>
             <tr>
@@ -16,6 +15,7 @@
               <th class="px-4 py-2">Pickup Time</th>
               <th class="px-2 py-1">departure time</th>
               <th class="px-2 py-1">to</th>
+              <th class="px-2 py-1">Landing Time</th>
               <th class="px-4 py-2">Actions</th>
             </tr>
           </thead>
@@ -25,11 +25,10 @@
             <td class="border px-4 py-2">{{ n.pickup_time }}</td>
             <td class="border px-2 py-1">{{ n.departure_time }}</td>
             <td class="border px-2 py-1">{{ n.to }}</td>
+            <td class="border px-2 py-1">{{ n.landing_time }}</td>
             <td class="border px-4 py-2">
               <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                 @click="() => handleDeleteReservation({ id: n.id })">Delete</button>
-              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                @click="() => openEditModal(n)">Update</button>
             </td>
             <td class="border px-4 py-2">
     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -38,8 +37,6 @@
           </tr>
         </table>
       </div>
-  
-      <!-- Añadir el componente modal aquí -->
       <edit-modal v-if="showModal" :reservation="selectedReservation" @close="closeEditModal" />
     </div>
   </template>
@@ -50,7 +47,7 @@
   import { useSignOut, useUserId } from "@nhost/vue";
   import { useQuery, useMutation } from "@vue/apollo-composable";
   import { gql } from "@apollo/client/core";
-  import EditModal from "@/components/EditModal.vue"; // Importar el componente modal
+  import EditModal from "@/components/EditModal.vue"; 
   
   const router = useRouter();
   const { signOut } = useSignOut();
@@ -120,6 +117,28 @@ let updateTo = ref('');
       }
     `
   );
+
+  function dateToString(date) {
+    if (!(date instanceof Date)) {
+        console.error('Input is not a valid Date object');
+        return null;
+    }
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    const timezoneOffset = date.getTimezoneOffset();
+    const offsetHours = Math.floor(Math.abs(timezoneOffset) / 60);
+    const offsetMinutes = Math.abs(timezoneOffset) % 60;
+    const timezone = '+00:00';
+    const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
+
+    return formattedDate;
+}
   
   deleteDone(() => {
     reservationRefetch();
@@ -133,42 +152,23 @@ let updateTo = ref('');
   const redirectToCreateArrival = () => {
     router.push("/createarrivals");
   };
-  
-  // Añadir las variables para controlar el estado del modal
-  const showModal = ref(false); // Indica si el modal está abierto o no
-  const selectedReservation = ref(null); // Guarda la reserva seleccionada para editar
-  
-  // Añadir las funciones para abrir y cerrar el modal
+  const showModal = ref(false); 
+  const selectedReservation = ref(null); 
   const openEditModal = (reservation) => {
-    // Asigna la reserva al estado
-    selectedReservation.value = reservation;
-    // Abre el modal
+    selectedReservation.value = reservation;    
     showModal.value = true;
   };
   
   const closeEditModal = () => {
-    // Cierra el modal
     showModal.value = false;
-    // Limpia la reserva
     selectedReservation.value = null;
-    // Refresca la lista de reservas
     reservationRefetch();
   };
 
   const loadDataForUpdate = (reservation) => {
-  // Asigna la reserva al estado
   selectedReservation.value = reservation;
-  // Abre el modal
   showModal.value = true;
-
-  // Carga los datos en el formulario de actualización
-  //updateId.value = reservation.id;
-  updateCustomer.value = reservation.customer;
-  updatePhone.value = reservation.phone;
-  updatePickupTime.value = reservation.pickup_time;
-  updateDepartureTime.value = reservation.departure_time;
-  updateTo.value = reservation.to;
-  // ... otros campos del formulario
+  
 };
   </script>
   

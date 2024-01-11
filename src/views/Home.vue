@@ -86,7 +86,7 @@ const mapToFullCalendarEvents = (reservation) => {
       kid: n.kid,
       adu: n.adult,
       veh: n.vehicle,
-      lan: n.landing_time,
+      land: n.landing_time,
       met: n.payment_met,
       email: n.email,
       flight: n.flight,
@@ -145,15 +145,17 @@ const calendarOptions = reactive({
   initialView: 'dayGridMonth',
   timeZone: 'America/Denver',
   dayMaxEvents: true,
+  
   headerToolbar: {
     left: 'prev,next today',
     center: 'title',
     right: 'dayGridMonth,timeGridWeek,timeGridDay',
   },
   events: [],
+  
   eventClick: function (info) {
     if (!"endevent" in info.event) {
-      if (info.event.title.includes("Steamboat")) {
+      if (info.event.extendedProps['from'].includes("Hayden Airport")) {
         alert('END EVENT - ARRIVAL:'
           
         );
@@ -168,7 +170,7 @@ const calendarOptions = reactive({
           ' \nDate: ' + formatDate(info.event.start) +
           ' \nFrom: ' + info.event.title +
           ' - ' + info.event.extendedProps['loc'] +
-          ' \nto: ' + info.event.extendedProps['from'] +
+          ' \nto: Hayden Airport' +
           ' \nTime: ' + formatTime(info.event.start) +
           ' \nDeparture time: ' + info.event.extendedProps['dep'] +
           ' \nName: ' + info.event.extendedProps['customer'] +
@@ -185,14 +187,38 @@ const calendarOptions = reactive({
           ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
           ' \nDriverS name: ' + info.event.extendedProps['driver'] +
           ' \nNote: ' + info.event.extendedProps['note']);
-      } else {
+      } else if(info.event.title.includes("Hayden airport")) {
         alert('ARRIVAL:' +
           ' \nDate: ' + formatDate(info.event.start) +
-          ' \nFrom: ' + info.event.title +
-          ' - ' + info.event.extendedProps['loc'] +
+          ' \nFrom: Hayden Airport' +          
           ' \nto: ' + info.event.extendedProps['to'] +
           ' \nTime: ' + formatTime(info.event.start) +
-          ' \nLanding time: ' + info.event.extendedProps['lan'] +
+          ' \nLanding time: ' + info.event.extendedProps['land'] +
+          ' \nName: ' + info.event.extendedProps['customer'] +
+          ' \nPhone: ' + info.event.extendedProps['phone'] +
+          ' \nAdult: ' + info.event.extendedProps['adu'] +
+          ' \nKid: ' + info.event.extendedProps['kid'] +
+          ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+          ' cost: $' + info.event.extendedProps['cost'] + ' tip: $' + info.event.extendedProps['tip'] +
+          ' cost return: $' + info.event.extendedProps['costr'] + ' tip return: $ ' + info.event.extendedProps['tipr'] +
+          ' \nPayment method ' + info.event.extendedProps['met'] +
+          ' \nEmail ' + info.event.extendedProps['email'] +
+          ' \nVehicle: ' + info.event.extendedProps['veh'] +
+          ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+          ' \nPayment method: ' + info.event.extendedProps['met'] +
+          ' \nEmail: ' + info.event.extendedProps['email'] +
+          ' \nFlight: ' + info.event.extendedProps['flight'] +
+          ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
+          ' \nDriverS name: ' + info.event.extendedProps['driver'] +
+          ' \nNote: ' + info.event.extendedProps['note']);
+      }
+      else {
+        alert('DEPARTURE:' +
+          ' \nDate: ' + formatDate(info.event.start) +
+          ' \nFrom: ' + info.event.extendedProps['to'] +
+          ' \nTo: ' + info.event.extendedProps['from'] +
+          ' \nTime: ' + formatTime(info.event.start) +
+          ' \nDeparture time: ' + info.event.extendedProps['dep'] +
           ' \nName: ' + info.event.extendedProps['customer'] +
           ' \nPhone: ' + info.event.extendedProps['phone'] +
           ' \nAdult: ' + info.event.extendedProps['adu'] +
@@ -237,7 +263,6 @@ function formatDate(date) {
     return null;
   }
   const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-  console.log(date.toLocaleDateString('en-US', options))
   return date.toLocaleDateString('en-US', options);
 }
 const formatTime = (isoDate) => {
@@ -271,4 +296,17 @@ const formatTime = (isoDate) => {
       height: 640px; 
     }
   } */
+  @media (max-width: 600px) {
+  .fc-daygrid-event, .fc-event {
+    white-space: normal !important;
+    /* Otros estilos para dispositivos móviles */
+  }
+
+  .fc-daygrid-day-events {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    /* Otros estilos para dispositivos móviles */
+  }
+}
 </style>

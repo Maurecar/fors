@@ -132,6 +132,7 @@
                                         Date and pick-up Time:
                                     </label>
                                     <VueDatePicker v-model="reservation.pickup_time" :is-24="false" :formatter="formatter"
+                                        timezone="UTC"
                                         class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                     </VueDatePicker>
 
@@ -140,7 +141,7 @@
                                         Departure Time:
                                     </label>
                                     <VueDatePicker v-model="reservation.departure_time" type="time" time-picker
-                                        :is-24="false"
+                                        timezone="UTC" :is-24="false"
                                         class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                     </VueDatePicker>
 
@@ -163,13 +164,14 @@
                                     for="reservation-pickup-time">
                                     Date and pick-up Time:
                                 </label>
-                                <VueDatePicker v-model="reservation.pickup_time" :is-24="false"
+                                <VueDatePicker v-model="reservation.pickup_time" :is-24="false" timezone="UTC"
                                     class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                 </VueDatePicker>
                                 <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Landing Time:
                                 </label>
+                                <h6>{{ reservation.landing_time }}</h6>
                                 <VueDatePicker v-model="reservation.landing_time" time-picker type="time" :is-24="false"
                                     class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                 </VueDatePicker>
@@ -186,9 +188,7 @@
                                 </label>
                                 <input id="to" v-model="reservation.to" placeholder="Drop-off location "
                                     class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
-
                             </div>
-
                         </div>
                         <div v-else-if="reservation.way === 'Round Trip'">
 
@@ -209,7 +209,7 @@
                                         for="reservation-pickup-time">
                                         Date and pick-up Time:
                                     </label>
-                                    <VueDatePicker v-model="reservation.pickup_time" :is-24="false"
+                                    <VueDatePicker v-model="reservation.pickup_time" :is-24="false" timezone="UTC"
                                         class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                     </VueDatePicker>
 
@@ -218,6 +218,7 @@
                                         Departure Time:
                                     </label>
                                     <VueDatePicker v-model="reservation.departure_time" time-picker :is-24="false"
+                                        timezone="UTC"
                                         class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                     </VueDatePicker>
                                     <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
@@ -239,7 +240,7 @@
                                         for="reservation-pickup-time">
                                         Date and Time:
                                     </label>
-                                    <VueDatePicker v-model="reservation.re_pickup_time" :is-24="false"
+                                    <VueDatePicker v-model="reservation.re_pickup_time" :is-24="false" timezone="UTC"
                                         class="returning w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                     </VueDatePicker>
                                     <label
@@ -248,6 +249,7 @@
                                         Landing Time:
                                     </label>
                                     <VueDatePicker v-model="reservation.landing_time" time-picker :is-24="false"
+                                        timezone="UTC"
                                         class="returning appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                     </VueDatePicker>
                                     <label class="returning  uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
@@ -276,16 +278,17 @@
                                     for="reservation-pickup-time">
                                     Date and pick-up Time:
                                 </label>
-                                <VueDatePicker v-model="reservation.pickup_time" :is-24="false"
+                                <VueDatePicker v-model="reservation.pickup_time" :is-24="false" timezone="UTC"
                                     class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                 </VueDatePicker>
                                 <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Landing Time:
                                 </label>
-                                <VueDatePicker v-model="reservation.landing_time" time-picker :is-24="false"
+                                <VueDatePicker v-model="reservation.landing_time" time-picker :is-24="false" timezone="UTC"
                                     class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                 </VueDatePicker>
+                               
                                 <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                     for="reservation-to">
                                     Airline and flight number:
@@ -315,7 +318,7 @@
                                     for="reservation-pickup-time">
                                     Date and Pick-up Time:
                                 </label>
-                                <VueDatePicker v-model="reservation.re_pickup_time" :is-24="false"
+                                <VueDatePicker v-model="reservation.re_pickup_time" :is-24="false" timezone="UTC"
                                     class="returning w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                 </VueDatePicker>
                                 <label class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
@@ -323,6 +326,7 @@
                                     Departure Time:
                                 </label>
                                 <VueDatePicker v-model="reservation.departure_time" time-picker :is-24="false"
+                                    timezone="UTC"
                                     class="returning appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                 </VueDatePicker>
 
@@ -332,12 +336,10 @@
                             for="reservation-pickup-time">
                             Reservation Date:
                         </label>
-                        <VueDatePicker v-model="reservation.date_reserv" :enable-time-picker="false"
+                        <VueDatePicker v-model="reservation.date_reserv" :enable-time-picker="false" timezone="UTC"
                             :format="formatter.date"
                             class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                         </VueDatePicker>
-
-
                     </div>
                 </div>
 
@@ -499,7 +501,6 @@
                                 <option>Other</option>
                             </select>
                         </div>
-
                     </div>
                     <label for="vehicle">Company of Reservation</label>
                     <div class="flex items-center ">
@@ -522,9 +523,7 @@
                             First Option Ride Service
                         </label>
                     </div>
-
                 </div>
-
                 <button type="cancel" class="close bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     @click="$emit('close')">Close</button>
                 <button type="submit" class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save
@@ -549,12 +548,6 @@ const emits = defineEmits();
 const totalAmount = ref(0);
 const Totalarrive = ref(0);
 const Totaldeparture = ref(0);
-// const reservation2 = ref({
-//     cost2: 0,
-//     tip2: 0,
-//     tipreturn2: 0,
-//     costreturn2: 0,
-// });
 const reservation = reactive({
 
     customer: "",
@@ -591,12 +584,9 @@ const reservation = reactive({
     driver2: "",
     vehicle2: "",
     company: "",
-
-}) 
-//const reserdatestr = new Date(newReservation.date_reserv).toLocaleDateString();
+})
 
 
-// Recibir la reserva como prop
 const props = defineProps({
     reservation: {
         type: Object,
@@ -604,11 +594,9 @@ const props = defineProps({
     },
 });
 onMounted(() => {
-    // Usar Object.assign para copiar propiedades de props.reservation a reservation
     Object.assign(reservation, props.reservation);
+    
 });
-
-// Usar una mutación para actualizar la reserva
 const { mutate: updateReservation, onDone: updateDone } = useMutation(
     gql`
       mutation MyMutation($id: Int!, $data: reservation_set_input!) {
@@ -652,13 +640,9 @@ const { mutate: updateReservation, onDone: updateDone } = useMutation(
 }
     `
 );
-
-// Ejecutar la mutación al enviar el formulario
-const handleUpdateReservation = async() => {
+const handleUpdateReservation = async () => {
     if (
-
         !reservation.pickup_time
-
     ) {
         return alert("Please fill all fields")
 
@@ -666,41 +650,40 @@ const handleUpdateReservation = async() => {
     const { data, errors } = await updateReservation({
         id: props.reservation.id,
         data: {
-
-        customer: reservation.customer,
-        phone: reservation.phone,
-        phone2: reservation.phone2,
-        email: reservation.email,
-        adult: reservation.adult,
-        kid: reservation.kid,
-        carseat: reservation.carseat,
-        boosterseat: reservation.boosterseat,
-        way: reservation.way,
-        from: reservation.from,
-        pick_location: reservation.pick_location,
-        pickup_time: dateToString(reservation.pickup_time),
-        departure_time: formatTime(reservation.departure_time),
-        to: reservation.to,
-        landing_time: formatTime(reservation.landing_time),
-        flight: reservation.flight,
-        tosec: reservation.tosec,
-        re_pickup_time: dateToString(reservation.re_pickup_time),
-        address: reservation.address,
-        date_reserv: formatDate(reservation.date_reserv),
-        cost: reservation.cost,
-        tip: reservation.tip,
-        costreturn: reservation.costreturn,
-        tipreturn: reservation.tipreturn,
-        payment_met: reservation.payment_met,
-        heard: reservation.heard,
-        note: reservation.note,
-        status: reservation.status,
-        vehicle: reservation.vehicle,
-        driver: reservation.driver,
-        vehicle2: reservation.vehicle2,
-        driver2: reservation.driver2,
-        dispatcher: reservation.dispatcher,
-        company: reservation.company,
+            customer: reservation.customer,
+            phone: reservation.phone,
+            phone2: reservation.phone2,
+            email: reservation.email,
+            adult: reservation.adult,
+            kid: reservation.kid,
+            carseat: reservation.carseat,
+            boosterseat: reservation.boosterseat,
+            way: reservation.way,
+            from: reservation.from,
+            pick_location: reservation.pick_location,
+            pickup_time: dateToString(reservation.pickup_time),
+            departure_time: formatTime(reservation.departure_time),
+            to: reservation.to,
+            landing_time: formatTime(reservation.landing_time),
+            flight: reservation.flight,
+            tosec: reservation.tosec,
+            re_pickup_time: dateToString(reservation.re_pickup_time),
+            address: reservation.address,
+            date_reserv: formatDate(reservation.date_reserv),
+            cost: reservation.cost,
+            tip: reservation.tip,
+            costreturn: reservation.costreturn,
+            tipreturn: reservation.tipreturn,
+            payment_met: reservation.payment_met,
+            heard: reservation.heard,
+            note: reservation.note,
+            status: reservation.status,
+            vehicle: reservation.vehicle,
+            driver: reservation.driver,
+            vehicle2: reservation.vehicle2,
+            driver2: reservation.driver2,
+            dispatcher: reservation.dispatcher,
+            company: reservation.company,
         }
 
     })
@@ -708,15 +691,15 @@ const handleUpdateReservation = async() => {
         console.error(errors);
     }
     await Swal.fire({
-            icon: 'success',
-            title: 'Successfully',
-            html: `
+        icon: 'success',
+        title: 'Successfully',
+        html: `
               UPDATE SUCCESFULLY
             `,
-            showCancelButton: false,
-            showCloseButton: false,
-            allowOutsideClick: false,
-        });
+        showCancelButton: false,
+        showCloseButton: false,
+        allowOutsideClick: false,
+    });
 };
 
 
@@ -727,22 +710,11 @@ updateDone(() => {
 const formatter = ref({
     date: "MMM dd yyyy ",
     month: "MMM",
-    time: "HH:mm tt"
+    time: "HH:mm tt",
+
 });
 const selectedDate = ref(null);
 const datePickerFormat = 'yyyy-MM-dd hh:mm tt';
-
-
-/*  watchEffect(() => {
-    cost2 = parseFloat(reservation.cost) || 0;
-    tip2 = parseFloat(reservation.tip) || 0;
-    tipreturn2 = parseFloat(reservation.tipreturn) || 0;
-    costreturn2 = parseFloat(reservation.costreturn) || 0;
-    totalAmount.value = cost + tip + tipreturn + costreturn;
-    Totalarrive.value = cost + tip;
-    Totaldeparture.value = costreturn + tipreturn;
-
-});  */
 
 const {
     loading: driverLoading,
@@ -777,6 +749,26 @@ function formatTime(timeObject) {
     const time = new Date(0, 0, 0, timeObject.hours, timeObject.minutes, timeObject.seconds);
     return time.toLocaleTimeString('en-Us', { hour: 'numeric', minute: 'numeric', hour12: true });
 }
+
+function convertTimeStringToObject(timeString) {
+  const [rawHours, minutes, period] = timeString.split(/:|\s/);
+
+  let hours = parseInt(rawHours, 10);
+
+  if (period === 'PM' && hours !== 12) {
+    
+    hours += 12;
+  } else if (period === 'AM' && hours === 12) {
+    
+    hours = 0;
+  }
+
+  return {
+    hours,
+    minutes: parseInt(minutes, 10),
+    seconds: 0
+  };
+}
 function dateToString(date) {
     if (!(date instanceof Date)) {
         console.error('Input is not a valid Date object');
@@ -807,6 +799,9 @@ function formatDate(date) {
     console.log(date.toLocaleDateString('en-US', options))
     return date.toLocaleDateString('en-US', options);
 }
+
+
+
 const formatTimetwo = (isoDate) => {
     const date = new Date(isoDate);
     const hours = date.getHours();
@@ -815,6 +810,9 @@ const formatTimetwo = (isoDate) => {
     const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
     return formattedTime;
 };
+const timeStringFromDB = "1:45 PM";
+const timeObject = convertTimeStringToObject(timeStringFromDB);
+console.log(timeObject);
 
 </script>
   
@@ -930,5 +928,4 @@ const formatTimetwo = (isoDate) => {
     margin: 0;
     padding: 0;
 
-}
-</style>
+}</style>
