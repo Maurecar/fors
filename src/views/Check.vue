@@ -76,7 +76,7 @@ const mapToFullCalendarEvents = (reservation) => {
       title: n.vehicle + "-" + n.driver,
       trip: n.way,
       start: n.pickup_time,
-      end: n.pickup_time,
+      end: n.pickup_time ,
       customer: n.customer,
       phone: n.phone,
       to: n.to,
@@ -266,9 +266,4 @@ const formatTime = (isoDate) => {
   </div>
 </template>
 <style scoped>
-/* @media screen and (max-width: 640px) {
-    .custom-mobile-calendar {
-      height: 640px; 
-    }
-  } */
 </style>

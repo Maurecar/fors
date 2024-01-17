@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, reactive, initCustomFormatter } from 'vue'
+import { ref, onMounted, reactive, initCustomFormatter, setBlockTracking } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSignOut, useUserId } from '@nhost/vue'
 
@@ -12,7 +12,7 @@ import { gql } from "@apollo/client/core";
 const router = useRouter()
 const { signOut } = useSignOut()
 const reservations = ref([]);
-
+const titulo ='';
 const {
   loading: reservationLoading,
   result: reservationResult,
@@ -34,6 +34,7 @@ const {
 		customer
 		dispatcher
 		driver
+    driver2
 		email
 		flight
 		from
@@ -47,6 +48,7 @@ const {
 		to
 		tosec
 		vehicle
+    vehicle2
 		way
 		departure_time
 		landing_time
@@ -73,8 +75,10 @@ const mapToFullCalendarEvents = (reservation) => {
 
   for (const n of reservation) {
     const startEvent = {
-      title: n.company + " " + n.from,
+      title: n.company + " " + (n.from === 'Hayden airport' ? '(H/S)' : '(S/H)')+ " " + 
+      (n.driver === 'Mauricio Vasquez' ? 'M' : (n.driver === 'Jarvi Colchado' ? 'J' : (n.driver === 'Tatiana Frolova' ? 'T' :(n.driver === 'Ivan Aguilar' ? 'Iv' :'X')))) + " " + (n.adult + n.kid )+ "P",
       trip: n.way,
+      from: n.from,
       start: n.pickup_time,
       end: n.pickup_time,
       customer: n.customer,
@@ -86,12 +90,14 @@ const mapToFullCalendarEvents = (reservation) => {
       kid: n.kid,
       adu: n.adult,
       veh: n.vehicle,
+      veh2: n.vehicle2,
       land: n.landing_time,
       met: n.payment_met,
       email: n.email,
       flight: n.flight,
       dispat: n.dispatcher,
       driver: n.driver,
+      driver2: n.driver2,
       reservation: n.date_reserv,
       note: n.note,
       cost: n.cost,
@@ -99,12 +105,13 @@ const mapToFullCalendarEvents = (reservation) => {
       tip: n.tip,
       tipr: n.tipreturn,
 
-      display: 'list-item',
-      color: 'green',
+      display: 'block',
+      color: (n.from === 'Hayden airport' ? 'black' : '#1d4ed8'),
     };
 
     const endEvent = {
-      title: n.company + " " + n.to,
+      title: n.company + " " + (n.to === 'Hayden airport' ? '(H/S)' : '(S/H)') + " " +  
+      (n.driver2 === 'Mauricio Vasquez' ? 'M' : (n.driver2 === 'Jarvi Colchado' ? 'J' : (n.driver2 === 'Tatiana Frolova' ? 'T' :(n.driver2 === 'Ivan Aguilar' ? 'Iv' :'X')))) + " " + (n.adult + n.kid )+ "P",
       start: n.re_pickup_time,
       end: n.re_pickup_time,
       customer: n.customer,
@@ -115,13 +122,14 @@ const mapToFullCalendarEvents = (reservation) => {
       dep: n.departure_time,
       kid: n.kid,
       adu: n.adult,
-      veh: n.vehicle,
+      veh2: n.vehicle2,
       lan: n.landing_time,
       met: n.payment_met,
       email: n.email,
       flight: n.flight,
       dispat: n.dispatcher,
       driver: n.driver,
+      driver2: n.driver2,
       reservation: n.date_reserv,
       note: n.note,
       cost: n.cost,
@@ -130,10 +138,10 @@ const mapToFullCalendarEvents = (reservation) => {
       tipr: n.tipreturn,
       from: n.from,
 
-      display: 'list-item',
-      color: 'red',
-    };
-
+      display: 'block',
+      color: (n.to === 'Hayden airport' ? 'black' : '#1d4ed8'),
+      
+    }
     events.push(startEvent);
     events.push(endEvent);
   }
@@ -145,7 +153,7 @@ const calendarOptions = reactive({
   initialView: 'dayGridMonth',
   timeZone: 'America/Denver',
   dayMaxEvents: true,
-  
+  aspectRatio: 0.7,
   headerToolbar: {
     left: 'prev,next today',
     center: 'title',
@@ -165,10 +173,10 @@ const calendarOptions = reactive({
         );
       }
     } else {
-      if (info.event.title.includes("Steamboat")) {
+      if (info.event.title.includes("S/H")) {
         alert('DEPARTURE:' +
           ' \nDate: ' + formatDate(info.event.start) +
-          ' \nFrom: ' + info.event.title +
+          ' \nFrom: ' + 'Steamboat ' +
           ' - ' + info.event.extendedProps['loc'] +
           ' \nto: Hayden Airport' +
           ' \nTime: ' + formatTime(info.event.start) +
@@ -186,8 +194,9 @@ const calendarOptions = reactive({
           ' \nFlight: ' + info.event.extendedProps['flight'] +
           ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
           ' \nDriverS name: ' + info.event.extendedProps['driver'] +
+          ' \nDriverS name: ' + info.event.extendedProps['driver2'] +
           ' \nNote: ' + info.event.extendedProps['note']);
-      } else if(info.event.title.includes("Hayden airport")) {
+      } else if(info.event.title.includes("H/S")) {
         alert('ARRIVAL:' +
           ' \nDate: ' + formatDate(info.event.start) +
           ' \nFrom: Hayden Airport' +          
@@ -210,6 +219,7 @@ const calendarOptions = reactive({
           ' \nFlight: ' + info.event.extendedProps['flight'] +
           ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
           ' \nDriverS name: ' + info.event.extendedProps['driver'] +
+          ' \nDriverS name: ' + info.event.extendedProps['driver2'] +
           ' \nNote: ' + info.event.extendedProps['note']);
       }
       else {

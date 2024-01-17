@@ -140,7 +140,7 @@
                                         for="reservation-pickup-time">
                                         Departure Time:
                                     </label>
-                                    <VueDatePicker v-model="reservation.departure_time" type="time" time-picker
+                                    <VueDatePicker v-model="selectedDate" type="time" time-picker
                                         timezone="UTC" :is-24="false"
                                         class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                     </VueDatePicker>
@@ -810,9 +810,11 @@ const formatTimetwo = (isoDate) => {
     const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
     return formattedTime;
 };
-const timeStringFromDB = "1:45 PM";
+const timeStringFromDB = reservation.departure_time;
 const timeObject = convertTimeStringToObject(timeStringFromDB);
-console.log(timeObject);
+const dateFromDB = new Date(0, 0, 0, timeObject.hours, timeObject.minutes, timeObject.seconds);
+selectedDate.value = dateFromDB;
+
 
 </script>
   
