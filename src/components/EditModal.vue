@@ -750,25 +750,7 @@ function formatTime(timeObject) {
     return time.toLocaleTimeString('en-Us', { hour: 'numeric', minute: 'numeric', hour12: true });
 }
 
-function convertTimeStringToObject(timeString) {
-  const [rawHours, minutes, period] = timeString.split(/:|\s/);
 
-  let hours = parseInt(rawHours, 10);
-
-  if (period === 'PM' && hours !== 12) {
-    
-    hours += 12;
-  } else if (period === 'AM' && hours === 12) {
-    
-    hours = 0;
-  }
-
-  return {
-    hours,
-    minutes: parseInt(minutes, 10),
-    seconds: 0
-  };
-}
 function dateToString(date) {
     if (!(date instanceof Date)) {
         console.error('Input is not a valid Date object');
@@ -810,10 +792,7 @@ const formatTimetwo = (isoDate) => {
     const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
     return formattedTime;
 };
-const timeStringFromDB = reservation.departure_time;
-const timeObject = convertTimeStringToObject(timeStringFromDB);
-const dateFromDB = new Date(0, 0, 0, timeObject.hours, timeObject.minutes, timeObject.seconds);
-selectedDate.value = dateFromDB;
+
 
 
 </script>
