@@ -106,7 +106,7 @@ const mapToFullCalendarEvents = (reservation) => {
       tipr: n.tipreturn,
 
       display: 'block',
-      color: (n.from === 'Hayden airport' ? 'black' : '#1d4ed8'),
+      color: (n.from === 'Hayden airport' ? 'black' : '#0891b2'),
     };
 
     const endEvent = {
@@ -139,7 +139,7 @@ const mapToFullCalendarEvents = (reservation) => {
       from: n.from,
 
       display: 'block',
-      color: (n.to === 'Hayden airport' ? 'black' : '#1d4ed8'),
+      color: (n.to === 'Hayden airport' ? 'black' : '#0891b2'),
       
     }
     events.push(startEvent);
