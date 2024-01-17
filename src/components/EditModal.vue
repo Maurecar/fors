@@ -131,6 +131,7 @@
                                         for="reservation-pickup-time">
                                         Date and pick-up Time:
                                     </label>
+                                    
                                     <VueDatePicker v-model="reservation.pickup_time" :is-24="false" :formatter="formatter"
                                         timezone="UTC"
                                         class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
@@ -140,6 +141,7 @@
                                         for="reservation-pickup-time">
                                         Departure Time:
                                     </label>
+                                    {{ reservation.departure_time }}
                                     <VueDatePicker v-model="reservation.departure_time" type="time" time-picker
                                         timezone="UTC" :is-24="false"
                                         class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
@@ -217,6 +219,7 @@
                                         for="reservation-pickup-time">
                                         Departure Time:
                                     </label>
+                                    {{ reservation.departure_time }}
                                     <VueDatePicker v-model="reservation.departure_time" time-picker :is-24="false"
                                         timezone="UTC"
                                         class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
@@ -248,6 +251,7 @@
                                         for="reservation-pickup-time">
                                         Landing Time:
                                     </label>
+                                    {{ reservation.landing_time }}
                                     <VueDatePicker v-model="reservation.landing_time" time-picker :is-24="false"
                                         timezone="UTC"
                                         class="returning appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
@@ -285,6 +289,7 @@
                                     for="reservation-pickup-time">
                                     Landing Time:
                                 </label>
+                                {{ reservation.landing_time }}
                                 <VueDatePicker v-model="reservation.landing_time" time-picker :is-24="false" timezone="UTC"
                                     class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                 </VueDatePicker>
@@ -324,7 +329,7 @@
                                 <label class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Departure Time:
-                                </label>
+                                </label>{{ reservation.departure_time }}
                                 <VueDatePicker v-model="reservation.departure_time" time-picker :is-24="false"
                                     timezone="UTC"
                                     class="returning appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
@@ -909,4 +914,6 @@ const formatTimetwo = (isoDate) => {
     margin: 0;
     padding: 0;
 
-}</style>
+}
+
+</style>

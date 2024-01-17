@@ -154,10 +154,12 @@ const calendarOptions = reactive({
   timeZone: 'America/Denver',
   dayMaxEvents: true,
   aspectRatio: 0.7,
+  
   headerToolbar: {
     left: 'prev,next today',
     center: 'title',
     right: 'dayGridMonth,timeGridWeek,timeGridDay',
+    
   },
   events: [],
   
@@ -301,22 +303,24 @@ const formatTime = (isoDate) => {
   </div>
 </template>
 <style scoped>
-/* @media screen and (max-width: 640px) {
-    .custom-mobile-calendar {
-      height: 640px; 
-    }
-  } */
+
   @media (max-width: 600px) {
   .fc-daygrid-event, .fc-event {
     white-space: normal !important;
-    /* Otros estilos para dispositivos móviles */
+   
   }
 
   .fc-daygrid-day-events {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    /* Otros estilos para dispositivos móviles */
+    
   }
 }
+:root {
+  --fc-border-color: black;
+  --fc-daygrid-event-dot-width: 5px;
+  
+}
+
 </style>
