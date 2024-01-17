@@ -772,7 +772,7 @@ function dateToString(date) {
     const timezoneOffset = date.getTimezoneOffset();
     const offsetHours = Math.floor(Math.abs(timezoneOffset) / 60);
     const offsetMinutes = Math.abs(timezoneOffset) % 60;
-    const timezone = '+00:00';
+    const timezone = '-05:00';
     const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
 
     return formattedDate;
