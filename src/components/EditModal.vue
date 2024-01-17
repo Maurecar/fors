@@ -140,7 +140,7 @@
                                         for="reservation-pickup-time">
                                         Departure Time:
                                     </label>
-                                    <VueDatePicker v-model="selectedDate" type="time" time-picker
+                                    <VueDatePicker v-model="reservation.departure_time" type="time" time-picker
                                         timezone="UTC" :is-24="false"
                                         class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                     </VueDatePicker>
