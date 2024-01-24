@@ -200,8 +200,8 @@ const calendarOptions = reactive({
           ' <br>Payment method: ' + info.event.extendedProps['met'] +
           ' <br>Email: ' + info.event.extendedProps['email'] +
           ' <br>Flight: ' + info.event.extendedProps['flight'] +
-          ' <br>DispatcherS name: ' + info.event.extendedProps['dispat'] +
-          ' <br>DriverS name: ' + info.event.extendedProps['driver'] +
+          ' <br>Dispatcher\'s name: ' + info.event.extendedProps['dispat'] +
+          ' <br>Driver\'s name: ' + info.event.extendedProps['driver'] +
           
           ' <br>Note: ' + info.event.extendedProps['note'], 
           width: '80%'
@@ -230,8 +230,8 @@ const calendarOptions = reactive({
           ' <br>Payment method: ' + info.event.extendedProps['met'] +
           ' <br>Email: ' + info.event.extendedProps['email'] +
           ' <br>Flight: ' + info.event.extendedProps['flight'] +
-          ' <br>DispatcherS name: ' + info.event.extendedProps['dispat'] +
-          ' <br>DriverS name: ' + info.event.extendedProps['driver'] +          
+          ' <br>Dispatcher\'s name: ' + info.event.extendedProps['dispat'] +
+          ' <br>Driver\'s name: ' + info.event.extendedProps['driver'] +          
           ' <br>Note: ' + info.event.extendedProps['note'],
           width: '80%'});
       }
@@ -259,8 +259,8 @@ const calendarOptions = reactive({
           ' <br>Payment method: ' + info.event.extendedProps['met'] +
           ' <br>Email: ' + info.event.extendedProps['email'] +
           ' <br>Flight: ' + info.event.extendedProps['flight'] +
-          ' <br>DispatcherS name: ' + info.event.extendedProps['dispat'] +
-          ' <br>DriverS name: ' + info.event.extendedProps['driver'] +
+          ' <br>Dispatcher\'s name: ' + info.event.extendedProps['dispat'] +
+          ' <br>Driver\'s name: ' + info.event.extendedProps['driver'] +
           ' <br>Note: ' + info.event.extendedProps['note'], width: '80%'});
       }
     }
