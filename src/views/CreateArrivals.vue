@@ -956,7 +956,7 @@ function formatTime(timeObject) {
     const time = new Date(0, 0, 0, timeObject.hours, timeObject.minutes, timeObject.seconds);
     return time.toLocaleTimeString('en-Us', { hour: 'numeric', minute: 'numeric', hour12: true });
 }
-
+/* crear numero de reserva fors1000*/
 function dateToString(date) {
     if (!(date instanceof Date)) {
         console.error('Input is not a valid Date object');

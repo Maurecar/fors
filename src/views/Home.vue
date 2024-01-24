@@ -55,6 +55,7 @@ const {
 		pickup_time
 		re_pickup_time
     company
+    
   }
 }
 `);
@@ -104,6 +105,7 @@ const mapToFullCalendarEvents = (reservation) => {
       costr: n.costreturn,
       tip: n.tip,
       tipr: n.tipreturn,
+      ident: n.id,
 
       display: 'block',
       color: (n.from === 'Hayden airport' ? 'black' : '#0891b2'),
@@ -137,6 +139,10 @@ const mapToFullCalendarEvents = (reservation) => {
       tip: n.tip,
       tipr: n.tipreturn,
       from: n.from,
+      ident: n.id,
+      
+      
+      
 
       display: 'block',
       color: (n.to === 'Hayden airport' ? 'black' : '#0891b2'),
@@ -177,6 +183,7 @@ const calendarOptions = reactive({
     } else {
       if (info.event.title.includes("S/H")) {
         alert('DEPARTURE:' +
+        ' \nReservation #: FORS' + info.event.extendedProps['ident'] +
           ' \nDate: ' + formatDate(info.event.start) +
           ' \nFrom: ' + 'Steamboat ' +
           ' - ' + info.event.extendedProps['loc'] +
@@ -200,6 +207,7 @@ const calendarOptions = reactive({
           ' \nNote: ' + info.event.extendedProps['note']);
       } else if(info.event.title.includes("H/S")) {
         alert('ARRIVAL:' +
+        ' \nReservation #: FORS' + info.event.extendedProps['ident'] +
           ' \nDate: ' + formatDate(info.event.start) +
           ' \nFrom: Hayden Airport' +          
           ' \nto: ' + info.event.extendedProps['to'] +

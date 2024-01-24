@@ -10,6 +10,7 @@
         <table class="table-auto">
           <thead>
             <tr>
+              <th class="px-4 py-2"># of reservation</th>
               <th class="px-4 py-2">Customer</th>
               <th class="px-4 py-2">Phone</th>
               <th class="px-4 py-2">Pickup Time</th>
@@ -20,6 +21,7 @@
             </tr>
           </thead>
           <tr v-for="n in reservationResult.reservation" :key="n.id">
+            <td class="border px-4 py-2">FORS{{ n.id }}</td>
             <td class="border px-4 py-2">{{ n.customer }}</td>
             <td class="border px-4 py-2">{{ n.phone }}</td>
             <td class="border px-4 py-2">{{ n.pickup_time }}</td>
