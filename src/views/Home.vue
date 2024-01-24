@@ -141,9 +141,6 @@ const mapToFullCalendarEvents = (reservation) => {
       from: n.from,
       ident: n.id,
       
-      
-      
-
       display: 'block',
       color: (n.to === 'Hayden airport' ? 'black' : '#0891b2'),
       
@@ -183,7 +180,7 @@ const calendarOptions = reactive({
     } else {
       if (info.event.title.includes("S/H")) {
         alert('DEPARTURE:' +
-        ' \nReservation #: FORS' + info.event.extendedProps['ident'] +
+          ' \nReservation #: FORS' + info.event.extendedProps['ident'] +
           ' \nDate: ' + formatDate(info.event.start) +
           ' \nFrom: ' + 'Steamboat ' +
           ' - ' + info.event.extendedProps['loc'] +
@@ -203,11 +200,11 @@ const calendarOptions = reactive({
           ' \nFlight: ' + info.event.extendedProps['flight'] +
           ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
           ' \nDriverS name: ' + info.event.extendedProps['driver'] +
-          ' \nDriverS name: ' + info.event.extendedProps['driver2'] +
+          
           ' \nNote: ' + info.event.extendedProps['note']);
       } else if(info.event.title.includes("H/S")) {
         alert('ARRIVAL:' +
-        ' \nReservation #: FORS' + info.event.extendedProps['ident'] +
+          ' \nReservation #: FORS' + info.event.extendedProps['ident'] +
           ' \nDate: ' + formatDate(info.event.start) +
           ' \nFrom: Hayden Airport' +          
           ' \nto: ' + info.event.extendedProps['to'] +
@@ -228,12 +225,12 @@ const calendarOptions = reactive({
           ' \nEmail: ' + info.event.extendedProps['email'] +
           ' \nFlight: ' + info.event.extendedProps['flight'] +
           ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
-          ' \nDriverS name: ' + info.event.extendedProps['driver'] +
-          ' \nDriverS name: ' + info.event.extendedProps['driver2'] +
+          ' \nDriverS name: ' + info.event.extendedProps['driver'] +          
           ' \nNote: ' + info.event.extendedProps['note']);
       }
       else {
         alert('DEPARTURE:' +
+          ' \nReservation #: FORS' + info.event.extendedProps['ident'] +
           ' \nDate: ' + formatDate(info.event.start) +
           ' \nFrom: ' + info.event.extendedProps['to'] +
           ' \nTo: ' + info.event.extendedProps['from'] +

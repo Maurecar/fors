@@ -5,6 +5,12 @@
             Reservation</button>
         <button @click="logout" class="text-red-500 hover:underline cursor-pointer">Logout</button>
     </div>
+    <div>
+        <div></div>
+        <option  v-for="x in reservation2Result.X" :key="x.id" :value="x.id"> 
+        <p>The # of reservation is {{ x.id }}</p>
+        </option>
+    </div>
     <div class="form-container mx-auto">
         <div class="flex flex-wrap justify-between mb-8">
             <form @submit.prevent="handleCreateReservation" class="w-full max-w-lg">
@@ -24,22 +30,22 @@
                     <div class="passengers-data">
                         <div>
                             <label for="adults">Adults:</label>
-                            <input id="adults" type="number" min="0" max="30" v-model="newReservation.adult"
+                            <input id="adults"  v-model="newReservation.adult"
                                 class="appearance-none block w-full bg-white-200 text-gray-700 border border-black-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray focus:border-black-500">
                         </div>
                         <div>
                             <label for="kid">Kids:</label>
-                            <input id="kid" type="number" min="0" max="30" v-model="newReservation.kid"
+                            <input id="kid"  v-model="newReservation.kid"
                                 class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500">
                         </div>
                         <div>
                             <label for="carseat">Car Seat:</label>
-                            <input id="carseat" type="number" min="0" max="30" v-model="newReservation.carseat"
+                            <input id="carseat"  v-model="newReservation.carseat"
                                 class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500">
                         </div>
                         <div>
                             <label for="boosterseat">Booster Seat:</label>
-                            <input id="boosterseat" type="number" min="0" max="30" v-model="newReservation.boosterseat"
+                            <input id="boosterseat" v-model="newReservation.boosterseat"
                                 class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500">
                         </div>
                     </div>
@@ -951,6 +957,17 @@ const {
       }
     }
   `)
+const {
+    loading: reservation2Loading,
+    result: reservation2Result,
+    refetch: reservation2Refetch
+} = useQuery(gql`
+            query GetReservation {
+                reservation(order_by: {id: desc}, limit: 1) {
+            id
+            }
+        }
+  `)
 function formatTime(timeObject) {
 
     const time = new Date(0, 0, 0, timeObject.hours, timeObject.minutes, timeObject.seconds);
@@ -1094,4 +1111,5 @@ const formatTimetwo = (isoDate) => {
     padding: 0;
 
 }
+/* quitar selector de numeros es adultos niños boosterseat y carseat*/
 </style>
