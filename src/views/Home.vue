@@ -2,7 +2,7 @@
 import { ref, onMounted, reactive, initCustomFormatter, setBlockTracking } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSignOut, useUserId } from '@nhost/vue'
-
+import Swal from 'sweetalert2'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
@@ -179,80 +179,89 @@ const calendarOptions = reactive({
       }
     } else {
       if (info.event.title.includes("S/H")) {
-        alert('DEPARTURE:' +
-          ' \nReservation #: FORS' + info.event.extendedProps['ident'] +
-          ' \nDate: ' + formatDate(info.event.start) +
-          ' \nFrom: ' + 'Steamboat ' +
+        Swal.fire({
+          title: 'Departure',
+          html: 'DEPARTURE:' +
+          ' <br>Reservation #: FORS' + info.event.extendedProps['ident'] +
+          ' <br>Date: ' + formatDate(info.event.start) +
+          ' <br>From: ' + 'Steamboat ' +
           ' - ' + info.event.extendedProps['loc'] +
-          ' \nto: Hayden Airport' +
-          ' \nTime: ' + formatTime(info.event.start) +
-          ' \nDeparture time: ' + info.event.extendedProps['dep'] +
-          ' \nName: ' + info.event.extendedProps['customer'] +
-          ' \nPhone: ' + info.event.extendedProps['phone'] +
-          ' \nAdult: ' + info.event.extendedProps['adu'] +
-          ' \nKid: ' + info.event.extendedProps['kid'] +
-          ' \nVehicle: ' + info.event.extendedProps['veh'] +
-          ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+          ' <br>to: Hayden Airport' +
+          ' <br>Time: ' + formatTime(info.event.start) +
+          ' <br>Departure time: ' + info.event.extendedProps['dep'] +
+          ' <br>Name: ' + info.event.extendedProps['customer'] +
+          ' <br>Phone: ' + info.event.extendedProps['phone'] +
+          ' <br>Adult: ' + info.event.extendedProps['adu'] +
+          ' <br>Kid: ' + info.event.extendedProps['kid'] +
+          ' <br>Vehicle: ' + info.event.extendedProps['veh'] +
+          ' <br>Payment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
           ' cost: $' + info.event.extendedProps['cost'] + ' tip: $' + info.event.extendedProps['tip'] +
           ' cost return: $' + info.event.extendedProps['costr'] + ' tip return: $ ' + info.event.extendedProps['tipr'] +
-          ' \nPayment method: ' + info.event.extendedProps['met'] +
-          ' \nEmail: ' + info.event.extendedProps['email'] +
-          ' \nFlight: ' + info.event.extendedProps['flight'] +
-          ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
-          ' \nDriverS name: ' + info.event.extendedProps['driver'] +
+          ' <br>Payment method: ' + info.event.extendedProps['met'] +
+          ' <br>Email: ' + info.event.extendedProps['email'] +
+          ' <br>Flight: ' + info.event.extendedProps['flight'] +
+          ' <br>DispatcherS name: ' + info.event.extendedProps['dispat'] +
+          ' <br>DriverS name: ' + info.event.extendedProps['driver'] +
           
-          ' \nNote: ' + info.event.extendedProps['note']);
+          ' <br>Note: ' + info.event.extendedProps['note'], 
+          width: '80%'
+          });
       } else if(info.event.title.includes("H/S")) {
-        alert('ARRIVAL:' +
-          ' \nReservation #: FORS' + info.event.extendedProps['ident'] +
-          ' \nDate: ' + formatDate(info.event.start) +
-          ' \nFrom: Hayden Airport' +          
-          ' \nto: ' + info.event.extendedProps['to'] +
-          ' \nTime: ' + formatTime(info.event.start) +
-          ' \nLanding time: ' + info.event.extendedProps['land'] +
-          ' \nName: ' + info.event.extendedProps['customer'] +
-          ' \nPhone: ' + info.event.extendedProps['phone'] +
-          ' \nAdult: ' + info.event.extendedProps['adu'] +
-          ' \nKid: ' + info.event.extendedProps['kid'] +
-          ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+        Swal.fire({
+          title:'Arrival',
+          html: 'ARRIVAL:' +
+          ' <br>Reservation #: FORS' + info.event.extendedProps['ident'] +
+          ' <br>Date: ' + formatDate(info.event.start) +
+          ' <br>From: Hayden Airport' +          
+          ' <br>to: ' + info.event.extendedProps['to'] +
+          ' <br>Time: ' + formatTime(info.event.start) +
+          ' <br>Landing time: ' + info.event.extendedProps['land'] +
+          ' <br>Name: ' + info.event.extendedProps['customer'] +
+          ' <br>Phone: ' + info.event.extendedProps['phone'] +
+          ' <br>Adult: ' + info.event.extendedProps['adu'] +
+          ' <br>Kid: ' + info.event.extendedProps['kid'] +
+          ' <br>Payment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
           ' cost: $' + info.event.extendedProps['cost'] + ' tip: $' + info.event.extendedProps['tip'] +
           ' cost return: $' + info.event.extendedProps['costr'] + ' tip return: $ ' + info.event.extendedProps['tipr'] +
-          ' \nPayment method ' + info.event.extendedProps['met'] +
-          ' \nEmail ' + info.event.extendedProps['email'] +
-          ' \nVehicle: ' + info.event.extendedProps['veh'] +
-          ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
-          ' \nPayment method: ' + info.event.extendedProps['met'] +
-          ' \nEmail: ' + info.event.extendedProps['email'] +
-          ' \nFlight: ' + info.event.extendedProps['flight'] +
-          ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
-          ' \nDriverS name: ' + info.event.extendedProps['driver'] +          
-          ' \nNote: ' + info.event.extendedProps['note']);
+          ' <br>Payment method ' + info.event.extendedProps['met'] +
+          ' <br>Email ' + info.event.extendedProps['email'] +
+          ' <br>Vehicle: ' + info.event.extendedProps['veh'] +
+          ' <br>Payment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+          ' <br>Payment method: ' + info.event.extendedProps['met'] +
+          ' <br>Email: ' + info.event.extendedProps['email'] +
+          ' <br>Flight: ' + info.event.extendedProps['flight'] +
+          ' <br>DispatcherS name: ' + info.event.extendedProps['dispat'] +
+          ' <br>DriverS name: ' + info.event.extendedProps['driver'] +          
+          ' <br>Note: ' + info.event.extendedProps['note'],
+          width: '80%'});
       }
       else {
-        alert('DEPARTURE:' +
-          ' \nReservation #: FORS' + info.event.extendedProps['ident'] +
-          ' \nDate: ' + formatDate(info.event.start) +
-          ' \nFrom: ' + info.event.extendedProps['to'] +
-          ' \nTo: ' + info.event.extendedProps['from'] +
-          ' \nTime: ' + formatTime(info.event.start) +
-          ' \nDeparture time: ' + info.event.extendedProps['dep'] +
-          ' \nName: ' + info.event.extendedProps['customer'] +
-          ' \nPhone: ' + info.event.extendedProps['phone'] +
-          ' \nAdult: ' + info.event.extendedProps['adu'] +
-          ' \nKid: ' + info.event.extendedProps['kid'] +
-          ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+        Swal.fire({
+          title:'Departure',
+          html:'DEPARTURE:' +
+          ' <br>Reservation #: FORS' + info.event.extendedProps['ident'] +
+          ' <br>Date: ' + formatDate(info.event.start) +
+          ' <br>From: ' + info.event.extendedProps['to'] +
+          ' <br>To: ' + info.event.extendedProps['from'] +
+          ' <br>Time: ' + formatTime(info.event.start) +
+          ' <br>Departure time: ' + info.event.extendedProps['dep'] +
+          ' <br>Name: ' + info.event.extendedProps['customer'] +
+          ' <br>Phone: ' + info.event.extendedProps['phone'] +
+          ' <br>Adult: ' + info.event.extendedProps['adu'] +
+          ' <br>Kid: ' + info.event.extendedProps['kid'] +
+          ' <br>Payment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
           ' cost: $' + info.event.extendedProps['cost'] + ' tip: $' + info.event.extendedProps['tip'] +
           ' cost return: $' + info.event.extendedProps['costr'] + ' tip return: $ ' + info.event.extendedProps['tipr'] +
-          ' \nPayment method ' + info.event.extendedProps['met'] +
-          ' \nEmail ' + info.event.extendedProps['email'] +
-          ' \nVehicle: ' + info.event.extendedProps['veh'] +
-          ' \nPayment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
-          ' \nPayment method: ' + info.event.extendedProps['met'] +
-          ' \nEmail: ' + info.event.extendedProps['email'] +
-          ' \nFlight: ' + info.event.extendedProps['flight'] +
-          ' \nDispatcherS name: ' + info.event.extendedProps['dispat'] +
-          ' \nDriverS name: ' + info.event.extendedProps['driver'] +
-          ' \nNote: ' + info.event.extendedProps['note']);
+          ' <br>Payment method ' + info.event.extendedProps['met'] +
+          ' <br>Email ' + info.event.extendedProps['email'] +
+          ' <br>Vehicle: ' + info.event.extendedProps['veh'] +
+          ' <br>Payment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+          ' <br>Payment method: ' + info.event.extendedProps['met'] +
+          ' <br>Email: ' + info.event.extendedProps['email'] +
+          ' <br>Flight: ' + info.event.extendedProps['flight'] +
+          ' <br>DispatcherS name: ' + info.event.extendedProps['dispat'] +
+          ' <br>DriverS name: ' + info.event.extendedProps['driver'] +
+          ' <br>Note: ' + info.event.extendedProps['note'], width: '80%'});
       }
     }
 
@@ -327,5 +336,8 @@ const formatTime = (isoDate) => {
   --fc-daygrid-event-dot-width: 5px;
   
 }
-
+.my-text-class {
+  font-size: 12px;
+  text-align: left;
+}
 </style>

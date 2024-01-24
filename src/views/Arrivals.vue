@@ -27,7 +27,7 @@
             <td class="border px-4 py-2">{{ n.pickup_time }}</td>
             <td class="border px-2 py-1">{{ n.departure_time }}</td>
             <td class="border px-2 py-1">{{ n.to }}</td>
-            <td class="border px-2 py-1">{{ n.landing_time }}</td>
+            <td class="border px-2 py-1">{{ n.landing_time }}</td> <!-- hacer aqui antes de enviar -->
             <td class="border px-4 py-2">
               <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                 @click="() => handleDeleteReservation({ id: n.id })">Delete</button>
