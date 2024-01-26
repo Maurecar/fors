@@ -150,8 +150,27 @@ let updateTo = ref('');
     refetchQueries({ include: "active" });
   });
   const handleDeleteReservation = ({ id }) => {
-    deleteReservation({ id });
-  };
+  // Mostrar el mensaje de confirmación con swal
+  swal.fire({
+    title: "Are you sure you want to delete this Reservation",
+    text: "You can’t recover this reservation once you delete it.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, Delete",
+    cancelButtonText: "No, cancel"
+  }).then((result) => {
+    // Verificar la respuesta del usuario
+    if (result.isConfirmed) {
+      // Llamar a la función para eliminar la reserva
+      deleteReservation({ id });
+      // Mostrar un mensaje de éxito
+      swal.fire("Deleted", "The reservation has been deleted.", "success");
+    } else {
+      // Mostrar un mensaje de cancelación
+      swal.fire("Cancelled", "The reservation has not been deleted.", "error");
+    }
+  });
+};
   
   const redirectToCreateArrival = () => {
     router.push("/createarrivals");
