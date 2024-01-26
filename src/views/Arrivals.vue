@@ -193,7 +193,23 @@ let updateTo = ref('');
   selectedReservation.value = reservation;
   showModal.value = true;swal.fire({
         title: 'Alert',
-        html:'You need' //todas las instrucciones 
+        html:'Attention: If you are going to update a round trip, you need to reselect the following dates and times:'+
+                '<br>-Date and pick-up time'+
+                '<br>-Landing time'+
+                '<br>For return'+
+                '<br>-Date and pick-up time'+
+                '<br>-Departure time'+
+                '<br>-Reservation date'+
+
+                '<br>If you are going to update a one-way trip, you need to reselect the following dates and times:'+
+                '<br>-Date and pick-up time'+
+                '<br>-Landing time or departure time'+
+                '<br>-Reservation date'+
+
+                '<br>Note 1: The reservation will not be updated unless you select these hours and dates.'+
+
+                '<br>Note 2: For now, the hours of departure time and landing need to be corrected since they are taking the current time of the PC. The correct time will be shown at the top of the picker. I will let you know as soon as I fix the problem.'
+                
     })
 };
   </script>
