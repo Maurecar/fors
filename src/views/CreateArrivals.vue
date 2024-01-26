@@ -366,6 +366,11 @@
                                 </label>
                                 <input id="Gratuity" name="Gratuity" type="text" v-model="newReservation.tip"
                                     class="mt-1 block w-full border border-gray-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                    <label for="Gratuity" class="block mt-4 text-sm font-medium text-white-700">
+                                    Square App Fee
+                                </label>
+                                <input id="Fee" name="Fee" type="text" v-model="newReservation.fee"
+                                    class="mt-1 block w-full border border-gray-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                             </div>
                             <div v-if="newReservation.way === 'Round Trip'" class="mt-4">
                                 <label for="text5" class="block mt-4 text-sm font-medium text-white-700">
@@ -378,6 +383,11 @@
                                 </label>
                                 <input id="text6" name="text6" type="text" v-model="newReservation.tipreturn"
                                     class="mt-1 block w-full border border-white-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                    <label for="Gratuity" class="block mt-4 text-sm font-medium text-white-700">
+                                    Square App Fee (return)
+                                </label>
+                                <input id="Fee" name="Fee" type="text" v-model="newReservation.fee2"
+                                    class="mt-1 block w-full border border-gray-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                             </div>
                             <div>
                                 <label>Total amount: {{ totalAmount }}</label>
@@ -597,6 +607,8 @@ const newReservation = ref({
     tip: 0,
     costreturn: 0,
     tipreturn: 0,
+    fee: 0,
+    fee2: 0,
     payment_met: "",
     heard: "",
     note: "",
@@ -610,8 +622,8 @@ const newReservation = ref({
 })
 const reserdatestr = new Date(newReservation.date_reserv).toLocaleDateString();
 const { mutate: createReservation } = useMutation(gql`
-        mutation InsertReservation($customer: String, $phone: String, $phone2: String, $email: String, $adult: Int, $kid: Int, $carseat: Int, $boosterseat: Int, $way: String, $from: String, $pick_location: String, $to: String, $flight: String, $tosec: String, $address: String, $date_reserv: date, $payment_met: String, $heard: String, $note: String, $status: String, $dispatcher: String, $driver: String, $driver2: String, $vehicle: String, $vehicle2: String, $cost: float8, $costreturn: float8, $departure_time: String, $landing_time: String, $re_pickup_time: timestamptz, $pickup_time: timestamptz, $tip: float8, $tipreturn: float8, $company: String ) {
-  insert_reservation(objects: {customer: $customer, phone: $phone, phone2: $phone2, email: $email, adult: $adult, kid: $kid, carseat: $carseat, boosterseat: $boosterseat, way: $way, from: $from, pick_location: $pick_location, to: $to, flight: $flight, tosec: $tosec, address: $address, date_reserv: $date_reserv, payment_met: $payment_met, heard: $heard, note: $note, status: $status, dispatcher: $dispatcher, driver: $driver, driver2: $driver2, vehicle: $vehicle, vehicle2: $vehicle2, cost: $cost, costreturn: $costreturn, departure_time: $departure_time, landing_time: $landing_time, re_pickup_time: $re_pickup_time, pickup_time: $pickup_time, tip: $tip, tipreturn: $tipreturn, company: $company}) {
+        mutation InsertReservation($customer: String, $phone: String, $phone2: String, $email: String, $adult: Int, $kid: Int, $carseat: Int, $boosterseat: Int, $way: String, $from: String, $pick_location: String, $to: String, $flight: String, $tosec: String, $address: String, $date_reserv: date, $payment_met: String, $heard: String, $note: String, $status: String, $dispatcher: String, $driver: String, $driver2: String, $vehicle: String, $vehicle2: String, $cost: float8, $costreturn: float8, $departure_time: String, $landing_time: String, $re_pickup_time: timestamptz, $pickup_time: timestamptz, $tip: float8, $fee: float8, $fee2: float8, $tipreturn: float8, $company: String ) {
+  insert_reservation(objects: {customer: $customer, phone: $phone, phone2: $phone2, email: $email, adult: $adult, kid: $kid, carseat: $carseat, boosterseat: $boosterseat, way: $way, from: $from, pick_location: $pick_location, to: $to, flight: $flight, tosec: $tosec, address: $address, date_reserv: $date_reserv, payment_met: $payment_met, heard: $heard, note: $note, status: $status, dispatcher: $dispatcher, driver: $driver, driver2: $driver2, vehicle: $vehicle, vehicle2: $vehicle2, cost: $cost, costreturn: $costreturn, departure_time: $departure_time, landing_time: $landing_time, re_pickup_time: $re_pickup_time, pickup_time: $pickup_time, tip: $tip, tipreturn: $tipreturn, fee: $fee, fee2: $fee2, company: $company}) {
     affected_rows
     returning {
       id
@@ -639,6 +651,8 @@ const { mutate: createReservation } = useMutation(gql`
       tip
       costreturn
       tipreturn
+      fee2
+      fee
       payment_met
       heard
       note
@@ -686,6 +700,8 @@ const handleCreateReservation = async () => {
         tip: newReservation.value.tip,
         costreturn: newReservation.value.costreturn,
         tipreturn: newReservation.value.tipreturn,
+        fee: newReservation.value.fee,
+        fee2: newReservation.value.fee2,
         payment_met: newReservation.value.payment_met,
         heard: newReservation.value.heard,
         note: newReservation.value.note,
@@ -882,6 +898,8 @@ NOTES: ${newReservation.value.note},
             cost: 0,
             tip: 0,
             costreturn: 0,
+            fee: 0,
+            fee2: 0,
             tipreturn: 0,
             total_amount: 0,
             payment_met: '',
@@ -923,8 +941,10 @@ watchEffect(() => {
     const tip = parseFloat(newReservation.value.tip) || 0;
     const tipreturn = parseFloat(newReservation.value.tipreturn) || 0;
     const costreturn = parseFloat(newReservation.value.costreturn) || 0;
-    totalAmount.value = cost + tip + tipreturn + costreturn;
-    Totalarrive.value = cost + tip;
+    const fee = parseFloat(newReservation.value.fee) || 0;
+    const feeret = parseFloat(newReservation.value.fee2) || 0;
+    totalAmount.value = cost + tip + tipreturn + costreturn + fee + feeret;
+    Totalarrive.value = cost + tip + fee;
     Totaldeparture.value = costreturn + tipreturn;
 
 });

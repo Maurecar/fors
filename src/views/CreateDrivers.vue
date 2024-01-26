@@ -47,6 +47,7 @@
   import { useSignOut, useUserId } from '@nhost/vue'
   import { useMutation, useQuery } from "@vue/apollo-composable";
   import { gql } from "@apollo/client/core";
+  import swal from 'sweetalert2'
   
 
     
