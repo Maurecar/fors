@@ -21,7 +21,7 @@
             "
             >Dashboard         -  
           </router-link>
-          <!-- Mobile menu button -->
+          
           <div @click="toggleNav" class="flex md:hidden">
             <button
               type="button"

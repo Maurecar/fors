@@ -27,7 +27,8 @@
             <td class="border px-4 py-2">{{ n.pickup_time }}</td>
             <td class="border px-2 py-1">{{ n.departure_time }}</td>
             <td class="border px-2 py-1">{{ n.to }}</td>
-            <td class="border px-2 py-1">{{ n.landing_time }}</td> <!-- hacer aqui antes de enviar -->
+            <td class="border px-2 py-1">{{ n.landing_time }}</td> 
+            <!-- hacer aqui antes de enviar -->
             <td class="border px-4 py-2">
               <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                 @click="() => handleDeleteReservation({ id: n.id })">Delete</button>
@@ -50,6 +51,7 @@
   import { useQuery, useMutation } from "@vue/apollo-composable";
   import { gql } from "@apollo/client/core";
   import EditModal from "@/components/EditModal.vue"; 
+  import swal from "sweetalert2"
   
   const router = useRouter();
   const { signOut } = useSignOut();
@@ -159,6 +161,7 @@ let updateTo = ref('');
   const openEditModal = (reservation) => {
     selectedReservation.value = reservation;    
     showModal.value = true;
+    
   };
   
   const closeEditModal = () => {
@@ -169,8 +172,10 @@ let updateTo = ref('');
 
   const loadDataForUpdate = (reservation) => {
   selectedReservation.value = reservation;
-  showModal.value = true;
-  
+  showModal.value = true;swal.fire({
+        title: 'Alert',
+        html:'You need' //todas las instrucciones 
+    })
 };
   </script>
   

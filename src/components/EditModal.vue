@@ -755,6 +755,24 @@ function formatTime(timeObject) {
     return time.toLocaleTimeString('en-Us', { hour: 'numeric', minute: 'numeric', hour12: true });
 }
 
+function parseTime(timeString) {
+  const [hourString, period] = timeString.split(" ");
+  const [hour, minute] = hourString.split(":").map(Number);
+  let seconds = 0;
+  if (period === "PM" && hour !== 12) {
+    seconds += 12 * 60 * 60;
+  }
+  if (period === "AM" && hour === 12) {
+    seconds -= 12 * 60 * 60;
+  }
+  seconds += minute * 60 + hour * 60 * 60;
+  const timeObject = {
+    hours: Math.floor(seconds / 3600),
+    minutes: Math.floor((seconds % 3600) / 60),
+    seconds: seconds % 60,
+  };
+   return timeObject;
+}
 
 function dateToString(date) {
     if (!(date instanceof Date)) {
@@ -803,7 +821,6 @@ const formatTimetwo = (isoDate) => {
 </script>
   
 <style scoped>
-/* Estilos del modal */
 .modal {
     display: block;
     position: fixed;

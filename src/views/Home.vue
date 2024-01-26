@@ -106,7 +106,6 @@ const mapToFullCalendarEvents = (reservation) => {
       tip: n.tip,
       tipr: n.tipreturn,
       ident: n.id,
-
       display: 'block',
       color: (n.from === 'Hayden airport' ? 'black' : '#0891b2'),
     };
@@ -180,8 +179,8 @@ const calendarOptions = reactive({
     } else {
       if (info.event.title.includes("S/H")) {
         Swal.fire({
-          title: 'Departure',
-          html: 'DEPARTURE:' +
+          title: 'DEPARTURE:',
+          html: 
           ' <br>Reservation #: FORS' + info.event.extendedProps['ident'] +
           ' <br>Date: ' + formatDate(info.event.start) +
           ' <br>From: ' + 'Steamboat ' +
@@ -194,7 +193,7 @@ const calendarOptions = reactive({
           ' <br>Adult: ' + info.event.extendedProps['adu'] +
           ' <br>Kid: ' + info.event.extendedProps['kid'] +
           ' <br>Vehicle: ' + info.event.extendedProps['veh'] +
-          ' <br>Payment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+          ' <br>Payment Status: Already paid: ' + info.event.extendedProps['trip'] +
           ' cost: $' + info.event.extendedProps['cost'] + ' tip: $' + info.event.extendedProps['tip'] +
           ' cost return: $' + info.event.extendedProps['costr'] + ' tip return: $ ' + info.event.extendedProps['tipr'] +
           ' <br>Payment method: ' + info.event.extendedProps['met'] +
@@ -208,8 +207,8 @@ const calendarOptions = reactive({
           });
       } else if(info.event.title.includes("H/S")) {
         Swal.fire({
-          title:'Arrival',
-          html: 'ARRIVAL:' +
+          title:'ARRIVAL:',
+          html: 
           ' <br>Reservation #: FORS' + info.event.extendedProps['ident'] +
           ' <br>Date: ' + formatDate(info.event.start) +
           ' <br>From: Hayden Airport' +          
@@ -220,13 +219,13 @@ const calendarOptions = reactive({
           ' <br>Phone: ' + info.event.extendedProps['phone'] +
           ' <br>Adult: ' + info.event.extendedProps['adu'] +
           ' <br>Kid: ' + info.event.extendedProps['kid'] +
-          ' <br>Payment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+          ' <br>Payment Status: Already paid: ' + info.event.extendedProps['trip'] +
           ' cost: $' + info.event.extendedProps['cost'] + ' tip: $' + info.event.extendedProps['tip'] +
           ' cost return: $' + info.event.extendedProps['costr'] + ' tip return: $ ' + info.event.extendedProps['tipr'] +
           ' <br>Payment method ' + info.event.extendedProps['met'] +
           ' <br>Email ' + info.event.extendedProps['email'] +
           ' <br>Vehicle: ' + info.event.extendedProps['veh'] +
-          ' <br>Payment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+          ' <br>Payment Status: Already paid: ' + info.event.extendedProps['trip'] +
           ' <br>Payment method: ' + info.event.extendedProps['met'] +
           ' <br>Email: ' + info.event.extendedProps['email'] +
           ' <br>Flight: ' + info.event.extendedProps['flight'] +
@@ -237,8 +236,8 @@ const calendarOptions = reactive({
       }
       else {
         Swal.fire({
-          title:'Departure',
-          html:'DEPARTURE:' +
+          title:'DEPARTURE:',
+          html:
           ' <br>Reservation #: FORS' + info.event.extendedProps['ident'] +
           ' <br>Date: ' + formatDate(info.event.start) +
           ' <br>From: ' + info.event.extendedProps['to'] +
@@ -249,19 +248,20 @@ const calendarOptions = reactive({
           ' <br>Phone: ' + info.event.extendedProps['phone'] +
           ' <br>Adult: ' + info.event.extendedProps['adu'] +
           ' <br>Kid: ' + info.event.extendedProps['kid'] +
-          ' <br>Payment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+          ' <br>Payment Status: Already paid: ' + info.event.extendedProps['trip'] +
           ' cost: $' + info.event.extendedProps['cost'] + ' tip: $' + info.event.extendedProps['tip'] +
           ' cost return: $' + info.event.extendedProps['costr'] + ' tip return: $ ' + info.event.extendedProps['tipr'] +
           ' <br>Payment method ' + info.event.extendedProps['met'] +
           ' <br>Email ' + info.event.extendedProps['email'] +
           ' <br>Vehicle: ' + info.event.extendedProps['veh'] +
-          ' <br>Payment Status: Alredy paid: ' + info.event.extendedProps['trip'] +
+          ' <br>Payment Status: Already paid: ' + info.event.extendedProps['trip'] +
           ' <br>Payment method: ' + info.event.extendedProps['met'] +
           ' <br>Email: ' + info.event.extendedProps['email'] +
           ' <br>Flight: ' + info.event.extendedProps['flight'] +
           ' <br>Dispatcher\'s name: ' + info.event.extendedProps['dispat'] +
           ' <br>Driver\'s name: ' + info.event.extendedProps['driver'] +
-          ' <br>Note: ' + info.event.extendedProps['note'], width: '80%'});
+          ' <br>Note: ' + info.event.extendedProps['note'], 
+          width: '80%'});
       }
     }
 
