@@ -21,22 +21,22 @@
                     <div class="passengers-data">
                         <div>
                             <label for="adults">Adults:</label>
-                            <input id="adults" type="number" min="0" max="30" v-model="reservation.adult"
+                            <input id="adults" v-model="reservation.adult"
                                 class="appearance-none block w-full bg-white-200 text-gray-700 border border-black-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray focus:border-black-500">
                         </div>
                         <div>
                             <label for="kid">Kids:</label>
-                            <input id="kid" type="number" min="0" max="30" v-model="reservation.kid"
+                            <input id="kid" v-model="reservation.kid"
                                 class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500">
                         </div>
                         <div>
                             <label for="carseat">Car Seat:</label>
-                            <input id="carseat" type="number" min="0" max="30" v-model="reservation.carseat"
+                            <input id="carseat" v-model="reservation.carseat"
                                 class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500">
                         </div>
                         <div>
                             <label for="boosterseat">Booster Seat:</label>
-                            <input id="boosterseat" type="number" min="0" max="30" v-model="reservation.boosterseat"
+                            <input id="boosterseat" v-model="reservation.boosterseat"
                                 class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500">
                         </div>
                     </div>
@@ -362,7 +362,12 @@
                                 </label>
                                 <input id="Gratuity" name="Gratuity" type="text" v-model="reservation.tip"
                                     class="mt-1 block w-full border border-gray-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                            </div>
+                                    <label for="Gratuity" class="block mt-4 text-sm font-medium text-white-700">
+                                    Square App Fee
+                                </label>
+                                <input id="Fee" name="Fee" type="text" v-model="reservation.fee"
+                                    class="mt-1 block w-full border border-gray-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                </div>
                             <div v-if="reservation.way === 'Round Trip'" class="mt-4">
                                 <label for="text5" class="block mt-4 text-sm font-medium text-white-700">
                                     Second trip amount (return)
@@ -374,6 +379,11 @@
                                 </label>
                                 <input id="text6" name="text6" type="text" v-model="reservation.tipreturn"
                                     class="mt-1 block w-full border border-white-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                    <label for="Gratuity" class="block mt-4 text-sm font-medium text-white-700">
+                                    Square App Fee (return)
+                                </label>
+                                <input id="Fee" name="Fee" type="text" v-model="reservation.fee2"
+                                    class="mt-1 block w-full border border-gray-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                             </div>
                             <div>
                                 <label>Total amount: {{ totalAmount }}</label>
@@ -589,6 +599,8 @@ const reservation = reactive({
     driver2: "",
     vehicle2: "",
     company: "",
+    fee:0,
+    fee2:0,
 })
 
 
@@ -641,6 +653,8 @@ const { mutate: updateReservation, onDone: updateDone } = useMutation(
     vehicle
     vehicle2
     way
+    fee
+    fee2
   }
 }
     `
@@ -689,6 +703,8 @@ const handleUpdateReservation = async () => {
             driver2: reservation.driver2,
             dispatcher: reservation.dispatcher,
             company: reservation.company,
+            fee: reservation.fee,
+            fee2: reservation.fee2,
         }
 
     })
