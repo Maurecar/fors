@@ -1,46 +1,30 @@
 <template>
-    <div>
-      <div class="flex items-center justify-between mb-8">
-        <h1 class="text-3xl font-bold">Reservations List</h1>
-        <button @click="redirectToCreateArrival" class="text-green-500 hover:underline cursor-pointer">Create
-          Reservation</button>
-        <button @click="logout" class="text-red-500 hover:underline cursor-pointer">Logout</button>
-      </div>
-        <div v-if="!reservationLoading ">
-        <table class="table-auto">
-          <thead>
-            <tr>
-              <th class="px-4 py-2"># of reservation</th>
-              <th class="px-4 py-2">Customer</th>
-              <th class="px-4 py-2">Phone</th>
-              <th class="px-4 py-2">Pickup Time</th>
-              <th class="px-2 py-1">departure time</th>
-              <th class="px-2 py-1">to</th>
-              <th class="px-2 py-1">Landing Time</th>
-              <th class="px-4 py-2">Actions</th>
             </tr>
           </thead>
-          <tr v-for="n in reservationResult.reservation" :key="n.id">
-            <td class="border px-4 py-2">FORS{{ n.id }}</td>
-            <td class="border px-4 py-2">{{ n.customer }}</td>
-            <td class="border px-4 py-2">{{ n.phone }}</td>
-            <td class="border px-4 py-2">{{ n.pickup_time }}</td>
-            <td class="border px-2 py-1">{{ n.departure_time }}</td>
-            <td class="border px-2 py-1">{{ n.to }}</td>
-            <td class="border px-2 py-1">{{ n.landing_time }}</td> 
-            <!-- hacer aqui antes de enviar -->
-            <td class="border px-4 py-2">
-              <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                @click="() => handleDeleteReservation({ id: n.id })">Delete</button>
-            </td>
-            <td class="border px-4 py-2">
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      @click="() => loadDataForUpdate(n)">Update</button>
-  </td>
+  <div>
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-bold">Reservations List</h1>
+      <button @click="redirectToCreateArrival" class="text-green-500 hover:underline cursor-pointer">Create
+        Reservation</button>
+      <button @click="logout" class="text-red-500 hover:underline cursor-pointer">Logout</button>
+    </div>
+    <div v-if="!reservationLoading ">
+      <table class="table-auto">
+        <thead>
+          <tr>
+            <th class="px-4 py-2"># of reservation</th>
+            <th class="px-4 py-2">Customer</th>
+            <th class="px-4 py-2">Phone</th>
+            <th class="px-4 py-2">Pickup Time</th>
+            <th class="px-2 py-1">departure time</th>
+            <th class="px-2 py-1">to</th>
+            <th class="px-2 py-1">Landing Time</th>
+            <th class="px-4 py-2">Actions</th>
           </tr>
         </table>
       </div>
       <edit-modal v-if="showModal" :reservation="selectedReservation" @close="closeEditModal" />
+        <tr v-for="n in reservationResult.reservation" :key="n.id">
     </div>
   </template>
   

@@ -183,8 +183,8 @@ const calendarOptions = reactive({
           html: 
           ' <br>Reservation #: FORS' + info.event.extendedProps['ident'] +
           ' <br>Date: ' + formatDate(info.event.start) +
-          ' <br>From: ' + 'Steamboat ' +
-          ' - ' + info.event.extendedProps['loc'] +
+          ' <br>From: ' + 'Steamboat - ' +  info.event.extendedProps['to'] +
+           info.event.extendedProps['loc'] +
           ' <br>to: Hayden Airport' +
           ' <br>Time: ' + formatTime(info.event.start) +
           ' <br>Departure time: ' + info.event.extendedProps['dep'] +

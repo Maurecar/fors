@@ -941,10 +941,9 @@ watchEffect(() => {
     const tip = parseFloat(newReservation.value.tip) || 0;
     const tipreturn = parseFloat(newReservation.value.tipreturn) || 0;
     const costreturn = parseFloat(newReservation.value.costreturn) || 0;
-    const fee = parseFloat(newReservation.value.fee) || 0;
-    const feeret = parseFloat(newReservation.value.fee2) || 0;
-    totalAmount.value = cost + tip + tipreturn + costreturn + fee + feeret;
-    Totalarrive.value = cost + tip + fee;
+   
+    totalAmount.value = cost + tip + tipreturn + costreturn ;
+    Totalarrive.value = cost + tip ;
     Totaldeparture.value = costreturn + tipreturn;
 
 });
