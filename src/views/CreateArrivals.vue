@@ -416,6 +416,7 @@
                                     <option value="">--Choose Option--</option>
                                     <option>Google search</option>
                                     <option>Front desk hotel</option>
+                                    <option>Steambot Central Reservations</option>
                                     <option>A friend</option>
                                     <option>Returning customer</option>
                                     <option>Facebook / Instagram</option>
@@ -722,7 +723,7 @@ const handleCreateReservation = async () => {
             if (newReservation.value.from === "Steamboat") {
                 contenidoTexto = ` DEPARTURE
 Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.address},
+from: ${newReservation.value.from}, ${newReservation.value.pick_location},
 to: ${newReservation.value.to},
 Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
 Flight departure time: ${formatTime(newReservation.value.departure_time)},
@@ -736,12 +737,11 @@ Vehicle: ${newReservation.value.vehicle},
 Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
 Payment  method: ${newReservation.value.payment_met},
 Email: ${newReservation.value.email},
-Flight: ${newReservation.value.flight},
 Dispatcher's name: ${newReservation.value.dispatcher},
 Driver's name: ${newReservation.value.driver},
 Date of reservation: ${formatDate(newReservation.value.date_reserv)},
 How do you hear about us?: ${newReservation.value.heard},
-NOTES: ${newReservation.value.note},
+NOTES: ${newReservation.value.note}
                 `
             } else { contenidoTexto = ` ARRIVAL
 Date: ${formatDate(newReservation.value.pickup_time)},
@@ -764,7 +764,7 @@ Dispatcher's name: ${newReservation.value.dispatcher},
 Driver's name: ${newReservation.value.driver},
 Date of reservation: ${formatDate(newReservation.value.date_reserv)},
 How do you hear about us?: ${newReservation.value.heard},
-NOTES: ${newReservation.value.note},
+NOTES: ${newReservation.value.note}
      `
             }
         } else {
@@ -790,7 +790,7 @@ Dispatcher's name: ${newReservation.value.dispatcher},
 Driver's name: ${newReservation.value.driver},
 Date of reservation: ${formatDate(newReservation.value.date_reserv)},
 How do you hear about us?: ${newReservation.value.heard},
-NOTES: ${newReservation.value.note},
+NOTES: ${newReservation.value.note}
 
                 ARRIVAL
 Date: ${formatDate(newReservation.value.pickup_time)},
@@ -813,7 +813,7 @@ Dispatcher's name: ${newReservation.value.dispatcher},
 Driver's name for returning: ${newReservation.value.driver2},
 Date of reservation: ${formatDate(newReservation.value.date_reserv)},
 How do you hear about us?: ${newReservation.value.heard},
-NOTES: ${newReservation.value.note},
+NOTES: ${newReservation.value.note}
                 `
             } else {
                 contenidoTexto = ` ARRIVAL
@@ -837,7 +837,7 @@ Dispatcher's name: ${newReservation.value.dispatcher},
 Driver's name: ${newReservation.value.driver},
 Date of reservation: ${formatDate(newReservation.value.date_reserv)},
 How do you hear about us?: ${newReservation.value.heard},
-NOTES: ${newReservation.value.note},
+NOTES: ${newReservation.value.note}
 
                 DEPARTURE
                 Date: ${formatDate(newReservation.value.pickup_time)},
@@ -859,7 +859,7 @@ Dispatcher's name: ${newReservation.value.dispatcher},
 Driver's name for returning: ${newReservation.value.driver2},
 Date of reservation: ${formatDate(newReservation.value.date_reserv)},
 How do you hear about us?: ${newReservation.value.heard},
-NOTES: ${newReservation.value.note},
+NOTES: ${newReservation.value.note}
                 `
             }
         };

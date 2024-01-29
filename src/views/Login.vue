@@ -10,6 +10,7 @@ const router = useRouter()
 const isRegister = ref(false)
 const email = ref('')
 const password = ref('')
+
 const { signUpEmailPassword } = useSignUpEmailPassword()
 const { signInEmailPassword } = useSignInEmailPassword()
 const registerOrLogin = async () => {
