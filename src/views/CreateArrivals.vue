@@ -794,8 +794,8 @@ NOTES: ${newReservation.value.note},
 
                 ARRIVAL
 Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.address}
-to: ${newReservation.value.to},
+from: ${newReservation.value.to}, ${newReservation.value.address}
+to: ${newReservation.value.from},
 Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
 Landing time: ${formatTime(newReservation.value.landing_time)},
 Name: ${newReservation.value.customer},
@@ -841,8 +841,8 @@ NOTES: ${newReservation.value.note},
 
                 DEPARTURE
                 Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.pick_location},
-to: ${newReservation.value.to},
+from: ${newReservation.value.to}, ${newReservation.value.pick_location},
+to: ${newReservation.value.from},
 Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
 Flight departure time: ${formatTime(newReservation.value.departure_time)},
 Name: ${newReservation.value.customer},
