@@ -396,7 +396,7 @@
                                 <label for="Status payment">Method Payment:</label>
                                 <select
                                     class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
-                                    id="payment methode" v-model="newReservation.payment_met">
+                                    id="payment  method" v-model="newReservation.payment_met">
                                     <option value="">--Choose Payment Method--</option>
                                     <option>Payment Link</option>
                                     <option>Credit Card</option>
@@ -734,7 +734,7 @@ Car seat: ${newReservation.value.carseat},
 Booster seat: ${newReservation.value.boosterseat},
 Vehicle: ${newReservation.value.vehicle},
 Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
-Payment methode: ${newReservation.value.payment_met},
+Payment  method: ${newReservation.value.payment_met},
 Email: ${newReservation.value.email},
 Flight: ${newReservation.value.flight},
 Dispatcher's name: ${newReservation.value.dispatcher},
@@ -757,7 +757,7 @@ Car seat: ${newReservation.value.carseat},
 Booster seat: ${newReservation.value.boosterseat},
 Vehicle: ${newReservation.value.vehicle},
 Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
-Payment methode: ${newReservation.value.payment_met},
+Payment  method: ${newReservation.value.payment_met},
 Email: ${newReservation.value.email},
 Flight: ${newReservation.value.flight},
 Dispatcher's name: ${newReservation.value.dispatcher},
@@ -771,7 +771,7 @@ NOTES: ${newReservation.value.note},
             if (newReservation.value.from === "Steamboat") {
                 contenidoTexto = ` DEPARTURE
                 Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.address},
+from: ${newReservation.value.from}, ${newReservation.value.pick_location},
 to: ${newReservation.value.to},
 Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
 Flight departure time: ${formatTime(newReservation.value.departure_time)},
@@ -783,7 +783,7 @@ Car seat: ${newReservation.value.carseat},
 Booster seat: ${newReservation.value.boosterseat},
 Vehicle: ${newReservation.value.vehicle},
 Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
-Payment methode: ${newReservation.value.payment_met},
+Payment  method: ${newReservation.value.payment_met},
 Email: ${newReservation.value.email},
 Flight: ${newReservation.value.flight},
 Dispatcher's name: ${newReservation.value.dispatcher},
@@ -794,7 +794,7 @@ NOTES: ${newReservation.value.note},
 
                 ARRIVAL
 Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.address},
+from: ${newReservation.value.from}, ${newReservation.value.address}
 to: ${newReservation.value.to},
 Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
 Landing time: ${formatTime(newReservation.value.landing_time)},
@@ -806,7 +806,7 @@ Car seat: ${newReservation.value.carseat},
 Booster seat: ${newReservation.value.boosterseat},
 Vehicle for returning: ${newReservation.value.vehicle2},
 Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.costreturn} + tip: $ ${newReservation.value.tipreturn} = Total : $ ${Totaldeparture.value}
-Payment methode: ${newReservation.value.payment_met},
+Payment  method: ${newReservation.value.payment_met},
 Email: ${newReservation.value.email},
 Flight: ${newReservation.value.flight},
 Dispatcher's name: ${newReservation.value.dispatcher},
@@ -818,7 +818,7 @@ NOTES: ${newReservation.value.note},
             } else {
                 contenidoTexto = ` ARRIVAL
                 Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.address},
+from: ${newReservation.value.from}, ${newReservation.value.address}
 to: ${newReservation.value.to},
 Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
 Landing time: ${formatTime(newReservation.value.landing_time)},
@@ -830,7 +830,7 @@ Car seat: ${newReservation.value.carseat},
 Booster seat: ${newReservation.value.boosterseat},
 Vehicle: ${newReservation.value.vehicle},
 Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
-Payment methode: ${newReservation.value.payment_met},
+Payment  method: ${newReservation.value.payment_met},
 Email: ${newReservation.value.email},
 Flight: ${newReservation.value.flight},
 Dispatcher's name: ${newReservation.value.dispatcher},
@@ -841,7 +841,7 @@ NOTES: ${newReservation.value.note},
 
                 DEPARTURE
                 Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.address},
+from: ${newReservation.value.from}, ${newReservation.value.pick_location},
 to: ${newReservation.value.to},
 Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
 Flight departure time: ${formatTime(newReservation.value.departure_time)},
@@ -853,7 +853,7 @@ Car seat: ${newReservation.value.carseat},
 Booster seat: ${newReservation.value.boosterseat},
 Vehicle for returning: ${newReservation.value.vehicle2},
 Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.costreturn} + tip: $ ${newReservation.value.tipreturn} = Total : $ ${Totaldeparture.value}
-Payment methode: ${newReservation.value.payment_met},
+Payment  method: ${newReservation.value.payment_met},
 Email: ${newReservation.value.email},
 Dispatcher's name: ${newReservation.value.dispatcher},
 Driver's name for returning: ${newReservation.value.driver2},
