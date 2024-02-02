@@ -409,14 +409,14 @@
                     <div>
                         <div class="others">
                             <div>
-                                <label for="How do you heard about us?">How do you heard about us?</label>
+                                <label for="How do you heard about us?">How did you hear about us?</label>
                                 <select
                                     class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
                                     id="How do you heard about us?" v-model="newReservation.heard">
                                     <option value="">--Choose Option--</option>
                                     <option>Google search</option>
                                     <option>Front desk hotel</option>
-                                    <option>Steambot Central Reservations</option>
+                                    <option>Steamboat Central Reservations</option>
                                     <option>A friend</option>
                                     <option>Returning customer</option>
                                     <option>Facebook / Instagram</option>
@@ -793,10 +793,10 @@ How do you hear about us?: ${newReservation.value.heard},
 NOTES: ${newReservation.value.note}
 
                 ARRIVAL
-Date: ${formatDate(newReservation.value.pickup_time)},
+Date: ${formatDate(newReservation.value.re_pickup_time)},
 from: ${newReservation.value.to}
 to: ${newReservation.value.from},
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
+Pick-up time:${formatTimetwo(newReservation.value.re_pickup_time)},
 Landing time: ${formatTime(newReservation.value.landing_time)},
 Name: ${newReservation.value.customer},
 Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
@@ -840,10 +840,10 @@ How do you hear about us?: ${newReservation.value.heard},
 NOTES: ${newReservation.value.note}
 
                 DEPARTURE
-                Date: ${formatDate(newReservation.value.pickup_time)},
+Date: ${formatDate(newReservation.value.re_pickup_time)},
 from: ${newReservation.value.to}, ${newReservation.value.address},
 to: ${newReservation.value.from},
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
+Pick-up time:${formatTimetwo(newReservation.value.re_pickup_time)},
 Flight departure time: ${formatTime(newReservation.value.departure_time)},
 Name: ${newReservation.value.customer},
 Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}

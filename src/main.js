@@ -3,6 +3,7 @@ import './main.css'
 
 import App from './App.vue'
 
+
 import { createApolloClient } from '@nhost/apollo'
 import { NhostClient } from '@nhost/vue'
 import { DefaultApolloClient } from '@vue/apollo-composable'
@@ -147,6 +148,22 @@ const routes = [
         path: '/check',
         name: 'check',
         component: () => import('./views/Check.vue'),
+        meta: {
+            protected: true
+        }
+    },
+    {
+        path: '/finance',
+        name: 'finance',
+        component: () => import('./views/Finance.vue'),
+        meta: {
+            protected: true
+        }
+    },
+    {
+        path: '/pricing',
+        name: 'pricing',
+        component: () => import('./views/PricingTable.vue'),
         meta: {
             protected: true
         }

@@ -21,6 +21,7 @@
             "
             >Dashboard         -  
           </router-link>
+          <!-- <h1 v-if="isAuthenticated">Bienvenido, {{ user.displayName }}</h1> -->
           
           <div @click="toggleNav" class="flex md:hidden">
             <button
