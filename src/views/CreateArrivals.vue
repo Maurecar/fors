@@ -770,7 +770,7 @@ NOTES: ${newReservation.value.note}
         } else {
             if (newReservation.value.from === "Steamboat") {
                 contenidoTexto = ` DEPARTURE
-                Date: ${formatDate(newReservation.value.pickup_time)},
+Date: ${formatDate(newReservation.value.pickup_time)},
 from: ${newReservation.value.from}, ${newReservation.value.pick_location},
 to: ${newReservation.value.to},
 Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
@@ -817,7 +817,7 @@ NOTES: ${newReservation.value.note}
                 `
             } else {
                 contenidoTexto = ` ARRIVAL
-                Date: ${formatDate(newReservation.value.pickup_time)},
+Date: ${formatDate(newReservation.value.pickup_time)},
 from: ${newReservation.value.from},
 to: ${newReservation.value.to},
 Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
