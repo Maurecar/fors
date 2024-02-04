@@ -14,7 +14,7 @@ const formatter = ref({
     time: "HH:mm aa",
     timezone: "UTC"
 });
-
+//cambio de nombre
 onMounted(() => {
   const startDate = new Date();
   const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
