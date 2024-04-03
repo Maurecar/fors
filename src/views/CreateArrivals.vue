@@ -727,7 +727,7 @@ const handleCreateReservation = async () => {
 Date: ${formatDate(newReservation.value.pickup_time)}
 from: ${newReservation.value.pick_location}
 to: ${newReservation.value.to}
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)}
+Pick-up time: ${formatTimetwo(newReservation.value.pickup_time)}
 Flight departure time: ${formatTime(newReservation.value.departure_time)}
 Name: ${newReservation.value.customer}
 Phone: ${newReservation.value.phone} ${newReservation.value.phone2}
@@ -736,7 +736,7 @@ kids: ${newReservation.value.kid}
 Car seat: ${newReservation.value.carseat}
 Booster seat: ${newReservation.value.boosterseat}
 Vehicle: ${newReservation.value.vehicle}
-Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
+Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total: $ ${Totalarrive.value}
 Payment  method: ${newReservation.value.payment_met}
 Email: ${newReservation.value.email}
 Dispatcher's name: ${newReservation.value.dispatcher}
@@ -749,7 +749,7 @@ NOTES: ${newReservation.value.note}
 Date: ${formatDate(newReservation.value.pickup_time)}
 from: ${newReservation.value.from} ${newReservation.value.address}
 to: ${newReservation.value.to}
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)}
+Pick-up time: ${formatTimetwo(newReservation.value.pickup_time)}
 Landing time: ${formatTime(newReservation.value.landing_time)}
 Name: ${newReservation.value.customer}
 Phone: ${newReservation.value.phone} ${newReservation.value.phone2}
@@ -775,7 +775,7 @@ NOTES: ${newReservation.value.note}
 Date: ${formatDate(newReservation.value.pickup_time)}
 from: ${newReservation.value.pick_location}
 to: ${newReservation.value.to}
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)}
+Pick-up time: ${formatTimetwo(newReservation.value.pickup_time)}
 Flight departure time: ${formatTime(newReservation.value.departure_time)}
 Name: ${newReservation.value.customer}
 Phone: ${newReservation.value.phone} ${newReservation.value.phone2}
@@ -798,7 +798,7 @@ ARRIVAL
 Date: ${formatDate(newReservation.value.re_pickup_time)}
 from: ${newReservation.value.to}
 to: ${newReservation.value.from}
-Pick-up time:${formatTimetwo(newReservation.value.re_pickup_time)}
+Pick-up time: ${formatTimetwo(newReservation.value.re_pickup_time)}
 Landing time: ${formatTime(newReservation.value.landing_time)}
 Name: ${newReservation.value.customer}
 Phone: ${newReservation.value.phone} ${newReservation.value.phone2}
@@ -807,7 +807,7 @@ kids: ${newReservation.value.kid}
 Car seat: ${newReservation.value.carseat}
 Booster seat: ${newReservation.value.boosterseat}
 Vehicle for returning: ${newReservation.value.vehicle2}
-Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.costreturn} + tip: $${newReservation.value.tipreturn} = Total : $${Totaldeparture.value}
+Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.costreturn} + tip: $${newReservation.value.tipreturn} = Total: $${Totaldeparture.value}
 Payment  method: ${newReservation.value.payment_met}
 Email: ${newReservation.value.email}
 Flight: ${newReservation.value.flight}
@@ -822,7 +822,7 @@ NOTES: ${newReservation.value.note}
 Date: ${formatDate(newReservation.value.pickup_time)}
 from: ${newReservation.value.from}
 to: ${newReservation.value.to}
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)}
+Pick-up time: ${formatTimetwo(newReservation.value.pickup_time)}
 Landing time: ${formatTime(newReservation.value.landing_time)}
 Name: ${newReservation.value.customer}
 Phone: ${newReservation.value.phone} ${newReservation.value.phone2}
@@ -831,7 +831,7 @@ kids: ${newReservation.value.kid}
 Car seat: ${newReservation.value.carseat}
 Booster seat: ${newReservation.value.boosterseat}
 Vehicle: ${newReservation.value.vehicle}
-Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.cost} + tip: $${newReservation.value.tip} = Total : $${Totalarrive.value}
+Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.cost} + tip: $${newReservation.value.tip} = Total: $${Totalarrive.value}
 Payment  method: ${newReservation.value.payment_met}
 Email: ${newReservation.value.email}
 Flight: ${newReservation.value.flight}
@@ -843,9 +843,9 @@ NOTES: ${newReservation.value.note}
 ==============================================================
 DEPARTURE
 Date: ${formatDate(newReservation.value.re_pickup_time)}
-from: ${newReservation.value.to} ${newReservation.value.address}
+from: ${newReservation.value.address}
 to: ${newReservation.value.from}
-Pick-up time:${formatTimetwo(newReservation.value.re_pickup_time)}
+Pick-up time: ${formatTimetwo(newReservation.value.re_pickup_time)}
 Flight departure time: ${formatTime(newReservation.value.departure_time)}
 Name: ${newReservation.value.customer}
 Phone: ${newReservation.value.phone} ${newReservation.value.phone2}
