@@ -20,7 +20,7 @@
                         <input id="Customer name" v-model="newReservation.customer" placeholder="Customer name"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
                         <label for="customer">Customer Phone:</label>
-                        <input id="Customer phone" v-model="newReservation.phone" placeholder="Customer Phone Number"
+                        <input id="Customer phone" type="text" v-model="newReservation.phone" placeholder="(987) 123-4567"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
                         <label for="customer">Customer Email:</label>
@@ -78,12 +78,12 @@
                         <div class="flex items-center" v-if="newReservation.way === 'One Way'">
                             <div class="oneway-roundtrip">
                                 <div class="flex items-center ">
-                                    <input id="Round Trip" name="from" type="radio" value="Hayden airport"
+                                    <input id="Round Trip" name="from" type="radio" value="Hayden Airport"
                                         v-model="newReservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
-                                    <label for="Pick-up from the Hayden airport"
+                                    <label for="Pick-up from the Hayden Airport"
                                         class="ml-3 block text-sm font-medium text-white-700">
-                                        Pick-up from the Hayden airport
+                                        Pick-up from the Hayden Airport
                                     </label>
                                 </div>
                                 <div class="flex items-center">
@@ -103,12 +103,12 @@
                         <div v-else-if="newReservation.way === 'Round Trip'">
                             <div class="oneway-roundtrip">
                                 <div class="flex items-center ">
-                                    <input id="Round Trip" name="from" type="radio" value="Hayden airport"
+                                    <input id="Round Trip" name="from" type="radio" value="Hayden Airport"
                                         v-model="newReservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
-                                    <label for="Pick-up from the Hayden airport"
+                                    <label for="Pick-up from the Hayden Airport"
                                         class="ml-3 block text-sm font-medium text-white-700">
-                                        Pick-up from the Hayden airport
+                                        Pick-up from the Hayden Airport
                                     </label>
                                 </div>
                                 <div class="flex items-center">
@@ -168,7 +168,7 @@
 
                             </div>
 
-                            <div v-else-if="newReservation.from === 'Hayden airport'">
+                            <div v-else-if="newReservation.from === 'Hayden Airport'">
                                 <h5>One Way From Hayden Airport</h5>
                                 <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
@@ -243,7 +243,7 @@
                                         class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                         for="reservation-pickup-time">
 
-                                        Return from the airport -
+                                        Return from the Airport -
                                     </label>
                                     <label
                                         class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
@@ -281,7 +281,7 @@
 
                                 </div>
                             </div>
-                            <div v-else-if="newReservation.from === 'Hayden airport'">
+                            <div v-else-if="newReservation.from === 'Hayden Airport'">
                                 <h5>Round Trip from Hayden Airport</h5>
                                 <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
@@ -415,7 +415,7 @@
                                     id="How do you heard about us?" v-model="newReservation.heard">
                                     <option value="">--Choose Option--</option>
                                     <option>Google search</option>
-                                    <option>Front desk hotel</option>
+                                    <option>Hotel´s front desk</option>
                                     <option>Steamboat Central Reservations</option>
                                     <option>A friend</option>
                                     <option>Returning customer</option>
@@ -722,143 +722,143 @@ const handleCreateReservation = async () => {
         if (newReservation.value.way === "One Way") {
             if (newReservation.value.from === "Steamboat") {
                 contenidoTexto = ` DEPARTURE
-Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.pick_location},
-to: ${newReservation.value.to},
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
-Flight departure time: ${formatTime(newReservation.value.departure_time)},
-Name: ${newReservation.value.customer},
-Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
-Adults: ${newReservation.value.adult},
-kids: ${newReservation.value.kid},
-Car seat: ${newReservation.value.carseat},
-Booster seat: ${newReservation.value.boosterseat},
-Vehicle: ${newReservation.value.vehicle},
+Date: ${formatDate(newReservation.value.pickup_time)}
+from: ${newReservation.value.pick_location}
+to: ${newReservation.value.to}
+Pick-up time:${formatTimetwo(newReservation.value.pickup_time)}
+Flight departure time: ${formatTime(newReservation.value.departure_time)}
+Name: ${newReservation.value.customer}
+Phone: ${newReservation.value.phone} ${newReservation.value.phone2}
+Adults: ${newReservation.value.adult}
+kids: ${newReservation.value.kid}
+Car seat: ${newReservation.value.carseat}
+Booster seat: ${newReservation.value.boosterseat}
+Vehicle: ${newReservation.value.vehicle}
 Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
-Payment  method: ${newReservation.value.payment_met},
-Email: ${newReservation.value.email},
-Dispatcher's name: ${newReservation.value.dispatcher},
-Driver's name: ${newReservation.value.driver},
-Date of reservation: ${formatDate(newReservation.value.date_reserv)},
-How do you hear about us?: ${newReservation.value.heard},
+Payment  method: ${newReservation.value.payment_met}
+Email: ${newReservation.value.email}
+Dispatcher's name: ${newReservation.value.dispatcher}
+Driver's name: ${newReservation.value.driver}
+Date of reservation: ${formatDate(newReservation.value.date_reserv)}
+How do you hear about us?: ${newReservation.value.heard}
 NOTES: ${newReservation.value.note}
                 `
-            } else { contenidoTexto = ` ARRIVAL
-Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.address},
-to: ${newReservation.value.to},
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
-Landing time: ${formatTime(newReservation.value.landing_time)},
-Name: ${newReservation.value.customer},
-Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
-Adults: ${newReservation.value.adult},
-kids: ${newReservation.value.kid},
-Car seat: ${newReservation.value.carseat},
-Booster seat: ${newReservation.value.boosterseat},
-Vehicle: ${newReservation.value.vehicle},
-Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
-Payment  method: ${newReservation.value.payment_met},
-Email: ${newReservation.value.email},
-Flight: ${newReservation.value.flight},
-Dispatcher's name: ${newReservation.value.dispatcher},
-Driver's name: ${newReservation.value.driver},
-Date of reservation: ${formatDate(newReservation.value.date_reserv)},
-How do you hear about us?: ${newReservation.value.heard},
+            } else { contenidoTexto = `ARRIVAL
+Date: ${formatDate(newReservation.value.pickup_time)}
+from: ${newReservation.value.from} ${newReservation.value.address}
+to: ${newReservation.value.to}
+Pick-up time:${formatTimetwo(newReservation.value.pickup_time)}
+Landing time: ${formatTime(newReservation.value.landing_time)}
+Name: ${newReservation.value.customer}
+Phone: ${newReservation.value.phone} ${newReservation.value.phone2}
+Adults: ${newReservation.value.adult}
+kids: ${newReservation.value.kid}
+Car seat: ${newReservation.value.carseat}
+Booster seat: ${newReservation.value.boosterseat}
+Vehicle: ${newReservation.value.vehicle}
+Payment status, already paid: ${newReservation.value.way} cost: $${newReservation.value.cost} + tip: $${newReservation.value.tip} = Total: $${Totalarrive.value}
+Payment  method: ${newReservation.value.payment_met}
+Email: ${newReservation.value.email}
+Flight: ${newReservation.value.flight}
+Dispatcher's name: ${newReservation.value.dispatcher}
+Driver's name: ${newReservation.value.driver}
+Date of reservation: ${formatDate(newReservation.value.date_reserv)}
+How do you hear about us?: ${newReservation.value.heard}
 NOTES: ${newReservation.value.note}
      `
             }
         } else {
             if (newReservation.value.from === "Steamboat") {
-                contenidoTexto = ` DEPARTURE
-Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from}, ${newReservation.value.pick_location},
-to: ${newReservation.value.to},
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
-Flight departure time: ${formatTime(newReservation.value.departure_time)},
-Name: ${newReservation.value.customer},
-Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
-Adults: ${newReservation.value.adult},
-kids: ${newReservation.value.kid},
-Car seat: ${newReservation.value.carseat},
-Booster seat: ${newReservation.value.boosterseat},
-Vehicle: ${newReservation.value.vehicle},
-Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
-Payment  method: ${newReservation.value.payment_met},
-Email: ${newReservation.value.email},
-Flight: ${newReservation.value.flight},
-Dispatcher's name: ${newReservation.value.dispatcher},
-Driver's name: ${newReservation.value.driver},
-Date of reservation: ${formatDate(newReservation.value.date_reserv)},
-How do you hear about us?: ${newReservation.value.heard},
+                contenidoTexto = `DEPARTURE
+Date: ${formatDate(newReservation.value.pickup_time)}
+from: ${newReservation.value.pick_location}
+to: ${newReservation.value.to}
+Pick-up time:${formatTimetwo(newReservation.value.pickup_time)}
+Flight departure time: ${formatTime(newReservation.value.departure_time)}
+Name: ${newReservation.value.customer}
+Phone: ${newReservation.value.phone} ${newReservation.value.phone2}
+Adults: ${newReservation.value.adult}
+kids: ${newReservation.value.kid}
+Car seat: ${newReservation.value.carseat}
+Booster seat: ${newReservation.value.boosterseat}
+Vehicle: ${newReservation.value.vehicle}
+Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.cost} + tip: $${newReservation.value.tip} = Total: $${Totalarrive.value}
+Payment  method: ${newReservation.value.payment_met}
+Email: ${newReservation.value.email}
+Flight: ${newReservation.value.flight}
+Dispatcher's name: ${newReservation.value.dispatcher}
+Driver's name: ${newReservation.value.driver}
+Date of reservation: ${formatDate(newReservation.value.date_reserv)}
+How do you hear about us?: ${newReservation.value.heard}
 NOTES: ${newReservation.value.note}
-
-                ARRIVAL
-Date: ${formatDate(newReservation.value.re_pickup_time)},
+=====================================================
+ARRIVAL
+Date: ${formatDate(newReservation.value.re_pickup_time)}
 from: ${newReservation.value.to}
-to: ${newReservation.value.from},
-Pick-up time:${formatTimetwo(newReservation.value.re_pickup_time)},
-Landing time: ${formatTime(newReservation.value.landing_time)},
-Name: ${newReservation.value.customer},
-Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
-Adults: ${newReservation.value.adult},
-kids: ${newReservation.value.kid},
-Car seat: ${newReservation.value.carseat},
-Booster seat: ${newReservation.value.boosterseat},
-Vehicle for returning: ${newReservation.value.vehicle2},
-Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.costreturn} + tip: $ ${newReservation.value.tipreturn} = Total : $ ${Totaldeparture.value}
-Payment  method: ${newReservation.value.payment_met},
-Email: ${newReservation.value.email},
-Flight: ${newReservation.value.flight},
-Dispatcher's name: ${newReservation.value.dispatcher},
-Driver's name for returning: ${newReservation.value.driver2},
-Date of reservation: ${formatDate(newReservation.value.date_reserv)},
-How do you hear about us?: ${newReservation.value.heard},
+to: ${newReservation.value.from}
+Pick-up time:${formatTimetwo(newReservation.value.re_pickup_time)}
+Landing time: ${formatTime(newReservation.value.landing_time)}
+Name: ${newReservation.value.customer}
+Phone: ${newReservation.value.phone} ${newReservation.value.phone2}
+Adults: ${newReservation.value.adult}
+kids: ${newReservation.value.kid}
+Car seat: ${newReservation.value.carseat}
+Booster seat: ${newReservation.value.boosterseat}
+Vehicle for returning: ${newReservation.value.vehicle2}
+Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.costreturn} + tip: $${newReservation.value.tipreturn} = Total : $${Totaldeparture.value}
+Payment  method: ${newReservation.value.payment_met}
+Email: ${newReservation.value.email}
+Flight: ${newReservation.value.flight}
+Dispatcher's name: ${newReservation.value.dispatcher}
+Driver's name for returning: ${newReservation.value.driver2}
+Date of reservation: ${formatDate(newReservation.value.date_reserv)}
+How do you hear about us?: ${newReservation.value.heard}
 NOTES: ${newReservation.value.note}
                 `
             } else {
-                contenidoTexto = ` ARRIVAL
-Date: ${formatDate(newReservation.value.pickup_time)},
-from: ${newReservation.value.from},
-to: ${newReservation.value.to},
-Pick-up time:${formatTimetwo(newReservation.value.pickup_time)},
-Landing time: ${formatTime(newReservation.value.landing_time)},
-Name: ${newReservation.value.customer},
-Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
-Adults: ${newReservation.value.adult},
-kids: ${newReservation.value.kid},
-Car seat: ${newReservation.value.carseat},
-Booster seat: ${newReservation.value.boosterseat},
-Vehicle: ${newReservation.value.vehicle},
-Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total : $ ${Totalarrive.value}
-Payment  method: ${newReservation.value.payment_met},
-Email: ${newReservation.value.email},
-Flight: ${newReservation.value.flight},
-Dispatcher's name: ${newReservation.value.dispatcher},
-Driver's name: ${newReservation.value.driver},
-Date of reservation: ${formatDate(newReservation.value.date_reserv)},
-How do you hear about us?: ${newReservation.value.heard},
+                contenidoTexto = `ARRIVAL
+Date: ${formatDate(newReservation.value.pickup_time)}
+from: ${newReservation.value.from}
+to: ${newReservation.value.to}
+Pick-up time:${formatTimetwo(newReservation.value.pickup_time)}
+Landing time: ${formatTime(newReservation.value.landing_time)}
+Name: ${newReservation.value.customer}
+Phone: ${newReservation.value.phone} ${newReservation.value.phone2}
+Adults: ${newReservation.value.adult}
+kids: ${newReservation.value.kid}
+Car seat: ${newReservation.value.carseat}
+Booster seat: ${newReservation.value.boosterseat}
+Vehicle: ${newReservation.value.vehicle}
+Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.cost} + tip: $${newReservation.value.tip} = Total : $${Totalarrive.value}
+Payment  method: ${newReservation.value.payment_met}
+Email: ${newReservation.value.email}
+Flight: ${newReservation.value.flight}
+Dispatcher's name: ${newReservation.value.dispatcher}
+Driver's name: ${newReservation.value.driver}
+Date of reservation: ${formatDate(newReservation.value.date_reserv)}
+How do you hear about us?: ${newReservation.value.heard}
 NOTES: ${newReservation.value.note}
-
-                DEPARTURE
-Date: ${formatDate(newReservation.value.re_pickup_time)},
-from: ${newReservation.value.to}, ${newReservation.value.address},
-to: ${newReservation.value.from},
-Pick-up time:${formatTimetwo(newReservation.value.re_pickup_time)},
-Flight departure time: ${formatTime(newReservation.value.departure_time)},
-Name: ${newReservation.value.customer},
-Phone: ${newReservation.value.phone}, ${newReservation.value.phone2}
-Adults: ${newReservation.value.adult},
-kids: ${newReservation.value.kid},
-Car seat: ${newReservation.value.carseat},
-Booster seat: ${newReservation.value.boosterseat},
-Vehicle for returning: ${newReservation.value.vehicle2},
-Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.costreturn} + tip: $ ${newReservation.value.tipreturn} = Total : $ ${Totaldeparture.value}
-Payment  method: ${newReservation.value.payment_met},
-Email: ${newReservation.value.email},
-Dispatcher's name: ${newReservation.value.dispatcher},
-Driver's name for returning: ${newReservation.value.driver2},
-Date of reservation: ${formatDate(newReservation.value.date_reserv)},
-How do you hear about us?: ${newReservation.value.heard},
+==============================================================
+DEPARTURE
+Date: ${formatDate(newReservation.value.re_pickup_time)}
+from: ${newReservation.value.to} ${newReservation.value.address}
+to: ${newReservation.value.from}
+Pick-up time:${formatTimetwo(newReservation.value.re_pickup_time)}
+Flight departure time: ${formatTime(newReservation.value.departure_time)}
+Name: ${newReservation.value.customer}
+Phone: ${newReservation.value.phone} ${newReservation.value.phone2}
+Adults: ${newReservation.value.adult}
+kids: ${newReservation.value.kid}
+Car seat: ${newReservation.value.carseat}
+Booster seat: ${newReservation.value.boosterseat}
+Vehicle for returning: ${newReservation.value.vehicle2}
+Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.costreturn} + tip: $${newReservation.value.tipreturn} = Total: $${Totaldeparture.value}
+Payment  method: ${newReservation.value.payment_met}
+Email: ${newReservation.value.email}
+Dispatcher's name: ${newReservation.value.dispatcher}
+Driver's name for returning: ${newReservation.value.driver2}
+Date of reservation: ${formatDate(newReservation.value.date_reserv)}
+How do you hear about us?: ${newReservation.value.heard}
 NOTES: ${newReservation.value.note}
                 `
             }
