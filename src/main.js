@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import './main.css'
 
 import App from './App.vue'
+import VueTheMask from 'vue-the-mask'
 
 
 import { createApolloClient } from '@nhost/apollo'
@@ -198,5 +199,6 @@ createApp(App)
     .provide(DefaultApolloClient, apolloClient)
     .use(nhost)
     .use(router)
+    .use(VueTheMask)
     .component('VueDatePicker', VueDatePicker)
     .mount('#app')

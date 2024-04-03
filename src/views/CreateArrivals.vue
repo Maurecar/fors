@@ -20,7 +20,7 @@
                         <input id="Customer name" v-model="newReservation.customer" placeholder="Customer name"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
                         <label for="customer">Customer Phone:</label>
-                        <input id="Customer phone" type="text" v-model="newReservation.phone" placeholder="(987) 123-4567"
+                        <input v-mask="'(###) ###-####'" id="Customer phone" v-model="newReservation.phone" placeholder="(987) 123-4567"
                             class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
                         <label for="customer">Customer Email:</label>
@@ -570,6 +570,8 @@ import { gql } from "@apollo/client/core";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import Swal from 'sweetalert2';
+import {TheMask} from 'vue-the-mask'
+
 const router = useRouter()
 const { signOut } = useSignOut()
 const { userId } = useUserId()
@@ -992,7 +994,7 @@ function formatTime(timeObject) {
     const time = new Date(0, 0, 0, timeObject.hours, timeObject.minutes, timeObject.seconds);
     return time.toLocaleTimeString('en-Us', { hour: 'numeric', minute: 'numeric', hour12: true });
 }
-/* crear numero de reserva fors1000*/
+
 function dateToString(date) {
     if (!(date instanceof Date)) {
         console.error('Input is not a valid Date object');
