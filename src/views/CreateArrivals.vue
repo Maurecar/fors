@@ -736,7 +736,7 @@ kids: ${newReservation.value.kid}
 Car seat: ${newReservation.value.carseat}
 Booster seat: ${newReservation.value.boosterseat}
 Vehicle: ${newReservation.value.vehicle}
-Payment status, already paid: ${newReservation.value.way} cost :$ ${newReservation.value.cost} + tip: $ ${newReservation.value.tip} = Total: $ ${Totalarrive.value}
+Payment status, already paid: ${newReservation.value.way} cost: $${newReservation.value.cost} + tip: $${newReservation.value.tip} = Total: $${Totalarrive.value}
 Payment  method: ${newReservation.value.payment_met}
 Email: ${newReservation.value.email}
 Dispatcher's name: ${newReservation.value.dispatcher}
