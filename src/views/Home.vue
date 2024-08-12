@@ -224,9 +224,6 @@ const calendarOptions = reactive({
           ' <br>Payment method ' + info.event.extendedProps['met'] +
           ' <br>Email ' + info.event.extendedProps['email'] +
           ' <br>Vehicle: ' + info.event.extendedProps['veh'] +
-          ' <br>Payment Status: Already paid: ' + info.event.extendedProps['trip'] +
-          ' <br>Payment method: ' + info.event.extendedProps['met'] +
-          ' <br>Email: ' + info.event.extendedProps['email'] +
           ' <br>Flight: ' + info.event.extendedProps['flight'] +
           ' <br>Dispatcher\'s name: ' + info.event.extendedProps['dispat'] +
           ' <br>Driver\'s name: ' + info.event.extendedProps['driver'] +          
@@ -253,9 +250,6 @@ const calendarOptions = reactive({
           ' <br>Payment method ' + info.event.extendedProps['met'] +
           ' <br>Email ' + info.event.extendedProps['email'] +
           ' <br>Vehicle: ' + info.event.extendedProps['veh'] +
-          ' <br>Payment Status: Already paid: ' + info.event.extendedProps['trip'] +
-          ' <br>Payment method: ' + info.event.extendedProps['met'] +
-          ' <br>Email: ' + info.event.extendedProps['email'] +
           ' <br>Flight: ' + info.event.extendedProps['flight'] +
           ' <br>Dispatcher\'s name: ' + info.event.extendedProps['dispat'] +
           ' <br>Driver\'s name: ' + info.event.extendedProps['driver'] +
