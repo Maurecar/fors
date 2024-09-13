@@ -89,6 +89,7 @@ const {
           customer
           dispatcher
           driver
+          driver2
           email
           flight
           from
@@ -102,6 +103,7 @@ const {
           to
           tosec
           vehicle
+          vehicle2
           way
           departure_time
           landing_time

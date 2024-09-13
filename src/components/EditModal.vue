@@ -52,7 +52,8 @@
                                 </label>
                             </div>
                             <div class="flex items-center ">
-                                <input id="Round Trip" name="way" type="radio" value="Round Trip" v-model="reservation.way"
+                                <input id="Round Trip" name="way" type="radio" value="Round Trip"
+                                    v-model="reservation.way"
                                     class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
                                 <label for="Round Trip" class="ml-3 block text-sm font-medium text-white-700">
                                     Round Trip
@@ -118,7 +119,8 @@
                                 <h5>One way from Steamboat Spring</h5>
                                 <div class="flex flex-wrap -mx-6 mb-6">
                                     <div class="w-full px-3">
-                                        <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
+                                        <label
+                                            class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                             for="reservation-pick-time">
                                             Pick-up location in Steamboat Springs:
                                         </label>
@@ -131,9 +133,9 @@
                                         for="reservation-pickup-time">
                                         Date and pick-up Time:
                                     </label>
-                                    
-                                    <VueDatePicker v-model="reservation.pickup_time" :is-24="false" :formatter="formatter"
-                                        timezone="UTC"
+
+                                    <VueDatePicker v-model="reservation.pickup_time" :is-24="false"
+                                        :formatter="formatter" timezone="UTC"
                                         class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                     </VueDatePicker>
 
@@ -181,7 +183,8 @@
                                     for="reservation-to">
                                     Airline and flight number:
                                 </label>
-                                <input id="airline" v-model="reservation.flight" placeholder="Airline and flight number "
+                                <input id="airline" v-model="reservation.flight"
+                                    placeholder="Airline and flight number "
                                     class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
                                 <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
@@ -198,7 +201,8 @@
                                 <h5>Round Trip from Steamboat Spring</h5>
                                 <div class="flex flex-wrap -mx-6 mb-6">
                                     <div class="w-full px-3">
-                                        <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
+                                        <label
+                                            class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                             for="reservation-pick-time">
                                             Pick-up location in Steamboat Springs:
                                         </label>
@@ -256,7 +260,8 @@
                                         timezone="UTC"
                                         class="returning appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                     </VueDatePicker>
-                                    <label class="returning  uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
+                                    <label
+                                        class="returning  uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                         for="reservation-to">
                                         Airline and flight number:
                                     </label>
@@ -290,15 +295,17 @@
                                     Landing Time:
                                 </label>
                                 {{ reservation.landing_time }}
-                                <VueDatePicker v-model="reservation.landing_time" time-picker :is-24="false" timezone="UTC"
+                                <VueDatePicker v-model="reservation.landing_time" time-picker :is-24="false"
+                                    timezone="UTC"
                                     class="appearance-none block w-full bg-black-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-black focus:border-black-500">
                                 </VueDatePicker>
-                               
+
                                 <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                     for="reservation-to">
                                     Airline and flight number:
                                 </label>
-                                <input id="airline" v-model="reservation.flight" placeholder="Airline and flight number "
+                                <input id="airline" v-model="reservation.flight"
+                                    placeholder="Airline and flight number "
                                     class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
                                 <label class="block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
@@ -308,25 +315,29 @@
                                 <input id="to" v-model="reservation.to" placeholder="Drop-off location "
                                     class="appearance-none block w-full bg-white-200 text-gray-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
-                                <label class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
+                                <label
+                                    class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Return from Steamboat -
                                 </label>
-                                <label class="returning block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
+                                <label
+                                    class="returning block uppercase tracking-wide text-white-700 text-xs font-bold mb-2"
                                     for="reservation-to">
                                     Pick-up Location Address:
                                 </label>
                                 <input id="airline" v-model="reservation.address" placeholder="Pick-up Location Address"
                                     class="returning appearance-none block w-full bg-white-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
 
-                                <label class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
+                                <label
+                                    class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Date and Pick-up Time:
                                 </label>
                                 <VueDatePicker v-model="reservation.re_pickup_time" :is-24="false" timezone="UTC"
                                     class="returning w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded">
                                 </VueDatePicker>
-                                <label class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
+                                <label
+                                    class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Departure Time:
                                 </label>{{ reservation.departure_time }}
@@ -362,12 +373,12 @@
                                 </label>
                                 <input id="Gratuity" name="Gratuity" type="text" v-model="reservation.tip"
                                     class="mt-1 block w-full border border-gray-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                                    <label for="Gratuity" class="block mt-4 text-sm font-medium text-white-700">
+                                <label for="Gratuity" class="block mt-4 text-sm font-medium text-white-700">
                                     Square App Fee
                                 </label>
                                 <input id="Fee" name="Fee" type="text" v-model="reservation.fee"
                                     class="mt-1 block w-full border border-gray-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                                </div>
+                            </div>
                             <div v-if="reservation.way === 'Round Trip'" class="mt-4">
                                 <label for="text5" class="block mt-4 text-sm font-medium text-white-700">
                                     Second trip amount (return)
@@ -379,7 +390,7 @@
                                 </label>
                                 <input id="text6" name="text6" type="text" v-model="reservation.tipreturn"
                                     class="mt-1 block w-full border border-white-300 text-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                                    <label for="Gratuity" class="block mt-4 text-sm font-medium text-white-700">
+                                <label for="Gratuity" class="block mt-4 text-sm font-medium text-white-700">
                                     Square App Fee (return)
                                 </label>
                                 <input id="Fee" name="Fee" type="text" v-model="reservation.fee2"
@@ -469,7 +480,7 @@
                                 <option value="">-- Select a driver --</option>
                                 <option v-for="driver in driverResult.Driver" :key="driver.id" :value="driver.name">{{
                                     driver.name
-                                }}
+                                    }}
                                 </option>
                             </select>
                         </div>
@@ -482,7 +493,10 @@
                             <option value="">--Choose a vehicle</option>
                             <option>Van #1</option>
                             <option>Van #2</option>
+                            <option>Van #3</option>
                             <option>Suburban</option>
+                            <option>Suburban Carlos</option>
+                            <option>Ford-E Librado</option>
                             <option>Yukon #1</option>
                             <option>Yukon #2</option>
                             <option>Other</option>
@@ -496,9 +510,10 @@
                                     class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
                                     @change="onSelectUser">
                                     <option value="">-- Select a driver for returning --</option>
-                                    <option v-for="driver in driverResult.Driver" :key="driver.id" :value="driver.name">{{
-                                        driver.name
-                                    }}
+                                    <option v-for="driver in driverResult.Driver" :key="driver.id" :value="driver.name">
+                                        {{
+                                            driver.name
+                                        }}
                                     </option>
                                 </select>
                             </div>
@@ -511,7 +526,10 @@
                                 <option value="">--Choose a vehicle for returning</option>
                                 <option>Van #1</option>
                                 <option>Van #2</option>
+                                <option>Van #3</option>
                                 <option>Suburban</option>
+                                <option>Suburban Carlos</option>
+                                <option>Ford-E Librado</option>
                                 <option>Yukon #1</option>
                                 <option>Yukon #2</option>
                                 <option>Other</option>
@@ -549,7 +567,7 @@
         </div>
     </div>
 </template>
-  
+
 <script setup>
 import { ref, watchEffect, onMounted, defineProps, reactive, defineEmits } from 'vue';
 import { useRouter } from 'vue-router';
@@ -600,8 +618,8 @@ const reservation = reactive({
     driver2: "",
     vehicle2: "",
     company: "",
-    fee:0,
-    fee2:0,
+    fee: 0,
+    fee2: 0,
 })
 
 
@@ -613,7 +631,7 @@ const props = defineProps({
 });
 onMounted(() => {
     Object.assign(reservation, props.reservation);
-    
+
 });
 const { mutate: updateReservation, onDone: updateDone } = useMutation(
     gql`
@@ -773,22 +791,22 @@ function formatTime(timeObject) {
 }
 
 function parseTime(timeString) {
-  const [hourString, period] = timeString.split(" ");
-  const [hour, minute] = hourString.split(":").map(Number);
-  let seconds = 0;
-  if (period === "PM" && hour !== 12) {
-    seconds += 12 * 60 * 60;
-  }
-  if (period === "AM" && hour === 12) {
-    seconds -= 12 * 60 * 60;
-  }
-  seconds += minute * 60 + hour * 60 * 60;
-  const timeObject = {
-    hours: Math.floor(seconds / 3600),
-    minutes: Math.floor((seconds % 3600) / 60),
-    seconds: seconds % 60,
-  };
-   return timeObject;
+    const [hourString, period] = timeString.split(" ");
+    const [hour, minute] = hourString.split(":").map(Number);
+    let seconds = 0;
+    if (period === "PM" && hour !== 12) {
+        seconds += 12 * 60 * 60;
+    }
+    if (period === "AM" && hour === 12) {
+        seconds -= 12 * 60 * 60;
+    }
+    seconds += minute * 60 + hour * 60 * 60;
+    const timeObject = {
+        hours: Math.floor(seconds / 3600),
+        minutes: Math.floor((seconds % 3600) / 60),
+        seconds: seconds % 60,
+    };
+    return timeObject;
 }
 
 function dateToString(date) {
@@ -836,7 +854,7 @@ const formatTimetwo = (isoDate) => {
 
 
 </script>
-  
+
 <style scoped>
 .modal {
     display: block;
@@ -949,5 +967,4 @@ const formatTimetwo = (isoDate) => {
     padding: 0;
 
 }
-
 </style>

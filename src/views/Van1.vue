@@ -8,6 +8,12 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import { useQuery } from "@vue/apollo-composable";
 import { gql } from "@apollo/client/core";
+import { useDark, useToggle } from '@vueuse/core'
+
+const isDark = useDark()
+const toggleDarkMode = () => {
+  isDark.value = !isDark.value
+}
 
 const router = useRouter()
 const { signOut } = useSignOut()
@@ -145,6 +151,7 @@ const calendarOptions = reactive({
   initialView: 'dayGridMonth',
   timeZone: 'America/Denver',
   dayMaxEvents: true,
+  eventColor: isDark.value ? '#4A5568' : '#3182CE',
   headerToolbar: {
     left: 'prev,next today',
     center: 'title',
@@ -252,6 +259,7 @@ const formatTime = (isoDate) => {
 </script>
 
 <template>
+
   <main>
     <div class="flex items-center justify-between mb-8">
       <h1 class="text 3xl font-bold">First Option Ride Service App</h1>
@@ -266,5 +274,13 @@ const formatTime = (isoDate) => {
   </div>
 </template>
 <style scoped>
-
+.dot {
+  transition: transform 0.3s;
+}
+input:checked + .block .dot {
+  transform: translateX(2.5rem);
+}
+input:not(:checked) + .block .dot {
+  transform: translateX(0);
+}
 </style>

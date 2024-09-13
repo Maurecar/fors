@@ -1,4 +1,5 @@
 <template>
+    
     <div>
         <div class="flex items-center justify-between mb-8">
             <h1 class="text-3xl font-bold">prices List</h1>

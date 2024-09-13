@@ -123,6 +123,7 @@ const mapToFullCalendarEvents = (reservation) => {
       dep: n.departure_time,
       kid: n.kid,
       adu: n.adult,
+      veh: n.vehicle,
       veh2: n.vehicle2,
       lan: n.landing_time,
       met: n.payment_met,
@@ -139,6 +140,7 @@ const mapToFullCalendarEvents = (reservation) => {
       tipr: n.tipreturn,
       from: n.from,
       ident: n.id,
+      
       
       display: 'block',
       color: (n.to === 'Hayden airport' ? 'black' : '#0891b2'),
@@ -185,7 +187,7 @@ const calendarOptions = reactive({
           ' <br>Date: ' + formatDate(info.event.start) +
           ' <br>From: ' + 'Steamboat - ' + info.event.extendedProps['loc'] +
           ' <br>To: Hayden Airport' +
-          ' <br>Time: ' + formatTime(info.event.start) +
+          ' <br>Pickup Time: ' + formatTime(info.event.start) +
           ' <br>Departure time: ' + info.event.extendedProps['dep'] +
           ' <br>Name: ' + info.event.extendedProps['customer'] +
           ' <br>Phone: ' + info.event.extendedProps['phone'] +
@@ -193,8 +195,8 @@ const calendarOptions = reactive({
           ' <br>Kid: ' + info.event.extendedProps['kid'] +
           ' <br>Vehicle: ' + info.event.extendedProps['veh'] +
           ' <br>Payment Status: Already paid: ' + info.event.extendedProps['trip'] +
-          ' cost: $' + info.event.extendedProps['cost'] + ' tip: $' + info.event.extendedProps['tip'] +
-          ' cost return: $' + info.event.extendedProps['costr'] + ' tip return: $ ' + info.event.extendedProps['tipr'] +
+          ' cost: $' + info.event.extendedProps['cost'] + ' gratuity: $' + info.event.extendedProps['tip'] +
+          ' cost return: $' + info.event.extendedProps['costr'] + ' gratuity return: $ ' + info.event.extendedProps['tipr'] +
           ' <br>Payment method: ' + info.event.extendedProps['met'] +
           ' <br>Email: ' + info.event.extendedProps['email'] +
           ' <br>Flight: ' + info.event.extendedProps['flight'] +
@@ -212,15 +214,15 @@ const calendarOptions = reactive({
           ' <br>Date: ' + formatDate(info.event.start) +
           ' <br>From: Hayden Airport' +          
           ' <br>To: ' + info.event.extendedProps['to'] +
-          ' <br>Time: ' + formatTime(info.event.start) +
+          ' <br>Pickup Time: ' + formatTime(info.event.start) +
           ' <br>Landing time: ' + info.event.extendedProps['land'] +
           ' <br>Name: ' + info.event.extendedProps['customer'] +
           ' <br>Phone: ' + info.event.extendedProps['phone'] +
           ' <br>Adult: ' + info.event.extendedProps['adu'] +
           ' <br>Kid: ' + info.event.extendedProps['kid'] +
           ' <br>Payment Status: Already paid: ' + info.event.extendedProps['trip'] +
-          ' cost: $' + info.event.extendedProps['cost'] + ' tip: $' + info.event.extendedProps['tip'] +
-          ' cost return: $' + info.event.extendedProps['costr'] + ' tip return: $ ' + info.event.extendedProps['tipr'] +
+          ' cost: $' + info.event.extendedProps['cost'] + ' gratuity: $' + info.event.extendedProps['tip'] +
+          ' cost return: $' + info.event.extendedProps['costr'] + ' gratuity return: $ ' + info.event.extendedProps['tipr'] +
           ' <br>Payment method ' + info.event.extendedProps['met'] +
           ' <br>Email ' + info.event.extendedProps['email'] +
           ' <br>Vehicle: ' + info.event.extendedProps['veh'] +
@@ -238,18 +240,18 @@ const calendarOptions = reactive({
           ' <br>Date: ' + formatDate(info.event.start) +
           ' <br>From: ' + info.event.extendedProps['to'] +
           ' <br>To: ' + info.event.extendedProps['from'] +
-          ' <br>Time: ' + formatTime(info.event.start) +
+          ' <br>Pickup Time: ' + formatTime(info.event.start) +
           ' <br>Departure time: ' + info.event.extendedProps['dep'] +
           ' <br>Name: ' + info.event.extendedProps['customer'] +
           ' <br>Phone: ' + info.event.extendedProps['phone'] +
           ' <br>Adult: ' + info.event.extendedProps['adu'] +
           ' <br>Kid: ' + info.event.extendedProps['kid'] +
           ' <br>Payment Status: Already paid: ' + info.event.extendedProps['trip'] +
-          ' cost: $' + info.event.extendedProps['cost'] + ' tip: $' + info.event.extendedProps['tip'] +
-          ' cost return: $' + info.event.extendedProps['costr'] + ' tip return: $ ' + info.event.extendedProps['tipr'] +
+          ' cost: $' + info.event.extendedProps['cost'] + ' gratuity: $' + info.event.extendedProps['tip'] +
+          ' cost return: $' + info.event.extendedProps['costr'] + ' gratuity return: $ ' + info.event.extendedProps['tipr'] +
           ' <br>Payment method ' + info.event.extendedProps['met'] +
           ' <br>Email ' + info.event.extendedProps['email'] +
-          ' <br>Vehicle: ' + info.event.extendedProps['veh'] +
+          ' <br>Vehicle: ' + info.event.extendedProps['veh3'] +
           ' <br>Flight: ' + info.event.extendedProps['flight'] +
           ' <br>Dispatcher\'s name: ' + info.event.extendedProps['dispat'] +
           ' <br>Driver\'s name: ' + info.event.extendedProps['driver'] +
@@ -298,39 +300,47 @@ const formatTime = (isoDate) => {
 <template>
   <main>
     <div class="flex items-center justify-between mb-8">
-      <h1 class="text 3xl font-bold">First Option Ride Service App</h1>
+      <h1 class="text-sm sm:text-5xl text-center font-bold">First Option Ride Service</h1>
       <button @click="logout" class="text-red-500 hover:underline cursor-pointer">Logout</button>
     </div>
   </main>
-  <h1>Welcome to app </h1>
+  <h1 class="text-lg sm:text-4xl ">Welcome to Fors App </h1>
   <button @click="redirectToCreateArrival" class="text-green-500 hover:underline cursor-pointer">Create
     Reservation</button>
-  <div>
+  <div class="calendar-container dark:bg-gray-600 text-xs sm:text-lg mt-0.5">
     <FullCalendar :options="calendarOptions" />
   </div>
 </template>
 <style scoped>
 
-  @media (max-width: 600px) {
-  .fc-daygrid-event, .fc-event {
+  /* @media (max-width: 600px) {
+  } */
+ /*  .fc-daygrid-event, .fc-event {
     white-space: normal !important;
    
-  }
+  } */
 
-  .fc-daygrid-day-events {
+ /*  .fc-daygrid-day-events {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     
-  }
-}
-:root {
+  } */
+/* :root {
   --fc-border-color: black;
   --fc-daygrid-event-dot-width: 5px;
   
-}
-.my-text-class {
+} */
+/* .my-text-class {
   font-size: 12px;
   text-align: left;
+} */
+.dark .fc .fc-daygrid-day {
+  border-color: #4a5568; /* color de las líneas en modo oscuro */
 }
+
+.dark .fc .fc-daygrid-day-number {
+  color: #e2e8f0; /* color de los números en modo oscuro */
+}
+
 </style>

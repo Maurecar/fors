@@ -1,8 +1,7 @@
 <template>
     <div class="flex items-center justify-between mb-8">
-        <h1 class="text-4xl font-bold mb-4">Reservations Create</h1>
-        <button @click="redirectToListArrival" class="text-green-500 hover:underline cursor-pointer">List
-            Reservation</button>
+        <h1 class="text-sm sm:text-4xl font-bold mb-4">New Reservations</h1>
+        <button @click="redirectToListArrival" class="text-sm sm:text-2xl text-green-500 hover:underline cursor-pointer">List Reservation</button>
         <button @click="logout" class="text-red-500 hover:underline cursor-pointer">Logout</button>
     </div>
     <div>
@@ -11,9 +10,9 @@
         <p>The # of reservation is {{ x.id }}</p>
         </option>
     </div>
-    <div class="form-container mx-auto">
-        <div class="flex flex-wrap justify-between mb-8">
-            <form @submit.prevent="handleCreateReservation" class="w-full max-w-lg">
+    <div class="form-container mx-auto ">
+        <div class="">
+            <form @submit.prevent="handleCreateReservation" class="grid grid-cols-1 sm:grid-cols-3">
                 <div>
                     <div class="customer-data">
                         <label for="customer">Customer Name:</label>
@@ -320,7 +319,7 @@
                                     Pick-up Location Address:
                                 </label>
                                 <input id="airline" v-model="newReservation.address" placeholder="Pick-up Location Address"
-                                    class="returning appearance-none block w-full bg-white-200 text-white-700 border border-white-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-white-500" />
+                                    class="block w-full bg-white-200 text-black border-white-200 rounded py-3 px-4 mb-3" />
 
                                 <label class="returning block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
@@ -486,7 +485,10 @@
                             <option value="">--Choose a vehicle</option>
                             <option>Van #1</option>
                             <option>Van #2</option>
+                            <option>Van #3</option>
                             <option>Suburban</option>
+                            <option>Suburban Carlos</option>
+                            <option>Ford-E Librado</option>
                             <option>Yukon #1</option>
                             <option>Yukon #2</option>
                             <option>Other</option>
@@ -515,7 +517,10 @@
                                 <option value="">--Choose a vehicle for returning</option>
                                 <option>Van #1</option>
                                 <option>Van #2</option>
+                                <option>Van #3</option>
                                 <option>Suburban</option>
+                                <option>Suburban Carlos</option>
+                                <option>Ford-E Librado</option>
                                 <option>Yukon #1</option>
                                 <option>Yukon #2</option>
                                 <option>Other</option>
@@ -736,7 +741,7 @@ kids: ${newReservation.value.kid}
 Car seat: ${newReservation.value.carseat}
 Booster seat: ${newReservation.value.boosterseat}
 Vehicle: ${newReservation.value.vehicle}
-Payment status, already paid: ${newReservation.value.way} cost: $${newReservation.value.cost} + tip: $${newReservation.value.tip} = Total: $${Totalarrive.value}
+Payment status, already paid: ${newReservation.value.way} cost: $${newReservation.value.cost} + gratuity: $${newReservation.value.tip} = Total: $${Totalarrive.value}
 Payment  method: ${newReservation.value.payment_met}
 Email: ${newReservation.value.email}
 Dispatcher's name: ${newReservation.value.dispatcher}
@@ -758,7 +763,7 @@ kids: ${newReservation.value.kid}
 Car seat: ${newReservation.value.carseat}
 Booster seat: ${newReservation.value.boosterseat}
 Vehicle: ${newReservation.value.vehicle}
-Payment status, already paid: ${newReservation.value.way} cost: $${newReservation.value.cost} + tip: $${newReservation.value.tip} = Total: $${Totalarrive.value}
+Payment status, already paid: ${newReservation.value.way} cost: $${newReservation.value.cost} + gratuity: $${newReservation.value.tip} = Total: $${Totalarrive.value}
 Payment  method: ${newReservation.value.payment_met}
 Email: ${newReservation.value.email}
 Flight: ${newReservation.value.flight}
@@ -784,7 +789,7 @@ kids: ${newReservation.value.kid}
 Car seat: ${newReservation.value.carseat}
 Booster seat: ${newReservation.value.boosterseat}
 Vehicle: ${newReservation.value.vehicle}
-Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.cost} + tip: $${newReservation.value.tip} = Total: $${Totalarrive.value}
+Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.cost} + gratuity: $${newReservation.value.tip} = Total: $${Totalarrive.value}
 Payment  method: ${newReservation.value.payment_met}
 Email: ${newReservation.value.email}
 Flight: ${newReservation.value.flight}
@@ -807,7 +812,7 @@ kids: ${newReservation.value.kid}
 Car seat: ${newReservation.value.carseat}
 Booster seat: ${newReservation.value.boosterseat}
 Vehicle for returning: ${newReservation.value.vehicle2}
-Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.costreturn} + tip: $${newReservation.value.tipreturn} = Total: $${Totaldeparture.value}
+Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.costreturn} + gratuity: $${newReservation.value.tipreturn} = Total: $${Totaldeparture.value}
 Payment  method: ${newReservation.value.payment_met}
 Email: ${newReservation.value.email}
 Flight: ${newReservation.value.flight}
@@ -831,7 +836,7 @@ kids: ${newReservation.value.kid}
 Car seat: ${newReservation.value.carseat}
 Booster seat: ${newReservation.value.boosterseat}
 Vehicle: ${newReservation.value.vehicle}
-Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.cost} + tip: $${newReservation.value.tip} = Total: $${Totalarrive.value}
+Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.cost} + gratuity: $${newReservation.value.tip} = Total: $${Totalarrive.value}
 Payment  method: ${newReservation.value.payment_met}
 Email: ${newReservation.value.email}
 Flight: ${newReservation.value.flight}
@@ -854,7 +859,7 @@ kids: ${newReservation.value.kid}
 Car seat: ${newReservation.value.carseat}
 Booster seat: ${newReservation.value.boosterseat}
 Vehicle for returning: ${newReservation.value.vehicle2}
-Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.costreturn} + tip: $${newReservation.value.tipreturn} = Total: $${Totaldeparture.value}
+Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.costreturn} + gratuity: $${newReservation.value.tipreturn} = Total: $${Totaldeparture.value}
 Payment  method: ${newReservation.value.payment_met}
 Email: ${newReservation.value.email}
 Dispatcher's name: ${newReservation.value.dispatcher}

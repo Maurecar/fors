@@ -24,6 +24,7 @@ const registerOrLogin = async () => {
       await signInEmailPassword(email.value, password.value);
     }
     router.push('/');
+    console.log("fue por aqui")
   } catch (error) {
     alert(error.message);
 }
@@ -44,12 +45,12 @@ router.push('/')
         Register?
       </label>
       <label class="block mb-4">
-        <span class="block text-sm uppercase mb-2">Email</span>
+        <span class="block text-sm text-center sm:text-left uppercase mb-2">Email</span>
         <input type="email" v-model="email" placeholder="Enter your email"
           class="block w-full text-slate-800 px-4 py-2" />
       </label>
       <label class="block mb-4">
-        <span class="block text-sm uppercase mb-2">Password</span>
+        <span class="block text-sm text-center sm:text-left uppercase mb-2">Password</span>
         <input type="password" v-model="password" placeholder="Enter your password"
           class="block w-full text-slate-800 px-4 py-2" />
       </label>
