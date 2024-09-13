@@ -77,12 +77,12 @@
                         <div class="flex items-center" v-if="newReservation.way === 'One Way'">
                             <div class="oneway-roundtrip">
                                 <div class="flex items-center ">
-                                    <input id="Round Trip" name="from" type="radio" value="Hayden Airport"
+                                    <input id="Round Trip" name="from" type="radio" value="Hayden airport"
                                         v-model="newReservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
-                                    <label for="Pick-up from the Hayden Airport"
+                                    <label for="Pick-up from the Hayden airport"
                                         class="ml-3 block text-sm font-medium text-white-700">
-                                        Pick-up from the Hayden Airport
+                                        Pick-up from the Hayden airport
                                     </label>
                                 </div>
                                 <div class="flex items-center">
@@ -102,12 +102,12 @@
                         <div v-else-if="newReservation.way === 'Round Trip'">
                             <div class="oneway-roundtrip">
                                 <div class="flex items-center ">
-                                    <input id="Round Trip" name="from" type="radio" value="Hayden Airport"
+                                    <input id="Round Trip" name="from" type="radio" value="Hayden airport"
                                         v-model="newReservation.from"
                                         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-white-300" />
-                                    <label for="Pick-up from the Hayden Airport"
+                                    <label for="Pick-up from the Hayden airport"
                                         class="ml-3 block text-sm font-medium text-white-700">
-                                        Pick-up from the Hayden Airport
+                                        Pick-up from the Hayden airport
                                     </label>
                                 </div>
                                 <div class="flex items-center">
@@ -167,8 +167,8 @@
 
                             </div>
 
-                            <div v-else-if="newReservation.from === 'Hayden Airport'">
-                                <h5>One Way From Hayden Airport</h5>
+                            <div v-else-if="newReservation.from === 'Hayden airport'">
+                                <h5>One Way From Hayden airport</h5>
                                 <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Date and pick-up Time:
@@ -280,8 +280,8 @@
 
                                 </div>
                             </div>
-                            <div v-else-if="newReservation.from === 'Hayden Airport'">
-                                <h5>Round Trip from Hayden Airport</h5>
+                            <div v-else-if="newReservation.from === 'Hayden airport'">
+                                <h5>Round Trip from Hayden airport</h5>
                                 <label class="block uppercase tracking-wide text-black-700 text-xs font-bold mb-2"
                                     for="reservation-pickup-time">
                                     Date and pick-up Time:
@@ -400,6 +400,7 @@
                                     <option>Payment Link</option>
                                     <option>Credit Card</option>
                                     <option>Cash</option>
+                                    <option>CRS - paid</option>
                                     <option>other</option>
                                 </select>
                             </div>
@@ -447,6 +448,7 @@
                             <option value="">--Choose Status--</option>
                             <option>Pending</option>
                             <option>Paid</option>
+                            <option>CRS - Paid</option>
                             <option>Other</option>
                         </select>
                     </div>

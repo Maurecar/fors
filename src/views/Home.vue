@@ -169,7 +169,7 @@ const calendarOptions = reactive({
   
   eventClick: function (info) {
     if (!"endevent" in info.event) {
-      if (info.event.extendedProps['from'].includes("Hayden Airport")) {
+      if (info.event.extendedProps['from'].includes("Hayden airport")) {
         alert('END EVENT - ARRIVAL:'
           
         );
@@ -186,7 +186,7 @@ const calendarOptions = reactive({
           ' <br>Reservation #: FORS' + info.event.extendedProps['ident'] +
           ' <br>Date: ' + formatDate(info.event.start) +
           ' <br>From: ' + 'Steamboat - ' + info.event.extendedProps['loc'] +
-          ' <br>To: Hayden Airport' +
+          ' <br>To: Hayden airport' +
           ' <br>Pickup Time: ' + formatTime(info.event.start) +
           ' <br>Departure time: ' + info.event.extendedProps['dep'] +
           ' <br>Name: ' + info.event.extendedProps['customer'] +
@@ -212,7 +212,7 @@ const calendarOptions = reactive({
           html: 
           ' <br>Reservation #: FORS' + info.event.extendedProps['ident'] +
           ' <br>Date: ' + formatDate(info.event.start) +
-          ' <br>From: Hayden Airport' +          
+          ' <br>From: Hayden airport' +          
           ' <br>To: ' + info.event.extendedProps['to'] +
           ' <br>Pickup Time: ' + formatTime(info.event.start) +
           ' <br>Landing time: ' + info.event.extendedProps['land'] +
