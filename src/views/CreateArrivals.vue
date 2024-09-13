@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center justify-between mb-8">
         <h1 class="text-sm sm:text-4xl font-bold mb-4">New Reservations</h1>
-        <button @click="redirectToListArrival" class="text-sm sm:text-2xl text-green-500 hover:underline cursor-pointer">List Reservation</button>
+        <button @click="redirectToListArrival" class="text-sm sm:text-2xl text-green-500 hover:underline cursor-pointer">Booked Reservations</button>
         <button @click="logout" class="text-red-500 hover:underline cursor-pointer">Logout</button>
     </div>
     <div>

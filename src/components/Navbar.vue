@@ -42,7 +42,7 @@
         </li>
         <li><a href="/drivers" class="text-gray-700 hover:text-indigo-400 dark:text-gray-100">Drivers</a></li>
         <li><a href="/dispatchers" class="text-gray-700 hover:text-indigo-400 dark:text-gray-100">Dispatchers</a></li>
-        <li><a href="/arrivals" class="text-gray-700 hover:text-indigo-400 dark:text-gray-100">Reservation</a></li>
+        <li><a href="/arrivals" class="text-gray-700 hover:text-indigo-400 dark:text-gray-100">Reservations</a></li>
         <li>
           <label for="dark-mode-toggle" class="flex items-center cursor-pointer">
             <div class="relative">
