@@ -81,6 +81,7 @@ const mapToFullCalendarEvents = (reservation) => {
       trip: n.way,
       from: n.from,
       start: n.pickup_time,
+      address: n.address,
       end: n.pickup_time,
       customer: n.customer,
       phone: n.phone,
@@ -117,8 +118,10 @@ const mapToFullCalendarEvents = (reservation) => {
       end: n.re_pickup_time,
       customer: n.customer,
       phone: n.phone,
+      trip: n.way,
       to: n.to,
       loc: n.pick_location,
+      address: n.address,
       land: n.landing_time,
       dep: n.departure_time,
       kid: n.kid,
@@ -185,21 +188,20 @@ const calendarOptions = reactive({
           html: 
           ' <br>Reservation #: FORS' + info.event.extendedProps['ident'] +
           ' <br>Date: ' + formatDate(info.event.start) +
-          ' <br>From: ' + 'Steamboat - ' + info.event.extendedProps['loc'] +
+          ' <br>From: ' + 'Steamboat - ' + info.event.extendedProps['address'] +
           ' <br>To: Hayden airport' +
           ' <br>Pickup Time: ' + formatTime(info.event.start) +
           ' <br>Departure time: ' + info.event.extendedProps['dep'] +
           ' <br>Name: ' + info.event.extendedProps['customer'] +
-          ' <br>Phone: ' + info.event.extendedProps['phone'] +
+          ' <br>Phone #: ' + info.event.extendedProps['phone'] +
           ' <br>Adult: ' + info.event.extendedProps['adu'] +
-          ' <br>Kid: ' + info.event.extendedProps['kid'] +
-          ' <br>Vehicle: ' + info.event.extendedProps['veh'] +
-          ' <br>Payment Status: Already paid: ' + info.event.extendedProps['trip'] +
-          ' cost: $' + info.event.extendedProps['cost'] + ' gratuity: $' + info.event.extendedProps['tip'] +
+          ' <br>Kids: ' + info.event.extendedProps['kid'] +
+          ' <br>Vehicle: ' + info.event.extendedProps['veh'] + //crear logica para definir si es round trip o one way
+          ' <br>Payment Status - Already paid: ' + info.event.extendedProps['trip'] +
+          ' <br>cost: $' + info.event.extendedProps['cost'] + ' gratuity: $' + info.event.extendedProps['tip'] +
           ' cost return: $' + info.event.extendedProps['costr'] + ' gratuity return: $ ' + info.event.extendedProps['tipr'] +
           ' <br>Payment method: ' + info.event.extendedProps['met'] +
           ' <br>Email: ' + info.event.extendedProps['email'] +
-          ' <br>Flight: ' + info.event.extendedProps['flight'] +
           ' <br>Dispatcher\'s name: ' + info.event.extendedProps['dispat'] +
           ' <br>Driver\'s name: ' + info.event.extendedProps['driver'] +
           
@@ -217,14 +219,14 @@ const calendarOptions = reactive({
           ' <br>Pickup Time: ' + formatTime(info.event.start) +
           ' <br>Landing time: ' + info.event.extendedProps['land'] +
           ' <br>Name: ' + info.event.extendedProps['customer'] +
-          ' <br>Phone: ' + info.event.extendedProps['phone'] +
+          ' <br>Phone #: ' + info.event.extendedProps['phone'] +
           ' <br>Adult: ' + info.event.extendedProps['adu'] +
-          ' <br>Kid: ' + info.event.extendedProps['kid'] +
-          ' <br>Payment Status: Already paid: ' + info.event.extendedProps['trip'] +
-          ' cost: $' + info.event.extendedProps['cost'] + ' gratuity: $' + info.event.extendedProps['tip'] +
+          ' <br>Kids: ' + info.event.extendedProps['kid'] +
+          ' <br>Payment Status - Already paid: ' + info.event.extendedProps['trip'] +
+          ' <br>cost: $' + info.event.extendedProps['cost'] + ' gratuity: $' + info.event.extendedProps['tip'] +
           ' cost return: $' + info.event.extendedProps['costr'] + ' gratuity return: $ ' + info.event.extendedProps['tipr'] +
-          ' <br>Payment method ' + info.event.extendedProps['met'] +
-          ' <br>Email ' + info.event.extendedProps['email'] +
+          ' <br>Payment method: ' + info.event.extendedProps['met'] +
+          ' <br>email: ' + info.event.extendedProps['email'] +
           ' <br>Vehicle: ' + info.event.extendedProps['veh'] +
           ' <br>Flight: ' + info.event.extendedProps['flight'] +
           ' <br>Dispatcher\'s name: ' + info.event.extendedProps['dispat'] +
@@ -243,18 +245,17 @@ const calendarOptions = reactive({
           ' <br>Pickup Time: ' + formatTime(info.event.start) +
           ' <br>Departure time: ' + info.event.extendedProps['dep'] +
           ' <br>Name: ' + info.event.extendedProps['customer'] +
-          ' <br>Phone: ' + info.event.extendedProps['phone'] +
+          ' <br>Phone #: ' + info.event.extendedProps['phone'] +
           ' <br>Adult: ' + info.event.extendedProps['adu'] +
-          ' <br>Kid: ' + info.event.extendedProps['kid'] +
-          ' <br>Payment Status: Already paid: ' + info.event.extendedProps['trip'] +
-          ' cost: $' + info.event.extendedProps['cost'] + ' gratuity: $' + info.event.extendedProps['tip'] +
+          ' <br>Kids: ' + info.event.extendedProps['kid'] +
+          ' <br>Payment Status - Already paid: ' + info.event.extendedProps['trip'] +
+          ' <br>cost: $' + info.event.extendedProps['cost'] + ' gratuity: $' + info.event.extendedProps['tip'] +
           ' cost return: $' + info.event.extendedProps['costr'] + ' gratuity return: $ ' + info.event.extendedProps['tipr'] +
-          ' <br>Payment method ' + info.event.extendedProps['met'] +
-          ' <br>Email ' + info.event.extendedProps['email'] +
-          ' <br>Vehicle: ' + info.event.extendedProps['veh3'] +
-          ' <br>Flight: ' + info.event.extendedProps['flight'] +
+          ' <br>Payment method: ' + info.event.extendedProps['met'] +
+          ' <br>email: ' + info.event.extendedProps['email'] +
+          ' <br>Vehicle: ' + info.event.extendedProps['veh'] + //crear logica para definir si es round trip o one way
           ' <br>Dispatcher\'s name: ' + info.event.extendedProps['dispat'] +
-          ' <br>Driver\'s name: ' + info.event.extendedProps['driver'] +
+          ' <br>Driver\'s name: ' + info.event.extendedProps['driver2'] +
           ' <br>Note: ' + info.event.extendedProps['note'], 
           width: '80%'});
       }
@@ -294,6 +295,7 @@ const formatTime = (isoDate) => {
   const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
   return formattedTime;
 };
+//verificar round trip steamboat to hayden
 
 </script>
 

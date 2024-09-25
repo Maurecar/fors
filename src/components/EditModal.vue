@@ -407,6 +407,7 @@
                                     <option value="">--Choose Payment Method--</option>
                                     <option>Payment Link</option>
                                     <option>Credit Card</option>
+                                    <option>CRS - Paid</option>
                                     <option>Cash</option>
                                     <option>other</option>
                                 </select>
@@ -455,6 +456,7 @@
                             <option value="">--Choose Status--</option>
                             <option>Pending</option>
                             <option>Paid</option>
+                            <option>CRS - Paid</option>
                             <option>Other</option>
                         </select>
                     </div>

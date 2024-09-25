@@ -525,7 +525,8 @@
                                 <option>Ford-E Librado</option>
                                 <option>Yukon #1</option>
                                 <option>Yukon #2</option>
-                                <option>Other</option>
+                                <option>Other</option> 
+                                <!-- crear logica para agregar automaticamente un vehiculo desde la base de datos -->
                             </select>
                         </div>
 
@@ -838,7 +839,8 @@ kids: ${newReservation.value.kid}
 Car seat: ${newReservation.value.carseat}
 Booster seat: ${newReservation.value.boosterseat}
 Vehicle: ${newReservation.value.vehicle}
-Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.cost} + gratuity: $${newReservation.value.tip} = Total: $${Totalarrive.value}
+Payment status, already paid: ${newReservation.value.way} 
+One Way Cost: $${newReservation.value.cost} + gratuity: $${newReservation.value.tip} = Total: $${Totalarrive.value}
 Payment  method: ${newReservation.value.payment_met}
 Email: ${newReservation.value.email}
 Flight: ${newReservation.value.flight}
@@ -861,7 +863,8 @@ kids: ${newReservation.value.kid}
 Car seat: ${newReservation.value.carseat}
 Booster seat: ${newReservation.value.boosterseat}
 Vehicle for returning: ${newReservation.value.vehicle2}
-Payment status, already paid: ${newReservation.value.way} One Way Cost: $${newReservation.value.costreturn} + gratuity: $${newReservation.value.tipreturn} = Total: $${Totaldeparture.value}
+Payment status, already paid: ${newReservation.value.way} 
+One Way Cost: $${newReservation.value.costreturn} + gratuity: $${newReservation.value.tipreturn} = Total: $${Totaldeparture.value}
 Payment  method: ${newReservation.value.payment_met}
 Email: ${newReservation.value.email}
 Dispatcher's name: ${newReservation.value.dispatcher}
