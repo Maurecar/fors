@@ -20,7 +20,9 @@
             <th class="border px-2 py-1">From</th>
             <th class="border px-2 py-1">to</th>
             <th class="border px-2 py-1">departure time</th>
-            <th class="border px-4 py-2">Actions</th>
+            <th class="border px-4 py-2">Delete</th>
+            <th class="border px-4 py-2">Update</th>
+            <th class="border px-4 py-2">View</th>
           </tr>
         </thead>
         <tr v-for="n in reservationResult.reservation" :key="n.id">
@@ -264,25 +266,126 @@ const loadDataForView = (reservation) => {
       })
     } else {
       swal.fire({
-        title: 'View information',
-        html: 'Reservation Number FORS' + reservation.id + ' <br>DEPARTURE',
+        title: 'DEPARTURE',
+        html: 'Reservation Number FORS' + reservation.id +
+          "<br> Date: " + formattedDate +
+          "<br> from: " + reservation.from +
+          "<br> to: " + reservation.to +
+          "<br> Pick-up time: " + formattedTime +
+          "<br> Flight departure time: " + reservation.landing_time +
+          "<br> Name: " + reservation.customer +
+          "<br> Phone: " + reservation.phone + reservation.phone2 +
+          "<br> Adults: " + reservation.adult +
+          "<br> kids: " + reservation.kid +
+          "<br> Car seat: " + reservation.carseat +
+          "<br> Booster seat: " + reservation.boosterseat +
+          "<br> Vehicle: " + reservation.vehicle +
+          "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " cost: $ " + reservation.cost + " gratuity: $" + reservation.tip + " = Total: $ " + (reservation.cost + reservation.tip) +
+          "<br> Payment  method: " + reservation.payment_met +
+          "<br> Email: " + reservation.email +
+          "<br> Dispatcher's name: " + reservation.dispatcher +
+          "<br> Driver's name: " + reservation.driver +
+          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> How do you hear about us?: " + reservation.heard +
+          "<br> NOTES: " + reservation.note + "",
         icon: "info",
       })
     }
   } else {
     if (reservation.from.toLowerCase() === "hayden airport") {
       swal.fire({
-        title: 'View information',
-        html: 'Reservation Number FORS' + reservation.id + ' <br>ARRIVAL' +
-          '<br> ====================================' + '<br>DEPARTURE',
+        title: 'ROUND TRIP - ARRIVAL',
+        html: 'Reservation Number FORS' + reservation.id + 
+        "<br> Date: " + formattedDate +
+          "<br> from: " + reservation.from +
+          "<br> to: " + reservation.to +
+          "<br> Pick-up time: " + formattedTime +
+          "<br> Flight departure time: " + reservation.landing_time +
+          "<br> Name: " + reservation.customer +
+          "<br> Phone: " + reservation.phone + reservation.phone2 +
+          "<br> Adults: " + reservation.adult +
+          "<br> kids: " + reservation.kid +
+          "<br> Car seat: " + reservation.carseat +
+          "<br> Booster seat: " + reservation.boosterseat +
+          "<br> Vehicle: " + reservation.vehicle +
+          "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " cost: $ " + reservation.cost + " gratuity: $" + reservation.tip + " = Total: $ " + (reservation.cost + reservation.tip) +
+          "<br> Payment  method: " + reservation.payment_met +
+          "<br> Email: " + reservation.email +
+          "<br> Dispatcher's name: " + reservation.dispatcher +
+          "<br> Driver's name: " + reservation.driver +
+          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> How do you hear about us?: " + reservation.heard +
+          "<br> NOTES: " + reservation.note +
+          '<br> ====================================' + '<br>ROUND TRIP - DEPARTURE' +
+          "<br> Date: " + formattedDate +
+          "<br> from: " + reservation.from +
+          "<br> to: " + reservation.to +
+          "<br> Pick-up time: " + formattedTime +
+          "<br> Flight departure time: " + reservation.landing_time +
+          "<br> Name: " + reservation.customer +
+          "<br> Phone: " + reservation.phone + reservation.phone2 +
+          "<br> Adults: " + reservation.adult +
+          "<br> kids: " + reservation.kid +
+          "<br> Car seat: " + reservation.carseat +
+          "<br> Booster seat: " + reservation.boosterseat +
+          "<br> Vehicle: " + reservation.vehicle2 +
+          "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " cost: $ " + reservation.costreturn + " gratuity: $" + reservation.tipreturn + " = Total: $ " + (reservation.cost + reservation.tip) +
+          "<br> Payment  method: " + reservation.payment_met +
+          "<br> Email: " + reservation.email +
+          "<br> Dispatcher's name: " + reservation.dispatcher +
+          "<br> Driver's name: " + reservation.driver2 +
+          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> How do you hear about us?: " + reservation.heard +
+          "<br> NOTES: " + reservation.note,
 
         icon: "info",
       })
     } else {
       swal.fire({
-        title: 'View information',
-        html: 'Reservation Number FORS' + reservation.id + ' <br>DEPARTURE' +
-          '<br> ====================================' + '<br>ARRIVAL',
+        title: 'ROUND TRIP - DEPARTURE',
+        html: 'Reservation Number FORS' + reservation.id + 
+        "<br> Date: " + formattedDate +
+          "<br> from: " + reservation.from +
+          "<br> to: " + reservation.to +
+          "<br> Pick-up time: " + formattedTime +
+          "<br> Flight departure time: " + reservation.landing_time +
+          "<br> Name: " + reservation.customer +
+          "<br> Phone: " + reservation.phone + reservation.phone2 +
+          "<br> Adults: " + reservation.adult +
+          "<br> kids: " + reservation.kid +
+          "<br> Car seat: " + reservation.carseat +
+          "<br> Booster seat: " + reservation.boosterseat +
+          "<br> Vehicle: " + reservation.vehicle +
+          "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " cost: $ " + reservation.cost + " gratuity: $" + reservation.tip + " = Total: $ " + (reservation.costreturn + reservation.tipreturn) +
+          "<br> Payment  method: " + reservation.payment_met +
+          "<br> Email: " + reservation.email +
+          "<br> Dispatcher's name: " + reservation.dispatcher +
+          "<br> Driver's name: " + reservation.driver +
+          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> How do you hear about us?: " + reservation.heard +
+          "<br> NOTES: " + reservation.note + 
+          '<br> ====================================' + '<br>ROUND TRIP - ARRIVAL' +
+          "<br> Date: " + formattedDate +
+          "<br> from: " + reservation.from +
+          "<br> to: " + reservation.to +
+          "<br> Pick-up time: " + formattedTime +
+          "<br> Flight departure time: " + reservation.landing_time +
+          "<br> Name: " + reservation.customer +
+          "<br> Phone: " + reservation.phone + reservation.phone2 +
+          "<br> Adults: " + reservation.adult +
+          "<br> kids: " + reservation.kid +
+          "<br> Car seat: " + reservation.carseat +
+          "<br> Booster seat: " + reservation.boosterseat +
+          "<br> Vehicle: " + reservation.vehicle2 +
+          "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " cost: $ " + reservation.costreturn + " gratuity: $" + reservation.tipreturn + " = Total: $ " + (reservation.costreturn + reservation.tipreturn) +
+          "<br> Payment  method: " + reservation.payment_met +
+          "<br> Email: " + reservation.email +
+          "<br> Dispatcher's name: " + reservation.dispatcher +
+          "<br> Driver's name: " + reservation.driver2 +
+          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> How do you hear about us?: " + reservation.heard +
+          "<br> NOTES: " + reservation.note
+          ,
         icon: "info",
       })
 
