@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex items-center justify-between mb-8">
-      <h1 class="text-3xl font-bold">Reservations List</h1>
+      <h1 class="text text-lg sm:text-sm font-bold">Reservations List</h1>
       <button @click="redirectToCreateArrival" class="text-green-500 hover:underline cursor-pointer">Create
         Reservation</button>
       <button @click="logout" class="text-red-500 hover:underline cursor-pointer">Logout</button>
@@ -10,10 +10,10 @@
       <table class="table-container">
         <thead class="sticky top-0 dark:bg-slate-800 bg-white">
           <tr>
-            <th class="border px-4 py-2"># of reservation</th>
+            <th class="border px-2 py-1"># of reservation</th>
             <th class="border px-4 py-2">Trip</th>
             <th class="border px-4 py-2">Customer</th>
-            <th class="border px-4 py-2">Phone</th>
+            <th class="border px-0 py-0">Phone</th>
             <th class="border px-4 py-2">Pickup Date</th>
             <th class="border px-2 py-1">Landing Time</th>
             <th class="border px-4 py-2">Pickup Time</th>
@@ -29,8 +29,8 @@
           <td class="border px-4 py-2">FORS{{ n.id }}</td>
           <td class="border px-4 py-2">{{ n.way }}</td>
           <td class="border px-4 py-2">{{ n.customer }}</td>
-          <td class="border px-4 py-2">{{ n.phone }}</td>
-          <td class="border px-4 py-2">{{ formatDate(n.pickup_time) }}</td>
+          <td class="border px-0 py-0">{{ n.phone }}</td>
+          <td class="border px-0 py-2">{{ formatDate(n.pickup_time) }}</td>
           <td class="border px-2 py-1">{{ n.landing_time }}</td>
           <td class="border px-2 py-1">{{ formatTime(n.pickup_time) }}</td>
           <td class="border px-2 py-1">{{ n.from }}</td>
@@ -38,15 +38,15 @@
           <td class="border px-2 py-1">{{ n.departure_time }}</td>
           <!-- hacer aqui antes de enviar -->
           <td class="border px-4 py-2">
-            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
               @click="() => handleDeleteReservation({ id: n.id })">Delete</button>
           </td>
           <td class="border px-4 py-2">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
               @click="() => loadDataForUpdate(n)">Update</button>
           </td>
           <td class="border px-4 py-2">
-            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
               @click="() => loadDataForView(n)">View</button>
           </td>
         </tr>
@@ -223,8 +223,14 @@ const closeEditModal = () => {
 
 const loadDataForView = (reservation) => {
   const fechaf = new Date(reservation.pickup_time);
+  const fechaf2 = new Date(reservation.date_reserv);
 
   const formattedDate = fechaf.toLocaleDateString('en-US', {
+    month: '2-digit',
+    day: '2-digit',
+    year: 'numeric'
+  });
+  const formattedDate2 = fechaf2.toLocaleDateString('en-US', {
     month: '2-digit',
     day: '2-digit',
     year: 'numeric'
@@ -259,7 +265,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver +
-          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note + "",
         icon: "info",
@@ -285,7 +291,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver +
-          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note + "",
         icon: "info",
@@ -313,7 +319,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver +
-          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note +
           '<br> ====================================' + '<br>ROUND TRIP - DEPARTURE' +
@@ -334,7 +340,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver2 +
-          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note,
 
@@ -361,7 +367,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver +
-          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note + 
           '<br> ====================================' + '<br>ROUND TRIP - ARRIVAL' +
@@ -382,7 +388,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver2 +
-          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note
           ,

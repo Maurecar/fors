@@ -489,20 +489,18 @@
                     </div>
                     <div>
                         <label for="vehicle">Vehicle:</label>
-                        <select
-                            class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
-                            id="vehicle" v-model="reservation.vehicle">
-                            <option value="">--Choose a vehicle</option>
-                            <option>Van #1</option>
-                            <option>Van #2</option>
-                            <option>Van #3</option>
-                            <option>Suburban</option>
-                            <option>Suburban Carlos</option>
-                            <option>Ford-E Librado</option>
-                            <option>Yukon #1</option>
-                            <option>Yukon #2</option>
-                            <option>Other</option>
-                        </select>
+                        <div v-if="vehicleResult">
+                            <label for="vehicle">Select a Vehicle:</label>
+                            <select id="vehicle" v-model="newReservation.vehicle"
+                                class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
+                                @change="onSelectUser">
+                                <option value="">-- Select a driver --</option>
+                                <option v-for="vehicle in vehicleResult.Vehicle" :key="vehicle.id" :value="vehicle.name">{{
+                                    vehicle.name
+                                }}
+                                </option>
+                            </select>
+                        </div>
                     </div>
                     <div v-if="reservation.way === 'Round Trip'" class="mt-4">
                         <div>
@@ -522,20 +520,18 @@
                         </div>
                         <div>
                             <label for="vehicle">Vehicle for returning:</label>
-                            <select
+                            <div v-if="vehicleResult">
+                            <label for="vehicle">Select a Vehicle:</label>
+                            <select id="vehicle" v-model="newReservation.vehicle2"
                                 class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
-                                id="vehicle" v-model="reservation.vehicle2">
-                                <option value="">--Choose a vehicle for returning</option>
-                                <option>Van #1</option>
-                                <option>Van #2</option>
-                                <option>Van #3</option>
-                                <option>Suburban</option>
-                                <option>Suburban Carlos</option>
-                                <option>Ford-E Librado</option>
-                                <option>Yukon #1</option>
-                                <option>Yukon #2</option>
-                                <option>Other</option>
+                                @change="onSelectUser">
+                                <option value="">--Choose a vehicle for returning--</option>
+                                <option v-for="vehicle in vehicleResult.Vehicle" :key="vehicle.id" :value="vehicle.name">{{
+                                    vehicle.name
+                                }}
+                                </option>
                             </select>
+                        </div>
                         </div>
                     </div>
                     <label for="vehicle">Company of Reservation</label>
@@ -786,6 +782,22 @@ const {
       }
     }
   `)
+
+const {
+    loading: vehicleLoading,
+    result: vehicleResult,
+    refetch: vehicleRefetch
+  } = useQuery(gql`
+      query GetVehicle {
+    Vehicle {
+        id
+        name
+        licence
+        owner
+    }
+  }
+    `)
+
 function formatTime(timeObject) {
 
     const time = new Date(0, 0, 0, timeObject.hours, timeObject.minutes, timeObject.seconds);

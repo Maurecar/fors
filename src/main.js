@@ -114,6 +114,14 @@ const routes = [
         }
     },
     {
+        path: '/vehicles',
+        name: 'vehicles',
+        component: () => import('./views/Vehicles.vue'),
+        meta: {
+            protected: true
+        }
+    },
+    {
         path: '/trip',
         name: 'trip',
         component: () => import('./views/Trip.vue'),
@@ -148,7 +156,15 @@ const routes = [
     {
         path: '/check',
         name: 'check',
-        component: () => import('./views/Check.vue'),
+        component: () => import('./views/check.vue'),
+        meta: {
+            protected: true
+        }
+    },
+    {
+        path: '/createvehicles',
+        name: 'createvehicles',
+        component: () => import('./views/CreateVehicles.vue'),
         meta: {
             protected: true
         }

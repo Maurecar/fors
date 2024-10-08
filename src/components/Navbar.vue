@@ -29,9 +29,9 @@
       >
         <li><a href="/check" class="text-gray-700 hover:text-indigo-400 dark:text-gray-100">Available</a></li>
         <li>
-          <div class="relative" @click="toggleVehiclesMenu">
-            <a class="text-gray-700 hover:text-indigo-400 dark:text-gray-100">Vehicles</a>
-            <ul v-show="showVehiclesMenu" class="absolute mt-2 space-y-2 bg-white shadow-md dark:bg-gray-800">
+          <div @mouseenter="showVehiclesMenu = true" @mouseleave="showVehiclesMenu = false">
+            <a href="/vehicles" class="text-gray-700 hover:text-indigo-400 dark:text-gray-100">Vehicles</a>
+            <ul v-show="showVehiclesMenu" class="dropdown-menu absolute mt-2 space-y-2 bg-white shadow-md dark:bg-gray-800">
               <li><a href="/van1" class="block px-4 py-2 text-gray-800 dark:text-gray-100">Van 1</a></li>
               <li><a href="/van2" class="block px-4 py-2 text-gray-800 dark:text-gray-100">Van 2</a></li>
               <li><a href="/suburban" class="block px-4 py-2 text-gray-800 dark:text-gray-100">Suburban</a></li>

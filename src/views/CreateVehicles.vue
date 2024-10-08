@@ -3,7 +3,7 @@
 <template>
     <div>
       <div class="flex items-center justify-between mb-8">
-        <h1 class="text-4xl font-bold mb-4">Vehicles Create</h1>
+        <h1 class="text-4xl font-bold mb-4">Add Vehicles</h1>
         <button @click="redirectToListVehicle" class="text-green-500 hover:underline cursor-pointer">List Vehicle</button>
         <button @click="logout" class="text-red-500 hover:underline cursor-pointer">Logout</button>
       </div>
@@ -11,25 +11,25 @@
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full px-3">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="vehicle-name">
-              Name:
+              Vehicle´s Model:
             </label>
-            <input id="vehicle-name" v-model="newVehicle.name" placeholder="Name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
+            <input id="vehicle-name" v-model="newVehicle.name" placeholder="Vehicle´s Model" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full px-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="vehicle-phone">
-              Phone:
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="vehicle-licence">
+              Licence Plate:
             </label>
-            <input id="vehicle-phone" v-model="newVehicle.phone" placeholder="Phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
+            <input id="vehicle-licence" v-model="newVehicle.licence" placeholder="licence" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full px-3">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="vehicle-email">
-              Email:
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="vehicle-owner">
+              Driver´s name:
             </label>
-            <input id="vehicle-email" v-model="newVehicle.email" placeholder="Email" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
+            <input id="vehicle-owner" v-model="newVehicle.owner" placeholder="Driver´s name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
@@ -61,18 +61,18 @@
   
   const newVehicle = ref({
     name: '',
-    phone: '',
-    email: ''
+    licence: '',
+    owner: ''
   })
   
   const { mutate: createVehicle, onDone: createDone } = useMutation(gql`
-      mutation InsertVehicle($name: String, $phone: String, $email: String) {
-        insert_Vehicle(objects: {name: $name, phone: $phone, email: $email}) {
+      mutation InsertVehicle($name: String, $licence: String, $owner: String) {
+        insert_Vehicle(objects: {name: $name, licence: $licence, owner: $owner}) {
           affected_rows
           returning {
             name
-            phone
-            email
+            licence
+            owner
             id
           }
         }
@@ -92,18 +92,18 @@
   }
 })
   const handleCreateVehicle = async () => {
-    if (!newVehicle.value.name || !newVehicle.value.email || !newVehicle.value.phone) {
+    if (!newVehicle.value.name || !newVehicle.value.owner || !newVehicle.value.licence) {
       return alert("Please fill all fields")
     }
     await createVehicle({
       name: newVehicle.value.name,
-      phone: newVehicle.value.phone,
-      email: newVehicle.value.email
+      licence: newVehicle.value.licence,
+      owner: newVehicle.value.owner
     })
     newVehicle.value = {
       name: '',
-      phone: '',
-      email: ''
+      licence: '',
+      owner: ''
     }
     redirectToListVehicle()
     
