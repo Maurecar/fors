@@ -156,7 +156,7 @@ const routes = [
     {
         path: '/check',
         name: 'check',
-        component: () => import('./views/check.vue'),
+        component: () => import('./views/Check.vue'),
         meta: {
             protected: true
         }
