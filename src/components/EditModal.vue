@@ -491,7 +491,7 @@
                         <label for="vehicle">Vehicle:</label>
                         <div v-if="vehicleResult">
                             <label for="vehicle">Select a Vehicle:</label>
-                            <select id="vehicle" v-model="newReservation.vehicle"
+                            <select id="vehicle" v-model="reservation.vehicle"
                                 class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
                                 @change="onSelectUser">
                                 <option value="">-- Select a driver --</option>
@@ -522,7 +522,7 @@
                             <label for="vehicle">Vehicle for returning:</label>
                             <div v-if="vehicleResult">
                             <label for="vehicle">Select a Vehicle:</label>
-                            <select id="vehicle" v-model="newReservation.vehicle2"
+                            <select id="vehicle" v-model="reservation.vehicle2"
                                 class="w-full bg-white-200 border border-white-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
                                 @change="onSelectUser">
                                 <option value="">--Choose a vehicle for returning--</option>
