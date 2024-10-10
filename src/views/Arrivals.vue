@@ -32,7 +32,7 @@
           <td class="border px-0 py-0">{{ n.phone }}</td>
           <td class="border px-0 py-2">{{ formatDate(n.pickup_time) }}</td>
           <td class="border px-2 py-1">{{ n.landing_time }}</td>
-          <td class="border px-2 py-1">{{ formatTime(n.pickup_time) }}</td>
+          <td class="border px-2 py-1">{{ formatTimetwo(n.pickup_time) }}</td>
           <td class="border px-2 py-1">{{ n.from }}</td>
           <td class="border px-2 py-1">{{ n.to }}</td>
           <td class="border px-2 py-1">{{ n.departure_time }}</td>
@@ -224,7 +224,7 @@ const closeEditModal = () => {
 const loadDataForView = (reservation) => {
   const fechaf = new Date(reservation.pickup_time);
   const fechaf2 = new Date(reservation.date_reserv);
-
+  
   const formattedDate = fechaf.toLocaleDateString('en-US', {
     month: '2-digit',
     day: '2-digit',
@@ -235,13 +235,11 @@ const loadDataForView = (reservation) => {
     day: '2-digit',
     year: 'numeric'
   });
+  const options = { timeZone: "UTC", hour: '2-digit', minute: '2-digit', hour12: true };
+  const formattedTime = fechaf.toLocaleTimeString('en-US', options);
+  const formattedTime2 = fechaf2.toLocaleTimeString('en-US', options);
 
-  const formattedTime = fechaf.toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true
-  });
+
   if (reservation.way === "One Way") {
     if (reservation.from.toLowerCase() === "hayden airport") {
       console.log(reservation.pickup_time)
@@ -323,10 +321,10 @@ const loadDataForView = (reservation) => {
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note +
           '<br> ====================================' + '<br>ROUND TRIP - DEPARTURE' +
-          "<br> Date: " + formattedDate +
+          "<br> Date: " + formattedDate2 +
           "<br> from: " + reservation.from +
           "<br> to: " + reservation.to +
-          "<br> Pick-up time: " + formattedTime +
+          "<br> Pick-up time: " + formattedTime2 +
           "<br> Flight departure time: " + reservation.landing_time +
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
@@ -371,10 +369,10 @@ const loadDataForView = (reservation) => {
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note + 
           '<br> ====================================' + '<br>ROUND TRIP - ARRIVAL' +
-          "<br> Date: " + formattedDate +
+          "<br> Date: " + formattedDate2 +
           "<br> from: " + reservation.from +
           "<br> to: " + reservation.to +
-          "<br> Pick-up time: " + formattedTime +
+          "<br> Pick-up time: " + formattedTime2 +
           "<br> Flight departure time: " + reservation.landing_time +
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
@@ -441,6 +439,15 @@ const formatTime = (dateString) => {
   if (!dateString) return '';
   const date = new Date(dateString);
   return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+};
+
+const formatTimetwo = (isoDate) => {
+  const date = new Date(isoDate);
+  const hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
+  return formattedTime;
 };
 
 </script>
