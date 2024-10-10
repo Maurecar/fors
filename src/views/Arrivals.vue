@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <div class="flex items-center justify-between mb-8">
       <h1 class="text text-lg sm:text-sm font-bold">Reservations List</h1>
       <button @click="redirectToCreateArrival" class="text-green-500 hover:underline cursor-pointer">Create
@@ -13,7 +13,7 @@
             <th class="border px-2 py-1"># of reservation</th>
             <th class="border px-4 py-2">Trip</th>
             <th class="border px-4 py-2">Customer</th>
-            <th class="border px-0 py-0">Phone</th>
+            <th class="border px-0 py-0">Reservation</th>
             <th class="border px-4 py-2">Pickup Date</th>
             <th class="border px-2 py-1">Landing Time</th>
             <th class="border px-4 py-2">Pickup Time</th>
@@ -29,7 +29,7 @@
           <td class="border px-4 py-2">FORS{{ n.id }}</td>
           <td class="border px-4 py-2">{{ n.way }}</td>
           <td class="border px-4 py-2">{{ n.customer }}</td>
-          <td class="border px-0 py-0">{{ n.phone }}</td>
+          <td class="border px-0 py-0">{{ n.date_reserv }}</td>
           <td class="border px-0 py-2">{{ formatDate(n.pickup_time) }}</td>
           <td class="border px-2 py-1">{{ n.landing_time }}</td>
           <td class="border px-2 py-1">{{ formatTimetwo(n.pickup_time) }}</td>
@@ -224,6 +224,8 @@ const closeEditModal = () => {
 const loadDataForView = (reservation) => {
   const fechaf = new Date(reservation.pickup_time);
   const fechaf2 = new Date(reservation.date_reserv);
+  console.log(reservation.date_reserv)
+  const fechaf3 = new Date(reservation.re_pickup_time);
   
   const formattedDate = fechaf.toLocaleDateString('en-US', {
     month: '2-digit',
@@ -235,9 +237,15 @@ const loadDataForView = (reservation) => {
     day: '2-digit',
     year: 'numeric'
   });
+ 
+  const formattedDate3 = fechaf3.toLocaleDateString('en-US', {
+    month: '2-digit',
+    day: '2-digit',
+    year: 'numeric'
+  });
   const options = { timeZone: "UTC", hour: '2-digit', minute: '2-digit', hour12: true };
   const formattedTime = fechaf.toLocaleTimeString('en-US', options);
-  const formattedTime2 = fechaf2.toLocaleTimeString('en-US', options);
+  const formattedTime3 = fechaf3.toLocaleTimeString('en-US', options);
 
 
   if (reservation.way === "One Way") {
@@ -250,7 +258,7 @@ const loadDataForView = (reservation) => {
           "<br> from: " + reservation.from +
           "<br> to: " + reservation.to +
           "<br> Pick-up time: " + formattedTime +
-          "<br> Flight departure time: " + reservation.landing_time +
+          "<br> Flight landing time: " + reservation.landing_time +
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
@@ -263,7 +271,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver +
-          "<br> Date of reservation: " + formattedDate2 +
+          "<br> Date of reservation: " + reservation.date_reserv +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note + "",
         icon: "info",
@@ -276,7 +284,7 @@ const loadDataForView = (reservation) => {
           "<br> from: " + reservation.from +
           "<br> to: " + reservation.to +
           "<br> Pick-up time: " + formattedTime +
-          "<br> Flight departure time: " + reservation.landing_time +
+          "<br> Flight departure time: " + reservation.departure_time +
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
@@ -289,7 +297,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver +
-          "<br> Date of reservation: " + formattedDate2 +
+          "<br> Date of reservation: " + reservation.date_reserv +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note + "",
         icon: "info",
@@ -304,7 +312,7 @@ const loadDataForView = (reservation) => {
           "<br> from: " + reservation.from +
           "<br> to: " + reservation.to +
           "<br> Pick-up time: " + formattedTime +
-          "<br> Flight departure time: " + reservation.landing_time +
+          "<br> Flight landing time: " + reservation.landing_time +
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
@@ -317,15 +325,15 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver +
-          "<br> Date of reservation: " + formattedDate2 +
+          "<br> Date of reservation: " + reservation.date_reserv +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note +
           '<br> ====================================' + '<br>ROUND TRIP - DEPARTURE' +
-          "<br> Date: " + formattedDate2 +
+          "<br> Date: " + formattedDate3 +
           "<br> from: " + reservation.from +
           "<br> to: " + reservation.to +
-          "<br> Pick-up time: " + formattedTime2 +
-          "<br> Flight departure time: " + reservation.landing_time +
+          "<br> Pick-up time: " + formattedTime3 +
+          "<br> Flight departure time: " + reservation.departure_time +
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
@@ -338,7 +346,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver2 +
-          "<br> Date of reservation: " + formattedDate2 +
+          "<br> Date of reservation: " + reservation.date_reserv +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note,
 
@@ -352,7 +360,7 @@ const loadDataForView = (reservation) => {
           "<br> from: " + reservation.from +
           "<br> to: " + reservation.to +
           "<br> Pick-up time: " + formattedTime +
-          "<br> Flight departure time: " + reservation.landing_time +
+          "<br> Flight departure time: " + reservation.departure_time +
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
@@ -365,15 +373,15 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver +
-          "<br> Date of reservation: " + formattedDate2 +
+          "<br> Date of reservation: " + reservation.date_reserv +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note + 
           '<br> ====================================' + '<br>ROUND TRIP - ARRIVAL' +
-          "<br> Date: " + formattedDate2 +
+          "<br> Date: " + formattedDate3 +
           "<br> from: " + reservation.from +
           "<br> to: " + reservation.to +
-          "<br> Pick-up time: " + formattedTime2 +
-          "<br> Flight departure time: " + reservation.landing_time +
+          "<br> Pick-up time: " + formattedTime3 +
+          "<br> Flight landing time: " + reservation.landing_time +
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
@@ -386,7 +394,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver2 +
-          "<br> Date of reservation: " + formattedDate2 +
+          "<br> Date of reservation: " + reservation.date_reserv +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note
           ,
