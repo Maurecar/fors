@@ -29,7 +29,7 @@
           <td class="border px-4 py-2">FORS{{ n.id }}</td>
           <td class="border px-4 py-2">{{ n.way }}</td>
           <td class="border px-4 py-2">{{ n.customer }}</td>
-          <td class="border px-0 py-0">{{ n.date_reserv }}</td>
+          <td class="border px-0 py-0">{{ formatDate(n.date_reserv) }}</td>
           <td class="border px-0 py-2">{{ formatDate(n.pickup_time) }}</td>
           <td class="border px-2 py-1">{{ n.landing_time }}</td>
           <td class="border px-2 py-1">{{ formatTimetwo(n.pickup_time) }}</td>
@@ -220,7 +220,7 @@ const closeEditModal = () => {
   selectedReservation.value = null;
   reservationRefetch();
 };
-
+//// agregar vuelo - no esta apareciendo 
 const loadDataForView = (reservation) => {
   const fechaf = new Date(reservation.pickup_time);
   const fechaf2 = new Date(reservation.date_reserv);
@@ -259,6 +259,7 @@ const loadDataForView = (reservation) => {
           "<br> to: " + reservation.to +
           "<br> Pick-up time: " + formattedTime +
           "<br> Flight landing time: " + reservation.landing_time +
+          "<br> Flight number: " + reservation.flight +
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
@@ -271,7 +272,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver +
-          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note + "",
         icon: "info",
@@ -297,7 +298,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver +
-          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note + "",
         icon: "info",
@@ -313,6 +314,7 @@ const loadDataForView = (reservation) => {
           "<br> to: " + reservation.to +
           "<br> Pick-up time: " + formattedTime +
           "<br> Flight landing time: " + reservation.landing_time +
+          "<br> Flight number: " + reservation.flight +
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
@@ -325,7 +327,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver +
-          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note +
           '<br> ====================================' + '<br>ROUND TRIP - DEPARTURE' +
@@ -346,7 +348,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver2 +
-          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note,
 
@@ -373,7 +375,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver +
-          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note + 
           '<br> ====================================' + '<br>ROUND TRIP - ARRIVAL' +
@@ -382,6 +384,7 @@ const loadDataForView = (reservation) => {
           "<br> to: " + reservation.to +
           "<br> Pick-up time: " + formattedTime3 +
           "<br> Flight landing time: " + reservation.landing_time +
+          "<br> Flight number: " + reservation.flight +
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
@@ -394,7 +397,7 @@ const loadDataForView = (reservation) => {
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver2 +
-          "<br> Date of reservation: " + reservation.date_reserv +
+          "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note
           ,
