@@ -39,7 +39,6 @@ import { useSignOut, useUserId } from '@nhost/vue'
 import { useQuery, useMutation } from "@vue/apollo-composable";
 import { gql } from "@apollo/client/core";
 
-
 const router = useRouter()
 const { signOut } = useSignOut()
 const { userId } = useUserId()

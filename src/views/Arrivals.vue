@@ -1,10 +1,27 @@
 <template>
-  <div >
+  <div>
     <div class="flex items-center justify-between mb-8">
       <h1 class="text text-lg sm:text-sm font-bold">Reservations List</h1>
       <button @click="redirectToCreateArrival" class="text-green-500 hover:underline cursor-pointer">Create
         Reservation</button>
       <button @click="logout" class="text-red-500 hover:underline cursor-pointer">Logout</button>
+    </div>
+    <div>
+      <h4>Search by name</h4>
+      <input 
+        type="search" 
+        class="h-8 rounded px-2 py-2 border-solid border-2 border-black" 
+        v-model="searchname"
+        placeholder="Enter customer's name"
+        @input="handleSearch"
+      >
+      <button @click="handleSearch">
+        <svg class="h-4 w-4 text-slate-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  
+          <path stroke="none" d="M0 0h24v24H0z"/>  
+          <circle cx="10" cy="10" r="7" />  
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </button>
     </div>
     <div v-if="!reservationLoading">
       <table class="table-container">
@@ -19,13 +36,13 @@
             <th class="border px-4 py-2">Pickup Time</th>
             <th class="border px-2 py-1">From</th>
             <th class="border px-2 py-1">to</th>
-            <th class="border px-2 py-1">departure time</th>
+            <th class="border px-2 py-1">departure date</th>
             <th class="border px-4 py-2">Delete</th>
             <th class="border px-4 py-2">Update</th>
             <th class="border px-4 py-2">View</th>
           </tr>
         </thead>
-        <tr v-for="n in reservationResult.reservation" :key="n.id">
+        <tr v-for="n in filteredReservations" :key="n.id">
           <td class="border px-4 py-2">FORS{{ n.id }}</td>
           <td class="border px-4 py-2">{{ n.way }}</td>
           <td class="border px-4 py-2">{{ n.customer }}</td>
@@ -35,8 +52,7 @@
           <td class="border px-2 py-1">{{ formatTimetwo(n.pickup_time) }}</td>
           <td class="border px-2 py-1">{{ n.from }}</td>
           <td class="border px-2 py-1">{{ n.to }}</td>
-          <td class="border px-2 py-1">{{ n.departure_time }}</td>
-          <!-- hacer aqui antes de enviar -->
+          <td class="border px-1 py-1">{{ formatDate(n.re_pickup_time) }} </td>
           <td class="border px-4 py-2">
             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
               @click="() => handleDeleteReservation({ id: n.id })">Delete</button>
@@ -54,12 +70,11 @@
     </div>
     <edit-modal v-if="showModal" :reservation="selectedReservation" @close="closeEditModal" />
     <see-modal v-if="showModal" :reservation="selectedReservation" @close="closeSeeModal" />
-
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useSignOut, useUserId } from "@nhost/vue";
 import { useQuery, useMutation } from "@vue/apollo-composable";
@@ -72,6 +87,32 @@ const router = useRouter();
 const { signOut } = useSignOut();
 const { userId } = useUserId();
 
+const searchname = ref('');
+
+
+// Asumiendo que reservationResult contiene los datos de la consulta
+const filteredReservations = computed(() => {
+  if (!reservationResult.value?.reservation) return [];
+  
+  if (!searchname.value) {
+    return reservationResult.value.reservation;
+  }
+
+  return reservationResult.value.reservation.filter(reservation => 
+    reservation.customer.toLowerCase().includes(searchname.value.toLowerCase())
+  );
+});
+
+// Función para manejar la búsqueda
+const handleSearch = () => {
+  // Si necesitas realizar alguna acción adicional al buscar
+  console.log('Searching for:', searchname.value);
+};
+
+// Opcional: función para limpiar la búsqueda
+const clearSearch = () => {
+  searchname.value = '';
+};
 const logout = () => {
   signOut();
   router.push("/login");
@@ -82,7 +123,6 @@ let updatePhone = ref('');
 let updatePickupTime = ref('');
 let updateDepartureTime = ref('');
 let updateTo = ref('');
-
 
 const {
   loading: reservationLoading,
@@ -137,8 +177,7 @@ const { mutate: deleteReservation, onDone: deleteDone } = useMutation(
         delete_reservation(where: { id: { _eq: $id } }) {
           affected_rows
         }
-      }
-    `
+      }`
 );
 
 function dateToString(date) {
@@ -159,10 +198,8 @@ function dateToString(date) {
   const offsetMinutes = Math.abs(timezoneOffset) % 60;
   const timezone = '+00:00';
   const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${timezone}`;
-
   return formattedDate;
 }
-//para cargar los datos en swal
 
 deleteDone(() => {
   reservationRefetch();
@@ -220,13 +257,13 @@ const closeEditModal = () => {
   selectedReservation.value = null;
   reservationRefetch();
 };
-//// agregar vuelo - no esta apareciendo 
+
 const loadDataForView = (reservation) => {
   const fechaf = new Date(reservation.pickup_time);
   const fechaf2 = new Date(reservation.date_reserv);
   console.log(reservation.date_reserv)
   const fechaf3 = new Date(reservation.re_pickup_time);
-  
+
   const formattedDate = fechaf.toLocaleDateString('en-US', {
     month: '2-digit',
     day: '2-digit',
@@ -237,7 +274,7 @@ const loadDataForView = (reservation) => {
     day: '2-digit',
     year: 'numeric'
   });
- 
+
   const formattedDate3 = fechaf3.toLocaleDateString('en-US', {
     month: '2-digit',
     day: '2-digit',
@@ -246,7 +283,6 @@ const loadDataForView = (reservation) => {
   const options = { timeZone: "UTC", hour: '2-digit', minute: '2-digit', hour12: true };
   const formattedTime = fechaf.toLocaleTimeString('en-US', options);
   const formattedTime3 = fechaf3.toLocaleTimeString('en-US', options);
-
 
   if (reservation.way === "One Way") {
     if (reservation.from.toLowerCase() === "hayden airport") {
@@ -308,8 +344,8 @@ const loadDataForView = (reservation) => {
     if (reservation.from.toLowerCase() === "hayden airport") {
       swal.fire({
         title: 'ROUND TRIP - ARRIVAL',
-        html: 'Reservation Number FORS' + reservation.id + 
-        "<br> Date: " + formattedDate +
+        html: 'Reservation Number FORS' + reservation.id +
+          "<br> Date: " + formattedDate +
           "<br> from: " + reservation.from +
           "<br> to: " + reservation.to +
           "<br> Pick-up time: " + formattedTime +
@@ -357,8 +393,8 @@ const loadDataForView = (reservation) => {
     } else {
       swal.fire({
         title: 'ROUND TRIP - DEPARTURE',
-        html: 'Reservation Number FORS' + reservation.id + 
-        "<br> Date: " + formattedDate +
+        html: 'Reservation Number FORS' + reservation.id +
+          "<br> Date: " + formattedDate +
           "<br> from: " + reservation.from +
           "<br> to: " + reservation.to +
           "<br> Pick-up time: " + formattedTime +
@@ -377,7 +413,7 @@ const loadDataForView = (reservation) => {
           "<br> Driver's name: " + reservation.driver +
           "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
-          "<br> NOTES: " + reservation.note + 
+          "<br> NOTES: " + reservation.note +
           '<br> ====================================' + '<br>ROUND TRIP - ARRIVAL' +
           "<br> Date: " + formattedDate3 +
           "<br> from: " + reservation.from +
@@ -399,8 +435,7 @@ const loadDataForView = (reservation) => {
           "<br> Driver's name: " + reservation.driver2 +
           "<br> Date of reservation: " + formattedDate2 +
           "<br> How do you hear about us?: " + reservation.heard +
-          "<br> NOTES: " + reservation.note
-          ,
+          "<br> NOTES: " + reservation.note,
         icon: "info",
       })
 
@@ -443,7 +478,7 @@ const formatDate = (dateString) => {
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   const year = date.getFullYear();
-  return `${month}-${day}-${year}`;
+  return `${month}/${day}/${year}`;
 };
 
 const formatTime = (dateString) => {
@@ -460,11 +495,16 @@ const formatTimetwo = (isoDate) => {
   const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
   return formattedTime;
 };
+const searchF =() =>{
+  swal.fire({
+    title:"test",
+    text: "boton"
+  })
+}
 
 </script>
 <style scoped>
 .text-left {
   text-align: left;
 }
-
 </style>
