@@ -364,6 +364,7 @@ const loadDataForView = (reservation) => {
           "<br> Dispatcher's name: " + reservation.dispatcher +
           "<br> Driver's name: " + reservation.driver +
           "<br> Date of reservation: " + formattedDate2 +
+          "<br> Returning date: " + formattedDate3 +
           "<br> How do you hear about us?: " + reservation.heard +
           "<br> NOTES: " + reservation.note +
           '<br> ====================================' + '<br>ROUND TRIP - DEPARTURE' +
