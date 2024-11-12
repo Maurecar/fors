@@ -46,7 +46,7 @@
           <td class="border px-4 py-2">FORS{{ n.id }}</td>
           <td class="border px-4 py-2">{{ n.way }}</td>
           <td class="border px-4 py-2">{{ n.customer }}</td>
-          <td class="border px-0 py-0">{{ formatDate(n.date_reserv) }}</td>
+          <td class="border px-0 py-0">{{ formatDateString2(n.date_reserv) }}</td>
           <td class="border px-0 py-2">{{ formatDate(n.pickup_time) }}</td>
           <td class="border px-2 py-1">{{ n.landing_time }}</td>
           <td class="border px-2 py-1">{{ formatTimetwo(n.pickup_time) }}</td>
@@ -260,7 +260,8 @@ const closeEditModal = () => {
 
 const loadDataForView = (reservation) => {
   const fechaf = new Date(reservation.pickup_time);
-  const fechaf2 = new Date(reservation.date_reserv);
+  const dateParts = reservation.date_reserv.split('/'); 
+  const reservationDate = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`);
   console.log(reservation.date_reserv)
   const fechaf3 = new Date(reservation.re_pickup_time);
 
@@ -269,7 +270,7 @@ const loadDataForView = (reservation) => {
     day: '2-digit',
     year: 'numeric'
   });
-  const formattedDate2 = fechaf2.toLocaleDateString('en-US', {
+  const formattedDate2 = reservationDate.toLocaleDateString('en-US', {
     month: '2-digit',
     day: '2-digit',
     year: 'numeric'
@@ -473,6 +474,8 @@ const loadDataForUpdate = (reservation) => {
     grow: 'fullscreen'
   })
 };
+
+
 const formatDate = (dateString) => {
   if (!dateString) return '';
   const date = new Date(dateString);
@@ -481,12 +484,29 @@ const formatDate = (dateString) => {
   const year = date.getFullYear();
   return `${month}/${day}/${year}`;
 };
+function formatDateString2(dateString) {
+  // Divide la fecha en partes (día, mes, año)
+  const dateParts = dateString.split('/');
+  
+  // Crear un nuevo objeto Date usando los componentes individuales
+  const dateObject = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`);
 
-const formatTime = (dateString) => {
-  if (!dateString) return '';
-  const date = new Date(dateString);
-  return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-};
+  // Verifica si la conversión fue exitosa
+  if (isNaN(dateObject)) {
+    console.error('Fecha inválida');
+    return null;
+  }
+
+  // Formatea la fecha
+  const formattedDate = dateObject.toLocaleDateString('en-US', {
+    month: '2-digit',
+    day: '2-digit',
+    year: 'numeric'
+  });
+
+  return formattedDate;
+}
+
 
 const formatTimetwo = (isoDate) => {
   const date = new Date(isoDate);
