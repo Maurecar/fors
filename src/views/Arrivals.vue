@@ -300,9 +300,9 @@ const loadDataForView = (reservation) => {
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
-          "<br> kids: " + reservation.kid +
-          "<br> Car seat: " + reservation.carseat +
-          "<br> Booster seat: " + reservation.boosterseat +
+          (reservation.kid == 0 ? "" : "<br> kids: " + reservation.kid )+
+          (reservation.carseat == 0 ? "" : "<br> Car seat: " + reservation.carseat )+
+          (reservation.boosterseat == 0 ? "" : "<br> Booster seat: " + reservation.boosterseat )+
           "<br> Vehicle: " + reservation.vehicle +
           "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " cost: $ " + reservation.cost + " gratuity: $" + reservation.tip + " = Total: $ " + (reservation.cost + reservation.tip) +
           "<br> Payment  method: " + reservation.payment_met +
@@ -326,9 +326,9 @@ const loadDataForView = (reservation) => {
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
-          "<br> kids: " + reservation.kid +
-          "<br> Car seat: " + reservation.carseat +
-          "<br> Booster seat: " + reservation.boosterseat +
+          (reservation.kid == 0 ? "" : "<br> kids: " + reservation.kid )+
+          (reservation.carseat == 0 ? "" : "<br> Car seat: " + reservation.carseat )+
+          (reservation.boosterseat == 0 ? "" : "<br> Booster seat: " + reservation.boosterseat )+
           "<br> Vehicle: " + reservation.vehicle +
           "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " cost: $ " + reservation.cost + " gratuity: $" + reservation.tip + " = Total: $ " + (reservation.cost + reservation.tip) +
           "<br> Payment  method: " + reservation.payment_met +
@@ -355,11 +355,13 @@ const loadDataForView = (reservation) => {
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
-          "<br> kids: " + reservation.kid +
-          "<br> Car seat: " + reservation.carseat +
-          "<br> Booster seat: " + reservation.boosterseat +
+          (reservation.kid == 0 ? "" : "<br> kids: " + reservation.kid )+
+          (reservation.carseat == 0 ? "" : "<br> Car seat: " + reservation.carseat )+
+          (reservation.boosterseat == 0 ? "" : "<br> Booster seat: " + reservation.boosterseat )+
+          //"<br> Car seat: " + reservation.carseat +
+          //"<br> Booster seat: " + reservation.boosterseat +
           "<br> Vehicle: " + reservation.vehicle +
-          "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " cost: $ " + reservation.cost + " gratuity: $" + reservation.tip + " = Total: $ " + (reservation.cost + reservation.tip) +
+          "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " - One Way cost: $ " + reservation.cost + " gratuity: $" + reservation.tip + " = Total: $ " + (reservation.cost + reservation.tip) +
           "<br> Payment  method: " + reservation.payment_met +
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
@@ -377,11 +379,11 @@ const loadDataForView = (reservation) => {
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
-          "<br> kids: " + reservation.kid +
-          "<br> Car seat: " + reservation.carseat +
-          "<br> Booster seat: " + reservation.boosterseat +
+          (reservation.kid == 0 ? "" : "<br> kids: " + reservation.kid )+
+          (reservation.carseat == 0 ? "" : "<br> Car seat: " + reservation.carseat )+
+          (reservation.boosterseat == 0 ? "" : "<br> Booster seat: " + reservation.boosterseat )+
           "<br> Vehicle: " + reservation.vehicle2 +
-          "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " cost: $ " + reservation.costreturn + " gratuity: $" + reservation.tipreturn + " = Total: $ " + (reservation.cost + reservation.tip) +
+          "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " - One Way cost: $ " + reservation.costreturn + " gratuity: $" + reservation.tipreturn + " = Total: $ " + (reservation.cost + reservation.tip) +
           "<br> Payment  method: " + reservation.payment_met +
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
@@ -404,11 +406,11 @@ const loadDataForView = (reservation) => {
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
-          "<br> kids: " + reservation.kid +
-          "<br> Car seat: " + reservation.carseat +
-          "<br> Booster seat: " + reservation.boosterseat +
+          (reservation.kid == 0 ? "" : "<br> kids: " + reservation.kid )+
+          (reservation.carseat == 0 ? "" : "<br> Car seat: " + reservation.carseat )+
+          (reservation.boosterseat == 0 ? "" : "<br> Booster seat: " + reservation.boosterseat )+
           "<br> Vehicle: " + reservation.vehicle +
-          "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " cost: $ " + reservation.cost + " gratuity: $" + reservation.tip + " = Total: $ " + (reservation.costreturn + reservation.tipreturn) +
+          "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " - One Way cost: $ " + reservation.cost + " gratuity: $" + reservation.tip + " = Total: $ " + (reservation.costreturn + reservation.tipreturn) +
           "<br> Payment  method: " + reservation.payment_met +
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
@@ -426,11 +428,11 @@ const loadDataForView = (reservation) => {
           "<br> Name: " + reservation.customer +
           "<br> Phone: " + reservation.phone + reservation.phone2 +
           "<br> Adults: " + reservation.adult +
-          "<br> kids: " + reservation.kid +
-          "<br> Car seat: " + reservation.carseat +
-          "<br> Booster seat: " + reservation.boosterseat +
+          (reservation.kid == 0 ? "" : "<br> kids: " + reservation.kid )+
+          (reservation.carseat == 0 ? "" : "<br> Car seat: " + reservation.carseat )+
+          (reservation.boosterseat == 0 ? "" : "<br> Booster seat: " + reservation.boosterseat )+
           "<br> Vehicle: " + reservation.vehicle2 +
-          "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " cost: $ " + reservation.costreturn + " gratuity: $" + reservation.tipreturn + " = Total: $ " + (reservation.costreturn + reservation.tipreturn) +
+          "<br> Payment status, already paid: " + reservation.way.toLowerCase() + "- One Way cost: $ " + reservation.costreturn + " gratuity: $" + reservation.tipreturn + " = Total: $ " + (reservation.costreturn + reservation.tipreturn) +
           "<br> Payment  method: " + reservation.payment_met +
           "<br> Email: " + reservation.email +
           "<br> Dispatcher's name: " + reservation.dispatcher +
