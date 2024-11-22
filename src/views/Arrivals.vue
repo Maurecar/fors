@@ -370,8 +370,8 @@ const loadDataForView = (reservation) => {
           "<br> NOTES: " + reservation.note +
           '<br> ====================================' + '<br>ROUND TRIP - DEPARTURE' +
           "<br> Date: " + formattedDate3 +
-          "<br> from: " + reservation.from +
-          "<br> to: " + reservation.to +
+          "<br> From: " + reservation.to +
+          "<br> To: " + reservation.from +
           "<br> Pick-up time: " + formattedTime3 +
           "<br> Flight departure time: " + reservation.departure_time +
           "<br> Name: " + reservation.customer +
@@ -418,8 +418,8 @@ const loadDataForView = (reservation) => {
           "<br> NOTES: " + reservation.note +
           '<br> ====================================' + '<br>ROUND TRIP - ARRIVAL' +
           "<br> Date: " + formattedDate3 +
-          "<br> from: " + reservation.from +
-          "<br> to: " + reservation.to +
+          "<br> From: " + reservation.to +
+          "<br> To: " + reservation.from +
           "<br> Pick-up time: " + formattedTime3 +
           "<br> Flight landing time: " + reservation.landing_time +
           "<br> Flight number: " + reservation.flight +
@@ -485,19 +485,17 @@ const formatDate = (dateString) => {
   return `${month}/${day}/${year}`;
 };
 function formatDateString2(dateString) {
-  // Divide la fecha en partes (día, mes, año)
+  
   const dateParts = dateString.split('/');
   
-  // Crear un nuevo objeto Date usando los componentes individuales
   const dateObject = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`);
 
-  // Verifica si la conversión fue exitosa
   if (isNaN(dateObject)) {
     console.error('Fecha inválida');
     return null;
   }
 
-  // Formatea la fecha
+
   const formattedDate = dateObject.toLocaleDateString('en-US', {
     month: '2-digit',
     day: '2-digit',
