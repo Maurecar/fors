@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <div class="flex items-center justify-between mb-8">
       <h1 class="text text-lg sm:text-sm font-bold">Reservations List</h1>
@@ -72,16 +72,130 @@
     <see-modal v-if="showModal" :reservation="selectedReservation" @close="closeSeeModal" />
   </div>
 </template>
+ -->
+ <template>
+  <div>
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text text-lg sm:text-sm font-bold">Reservations List</h1>
+      <button @click="redirectToCreateArrival" class="text-green-500 hover:underline cursor-pointer">
+        Create Reservation
+      </button>
+      <button @click="logout" class="text-red-500 hover:underline cursor-pointer">
+        Logout
+      </button>
+    </div>
 
+    <!-- Search and Pagination Section -->
+    <div class="mb-4 flex justify-between items-center">
+      <div class="flex-grow mr-4">
+        <h4>Search by name</h4>
+        <input 
+          type="search" 
+          class="h-8 rounded px-2 py-2 border-solid border-2 border-black w-full" 
+          v-model="searchname"
+          @input="handleSearch"
+          placeholder="Enter customer's name"
+        >
+      </div>
+      
+      <!-- Items Per Page Selector -->
+      <select 
+        v-model="itemsPerPage" 
+        class="h-8 rounded px-2 border-solid border-2 border-black"
+      >
+        <option :value="10">10 per page</option>
+        <option :value="25">25 per page</option>
+        <option :value="50">50 per page</option>
+      </select>
+    </div>
+
+    <!-- Loading State -->
+    <div v-if="reservationLoading" class="text-center p-4">
+      Loading reservations...
+    </div>
+
+    <!-- Reservations Table -->
+    <div v-else-if="paginatedReservations.length" class="overflow-x-auto">
+      <table class="w-full table-container">
+        <thead class="sticky top-0 dark:bg-slate-800 bg-white">
+          <tr>
+            <th class="border px-2 py-1"># of reservation</th>
+            <th class="border px-4 py-2">Trip</th>
+            <th class="border px-4 py-2">Customer</th>
+            <th class="border px-0 py-0">Reservation</th>
+            <th class="border px-4 py-2">Pickup Date</th>
+            <th class="border px-2 py-1">Landing Time</th>
+            <th class="border px-4 py-2">Pickup Time</th>
+            <th class="border px-2 py-1">From</th>
+            <th class="border px-2 py-1">to</th>
+            <th class="border px-2 py-1">departure date</th>
+            <th class="border px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="n in paginatedReservations" :key="n.id">
+            <td class="border px-4 py-2">FORS{{ n.id }}</td>
+            <td class="border px-4 py-2">{{ n.way }}</td>
+            <td class="border px-4 py-2">{{ n.customer }}</td>
+            <td class="border px-0 py-0">{{ formatDateString2(n.date_reserv) }}</td>
+            <td class="border px-0 py-2">{{ formatDate(n.pickup_time) }}</td>
+            <td class="border px-2 py-1">{{ n.landing_time }}</td>
+            <td class="border px-2 py-1">{{ formatTimetwo(n.pickup_time) }}</td>
+            <td class="border px-2 py-1">{{ n.from }}</td>
+            <td class="border px-2 py-1">{{ n.to }}</td>
+            <td class="border px-1 py-1">{{ formatDate(n.re_pickup_time) }}</td>
+            <td class="border px-4 py-2">
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+              @click="() => handleDeleteReservation({ id: n.id })">Delete</button>
+          </td>
+          <td class="border px-4 py-2">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+              @click="() => loadDataForUpdate(n)">Update</button>
+          </td>
+          <td class="border px-4 py-2">
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
+              @click="() => loadDataForView(n)">View</button>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination Controls -->
+      <div class="flex justify-center items-center mt-4 space-x-4">
+        <button 
+          @click="prevPage" 
+          :disabled="currentPage === 1"
+          class="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+        >
+          Previous
+        </button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button 
+          @click="nextPage" 
+          :disabled="currentPage === totalPages"
+          class="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+
+    <!-- No Results State -->
+    <div v-else class="text-center p-4 text-gray-500">
+      No reservations found.
+    </div>
+  </div>
+</template>
 <script setup>
-import { ref, onMounted, computed } from "vue";
-import { useRouter } from "vue-router";
-import { useSignOut, useUserId } from "@nhost/vue";
-import { useQuery, useMutation } from "@vue/apollo-composable";
-import { gql } from "@apollo/client/core";
-import EditModal from "@/components/EditModal.vue";
+import { ref, computed, onMounted } from 'vue'
+import { useRouter } from "vue-router"
+import { useSignOut, useUserId } from "@nhost/vue"
+import { useQuery, useMutation } from "@vue/apollo-composable"
+import { gql } from "@apollo/client/core"
+import EditModal from "@/components/EditModal.vue"
 import SeeModal from "@/components/SeeModal.vue"
 import swal from "sweetalert2"
+import moment from 'moment';
 
 const router = useRouter();
 const { signOut } = useSignOut();
@@ -486,7 +600,7 @@ const formatDate = (dateString) => {
   const year = date.getFullYear();
   return `${month}/${day}/${year}`;
 };
-function formatDateString2(dateString) {
+/* function formatDateString2(dateString) {
   
   const dateParts = dateString.split('/');
   
@@ -505,7 +619,12 @@ function formatDateString2(dateString) {
   });
 
   return formattedDate;
+} */
+
+function formatDateString2(dateString) {
+  return moment(dateString).format('MM/DD/YYYY');
 }
+
 
 
 const formatTimetwo = (isoDate) => {
@@ -523,6 +642,55 @@ const searchF =() =>{
   })
 }
 
+// Pagination State
+const currentPage = ref(1)
+const itemsPerPage = ref(10)
+const searchname2 = ref('')
+
+// Computed property for filtered and paginated reservations
+const filteredReservations2 = computed(() => {
+  if (!reservationResult.value?.reservation) return []
+  
+  return reservationResult.value.reservation.filter(reservation => 
+    !searchname.value || 
+    reservation.customer.toLowerCase().includes(searchname.value.toLowerCase())
+  )
+})
+
+// Paginated Reservations
+const paginatedReservations = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value
+  const end = start + itemsPerPage.value
+  return filteredReservations.value.slice(start, end)
+})
+
+// Total Pages Calculation
+const totalPages = computed(() => 
+  Math.ceil(filteredReservations.value.length / itemsPerPage.value)
+)
+
+// Pagination Methods
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++
+  }
+}
+
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--
+  }
+}
+
+// Reset to first page when search changes
+const handleSearch2 = () => {
+  currentPage.value = 1
+}
+
+// Optional: Reset pagination when items per page changes
+/* watch(itemsPerPage, () => {
+  currentPage.value = 1
+}) */
 </script>
 <style scoped>
 .text-left {
