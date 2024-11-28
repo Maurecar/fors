@@ -374,8 +374,8 @@ const closeEditModal = () => {
 
 const loadDataForView = (reservation) => {
   const fechaf = new Date(reservation.pickup_time);
-  const dateParts = reservation.date_reserv.split('/'); 
-  const reservationDate = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`);
+  //const dateParts = reservation.date_reserv.split('/'); 
+  //const reservationDate = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`);
   console.log(reservation.date_reserv)
   const fechaf3 = new Date(reservation.re_pickup_time);
 
@@ -384,12 +384,9 @@ const loadDataForView = (reservation) => {
     day: '2-digit',
     year: 'numeric'
   });
-  const formattedDate2 = reservationDate.toLocaleDateString('en-US', {
-    month: '2-digit',
-    day: '2-digit',
-    year: 'numeric'
-  });
 
+  const formattedDate2 = moment(reservation.date_reserv).format('MM/DD/YYYY')
+  
   const formattedDate3 = fechaf3.toLocaleDateString('en-US', {
     month: '2-digit',
     day: '2-digit',
