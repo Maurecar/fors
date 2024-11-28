@@ -220,7 +220,7 @@ const filteredReservations = computed(() => {
 // Función para manejar la búsqueda
 const handleSearch = () => {
   // Si necesitas realizar alguna acción adicional al buscar
-  console.log('Searching for:', searchname.value);
+  
 };
 
 // Opcional: función para limpiar la búsqueda
@@ -376,7 +376,7 @@ const loadDataForView = (reservation) => {
   const fechaf = new Date(reservation.pickup_time);
   //const dateParts = reservation.date_reserv.split('/'); 
   //const reservationDate = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`);
-  console.log(reservation.date_reserv)
+  
   const fechaf3 = new Date(reservation.re_pickup_time);
 
   const formattedDate = fechaf.toLocaleDateString('en-US', {
@@ -398,7 +398,7 @@ const loadDataForView = (reservation) => {
 
   if (reservation.way === "One Way") {
     if (reservation.from.toLowerCase() === "hayden airport") {
-      console.log(reservation.pickup_time)
+      
       swal.fire({
         title: 'ARRIVAL',
         html: 'Reservation Number FORS' + reservation.id +
