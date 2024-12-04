@@ -1,4 +1,4 @@
-<!-- Este es el componente modal que se importa en el componente principal -->
+
 <template>
     <div class="modal">
         <div class="modal-content">
@@ -575,7 +575,7 @@ import { gql } from "@apollo/client/core";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import Swal from 'sweetalert2';
-
+console.log("llegando al modal")
 const emits = defineEmits();
 const totalAmount = ref(0);
 const Totalarrive = ref(0);

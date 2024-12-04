@@ -179,12 +179,14 @@
         </button>
       </div>
     </div>
-
+    <edit-modal v-if="showModal" :reservation="selectedReservation" @close="closeEditModal" />
+    <see-modal v-if="showModal" :reservation="selectedReservation" @close="closeSeeModal" />
     <!-- No Results State -->
     <div v-else class="text-center p-4 text-gray-500">
       No reservations found.
     </div>
   </div>
+  
 </template>
 <script setup>
 import { ref, computed, onMounted } from 'vue'
@@ -469,8 +471,6 @@ const loadDataForView = (reservation) => {
           (reservation.kid == 0 ? "" : "<br> kids: " + reservation.kid )+
           (reservation.carseat == 0 ? "" : "<br> Car seat: " + reservation.carseat )+
           (reservation.boosterseat == 0 ? "" : "<br> Booster seat: " + reservation.boosterseat )+
-          //"<br> Car seat: " + reservation.carseat +
-          //"<br> Booster seat: " + reservation.boosterseat +
           "<br> Vehicle: " + reservation.vehicle +
           "<br> Payment status, already paid: " + reservation.way.toLowerCase() + " - One Way cost: $ " + reservation.cost + " gratuity: $" + reservation.tip + " = Total: $ " + (reservation.cost + reservation.tip) +
           "<br> Payment  method: " + reservation.payment_met +
@@ -585,7 +585,16 @@ const loadDataForUpdate = (reservation) => {
       popup: 'text-left'
     },
     grow: 'fullscreen'
-  })
+  }).then((result) => {
+    
+    // After the alert is closed, open the edit modal
+    if (result.isConfirmed || result.isDismissed) {
+      const fullReservation = reservationResult.value.reservation.find(n => n.id === reservation.id);
+      selectedReservation.value = fullReservation;
+      showModal.value = true;
+      console.log("se cierra solo")
+    }
+  });
 };
 
 
@@ -597,26 +606,6 @@ const formatDate = (dateString) => {
   const year = date.getFullYear();
   return `${month}/${day}/${year}`;
 };
-/* function formatDateString2(dateString) {
-  
-  const dateParts = dateString.split('/');
-  
-  const dateObject = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`);
-
-  if (isNaN(dateObject)) {
-    console.error('Fecha inválida');
-    return null;
-  }
-
-
-  const formattedDate = dateObject.toLocaleDateString('en-US', {
-    month: '2-digit',
-    day: '2-digit',
-    year: 'numeric'
-  });
-
-  return formattedDate;
-} */
 
 function formatDateString2(dateString) {
   return moment(dateString).format('MM/DD/YYYY');
