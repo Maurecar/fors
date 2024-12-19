@@ -13,6 +13,7 @@ const password = ref('')
 
 const { signUpEmailPassword } = useSignUpEmailPassword()
 const { signInEmailPassword } = useSignInEmailPassword()
+
 const registerOrLogin = async () => {
   if (!email.value || !password.value) {
     return alert("Please fill in all fields")
@@ -23,6 +24,7 @@ const registerOrLogin = async () => {
     } else {      
       await signInEmailPassword(email.value, password.value);
     }
+    
     router.push('/');
     console.log("fue por aqui")
   } catch (error) {

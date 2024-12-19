@@ -432,7 +432,7 @@ const loadDataForView = (reservation) => {
         title: 'DEPARTURE',
         html: 'Reservation Number FORS' + reservation.id +
           "<br> Date: " + formattedDate +
-          "<br> from: " + reservation.from +
+          "<br> from: " + reservation.pick_location +
           "<br> to: " + reservation.to +
           "<br> Pick-up time: " + formattedTime +
           "<br> Flight departure time: " + reservation.departure_time +

@@ -729,6 +729,7 @@ const handleCreateReservation = async () => {
         if (newReservation.value.way === "One Way") {
             if (newReservation.value.from === "Steamboat") {
                 contenidoTexto = ` DEPARTURE
+Reservation Number: FORS ${newReservation.value.id} 
 Date: ${formatDate(newReservation.value.pickup_time)}
 from: ${newReservation.value.pick_location}
 to: ${newReservation.value.to}
@@ -751,6 +752,7 @@ How do you hear about us?: ${newReservation.value.heard}
 NOTES: ${newReservation.value.note}
                 `
             } else { contenidoTexto = `ARRIVAL
+Reservation Number: FORS ${newReservation.value.id} 
 Date: ${formatDate(newReservation.value.pickup_time)}
 from: ${newReservation.value.from} ${newReservation.value.address}
 to: ${newReservation.value.to}
@@ -777,6 +779,7 @@ NOTES: ${newReservation.value.note}
         } else {
             if (newReservation.value.from === "Steamboat") {
                 contenidoTexto = `DEPARTURE
+Reservation Number: FORS ${newReservation.value.id} 
 Date: ${formatDate(newReservation.value.pickup_time)}
 from: ${newReservation.value.pick_location}
 to: ${newReservation.value.to}
@@ -824,6 +827,7 @@ NOTES: ${newReservation.value.note}
                 `
             } else {
                 contenidoTexto = `ARRIVAL
+Reservation Number: FORS ${newReservation.value.id} 
 Date: ${formatDate(newReservation.value.pickup_time)}
 from: ${newReservation.value.from}
 to: ${newReservation.value.to}

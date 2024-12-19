@@ -3,10 +3,10 @@ import './main.css'
 
 import App from './App.vue'
 import VueTheMask from 'vue-the-mask'
-
+import { nhost } from './lib/nhost'
 
 import { createApolloClient } from '@nhost/apollo'
-import { NhostClient } from '@nhost/vue'
+//import { NhostClient } from '@nhost/vue'
 import { DefaultApolloClient } from '@vue/apollo-composable'
 
 import { createRouter, createWebHistory } from 'vue-router' 
@@ -16,11 +16,6 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
 
-const nhost = new NhostClient({
-    subdomain: 'tfbyfdknrcrltxoxtjhx',
-    region: 'us-east-1'
-   
-})
 
 const apolloClient = createApolloClient({ nhost })
 const routes = [
